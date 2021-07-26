@@ -1,0 +1,25 @@
+fragment FullUser on User {
+  _id
+  email
+  firstName
+  kyc {
+    identification {
+      notes
+      status
+    }
+    proofOfAddress {
+      notes
+      status
+    }
+  }
+  lastName
+  profilePhotoUrl
+  primaryAccount {
+    ...FullAccount
+  }
+  reminders {
+    _id
+    seen
+  }
+  username
+}

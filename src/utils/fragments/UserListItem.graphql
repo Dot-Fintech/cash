@@ -1,0 +1,8 @@
+fragment UserListItem on User {
+  _id
+  firstName
+  lastName
+  username
+  profilePhotoUrl
+  connectionStatus
+}

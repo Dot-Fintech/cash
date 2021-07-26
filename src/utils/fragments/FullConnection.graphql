@@ -1,0 +1,9 @@
+fragment FullConnection on Connection {
+  _id
+  sender {
+    ...UserListItem
+  }
+  recipient {
+    ...UserListItem
+  }
+}

@@ -1,0 +1,6 @@
+fragment FullBankTransactionSource on BankTransactionSource {
+  card {
+    ...FullCard
+  }
+  type
+}

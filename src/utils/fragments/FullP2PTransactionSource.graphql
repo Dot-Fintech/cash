@@ -1,0 +1,12 @@
+fragment FullP2PTransactionSource on P2PTransactionSource {
+  _id
+  action
+  note
+  sender {
+    ...UserListItem
+  }
+  recipient {
+    ...UserListItem
+  }
+  type
+}

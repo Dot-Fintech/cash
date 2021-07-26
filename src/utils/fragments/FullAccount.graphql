@@ -1,0 +1,6 @@
+fragment FullAccount on Account {
+  _id
+  balance
+  currency
+  frozen
+}

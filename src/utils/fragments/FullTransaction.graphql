@@ -1,0 +1,13 @@
+fragment FullTransaction on Transaction {
+  _id
+  amount
+  createdAt
+  bank {
+    ...FullBankTransactionSource
+  }
+  p2p {
+    ...FullP2PTransactionSource
+  }
+  source
+  token
+}

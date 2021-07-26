@@ -1,0 +1,7 @@
+fragment FullCard on Card {
+  _id
+  last4Digits
+  provider
+  token
+  type
+}

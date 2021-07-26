@@ -1,0 +1,5 @@
+mutation acknowledgeReminder($data: AcknowledgeReminderInput!) {
+  acknowledgeReminder(data: $data) {
+    ...FullUser
+  }
+}
