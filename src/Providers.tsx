@@ -1,4 +1,5 @@
 import { ApolloProvider } from '@apollo/client';
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 
 import { client } from './config/apollo';
@@ -9,7 +10,9 @@ const Providers: React.FC = ({ children }) => {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider>
-        <UserContextProvider>{children}</UserContextProvider>
+        <UserContextProvider>
+          <NavigationContainer>{children}</NavigationContainer>
+        </UserContextProvider>
       </ThemeProvider>
     </ApolloProvider>
   );

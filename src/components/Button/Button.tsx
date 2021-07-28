@@ -1,7 +1,4 @@
-import React from 'react';
+import { Button } from 'react-native';
+import styled from 'styled-components';
 
-const Button: React.FC = () => {
-  return <div></div>;
-};
-
-export default Button;
+export default styled(Button)``;

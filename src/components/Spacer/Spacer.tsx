@@ -7,7 +7,6 @@ type Props = {
 };
 
 const Spacer = styled(View)<Props>`
-  display: inline-block;
   min-width: ${({ width = 1 }) => width}px;
   min-height: ${({ height = 1 }) => height}px;
 `;
