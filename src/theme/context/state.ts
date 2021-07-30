@@ -1,18 +1,16 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext } from 'react';
 
 import type { ThemeName } from '../types';
 
 export type State = {
-  getTheme: () => Promise<ThemeName>;
+  theme: ThemeName;
   setTheme: (theme: ThemeName) => void;
 };
 
 export const THEME_KEY = 'theme';
 
 export const initialState: State = {
-  getTheme: async () =>
-    (await AsyncStorage.getItem(THEME_KEY)) === 'dark' ? 'dark' : 'light',
+  theme: 'light',
   setTheme: (theme: ThemeName) => {
     void theme;
   },

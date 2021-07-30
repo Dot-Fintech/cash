@@ -14,8 +14,8 @@ const Typography = styled(Text)<Props>`
   margin: 0;
   ${({ tag, color, textTransform, textAlign, theme }) => css`
     color: ${color ? color.toString() : theme.colors.text.primary.toString()};
-    text-transform: ${textTransform};
-    text-align: ${textAlign};
+    text-transform: ${textTransform ?? 'none'};
+    text-align: ${textAlign ?? 'left'};
 
     font-family: ${theme.typography[tag].fontFamily};
     font-size: ${theme.typography[tag].fontSize}px;
