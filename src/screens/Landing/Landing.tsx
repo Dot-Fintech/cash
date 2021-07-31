@@ -11,13 +11,10 @@ import Row from '../../components/Row';
 import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
-import Vector from '../../components/Vector';
-import {
-  MetricsIcon,
-  PhoneScanIcon,
-  PhoneSendIcon,
-  POSIcon,
-} from '../../icons';
+import MetricsIcon from '../../icons/MetricsIcon';
+import PhoneScanIcon from '../../icons/PhoneSendIcon';
+import PhoneSendIcon from '../../icons/PhoneSendIcon';
+import POSIcon from '../../icons/POSIcon';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootStack';
 import FutureText from './FutureText';
@@ -56,15 +53,15 @@ const LandingPage: React.FC = () => {
         <Spacer height={16} />
         <Row>
           <Column>
-            <Vector vectorIcon={PhoneScanIcon} width={ICON_WIDTH} />
+            <PhoneScanIcon width={ICON_WIDTH} />
             <Spacer height={16} />
-            <Vector vectorIcon={POSIcon} width={ICON_WIDTH} />
+            <POSIcon width={ICON_WIDTH} />
           </Column>
           <Spacer width={MIDDLE_SPACER_WIDTH} />
           <Column>
-            <Vector vectorIcon={MetricsIcon} width={ICON_WIDTH} />
+            <MetricsIcon width={ICON_WIDTH} />
             <Spacer height={16} />
-            <Vector vectorIcon={PhoneSendIcon} width={ICON_WIDTH} />
+            <PhoneSendIcon width={ICON_WIDTH} />
           </Column>
         </Row>
         <Spacer height={16} />
