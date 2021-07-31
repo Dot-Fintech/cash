@@ -1,0 +1,13 @@
+query isEmailTaken($email: String!) {
+  isEmailTaken(email: $email)
+}
+
+query isUsernameTaken($username: String!) {
+  isUsernameTaken(username: $username)
+}
+
+mutation signUp($data: UserSignUpInput!) {
+  userSignUp(data: $data) {
+    ...Auth
+  }
+}

@@ -13,6 +13,7 @@ import styled, { useTheme } from 'styled-components';
 import Banner from '../../components/Banner';
 import Button from '../../components/Button';
 import Column from '../../components/Column';
+import FormValidationError from '../../components/FormValidationError';
 import Logo from '../../components/Logo';
 import Row from '../../components/Row';
 import Screen from '../../components/Screen';
@@ -25,6 +26,7 @@ import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootStack';
 import TokenStore from '../../stores/TokenStore';
+import { loginValidationSchema } from './utils';
 
 const Container = styled(Column)`
   padding: 80px 24px 0 24px;
@@ -98,8 +100,12 @@ const LoginPage: React.FC = () => {
         <Container justifyContent="center" alignItems="center">
           <Logo size={64} />
           <Spacer height={24} />
-          <Formik initialValues={initialFormValues} onSubmit={handleLogin}>
-            {({ handleChange, handleBlur, handleSubmit, values }) => (
+          <Formik
+            validationSchema={loginValidationSchema}
+            initialValues={initialFormValues}
+            onSubmit={handleLogin}
+          >
+            {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
               <>
                 <TextField
                   placeholder="Email Address"
@@ -109,6 +115,12 @@ const LoginPage: React.FC = () => {
                   keyboardType="email-address"
                   textContentType="emailAddress"
                 />
+                {errors.email && (
+                  <>
+                    <Spacer height={4} />
+                    <FormValidationError>{errors.email}</FormValidationError>
+                  </>
+                )}
                 <Spacer height={16} />
                 <TextField
                   placeholder="Password"
@@ -118,6 +130,12 @@ const LoginPage: React.FC = () => {
                   textContentType="password"
                   secureTextEntry
                 />
+                {errors.password && (
+                  <>
+                    <Spacer height={4} />
+                    <FormValidationError>{errors.password}</FormValidationError>
+                  </>
+                )}
                 <Spacer height={16} />
                 <FullWidthButton
                   onPress={
@@ -137,7 +155,9 @@ const LoginPage: React.FC = () => {
             <>
               <Spacer height={16} />
               <Column justifyContent="center" alignItems="center" fullWidth>
-                <ActivityIndicator />
+                <ActivityIndicator
+                  color={theme.colors.main.primary.toString()}
+                />
               </Column>
             </>
           )}
