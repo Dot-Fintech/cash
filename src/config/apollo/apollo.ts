@@ -30,12 +30,13 @@ const getNewAccessToken = async () => {
   try {
     if (!refreshToken) return;
     const accessTokenResponse = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/auth/generate-token`,
+      `${process.env.SERVER_URL}/auth/generate-token`,
       { params: { refreshToken } },
     );
     return accessTokenResponse.data;
   } catch (error) {
     setTokens();
+    console.error(error);
     // TODO: if we can't get the new tokens, we should log the user out
   }
 };
@@ -82,7 +83,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_SERVER_URL,
+  uri: process.env.SERVER_URL,
 });
 
 export const client = new ApolloClient({

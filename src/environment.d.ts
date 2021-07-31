@@ -6,8 +6,8 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NODE_ENV: 'development' | 'production';
-      REACT_APP_SERVER_URL: string;
-      REACT_APP_GOOGLE_MAPS_API_KEY: string;
+      SERVER_URL: string;
+      GOOGLE_MAPS_API_KEY: string;
     }
   }
 }

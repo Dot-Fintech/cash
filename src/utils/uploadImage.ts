@@ -19,7 +19,7 @@ export const useUploadImage = (size: number): Result => {
       const formData = new FormData();
       formData.append('image', file);
       const res = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/api/image-upload/${containerName}?size=${size}`,
+        `${process.env.SERVER_URL}/api/image-upload/${containerName}?size=${size}`,
         formData,
         {
           headers: {
