@@ -23,14 +23,6 @@ import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootSta
 import FutureText from './FutureText';
 import { MIDDLE_SPACER_WIDTH, RAIL_SPACING } from './utils';
 
-const getIconWidth = (windowWidth: number) =>
-  Math.min(
-    Math.floor(
-      (windowWidth - 2 * RAIL_SPACING - 0.5 * MIDDLE_SPACER_WIDTH) / 2,
-    ),
-    220,
-  );
-
 const Container = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;
   height: 100%;
@@ -46,6 +38,11 @@ const LandingPage: React.FC = () => {
 
   const goToLogin = () => navigation.push(SCREENS.LOGIN);
 
+  const ICON_WIDTH = Math.min(
+    Math.floor((width - 2 * RAIL_SPACING - 0.5 * MIDDLE_SPACER_WIDTH) / 2),
+    220,
+  );
+
   return (
     <Screen>
       <Container justifyContent="center" alignItems="center">
@@ -59,20 +56,20 @@ const LandingPage: React.FC = () => {
         <Spacer height={16} />
         <Row>
           <Column>
-            <Vector vectorIcon={PhoneScanIcon} width={getIconWidth(width)} />
+            <Vector vectorIcon={PhoneScanIcon} width={ICON_WIDTH} />
             <Spacer height={16} />
-            <Vector vectorIcon={POSIcon} width={getIconWidth(width)} />
+            <Vector vectorIcon={POSIcon} width={ICON_WIDTH} />
           </Column>
           <Spacer width={MIDDLE_SPACER_WIDTH} />
           <Column>
-            <Vector vectorIcon={MetricsIcon} width={getIconWidth(width)} />
+            <Vector vectorIcon={MetricsIcon} width={ICON_WIDTH} />
             <Spacer height={16} />
-            <Vector vectorIcon={PhoneSendIcon} width={getIconWidth(width)} />
+            <Vector vectorIcon={PhoneSendIcon} width={ICON_WIDTH} />
           </Column>
         </Row>
         <Spacer height={16} />
         <Button onPress={goToLogin} color={colors.main.secondary}>
-          Get Started
+          Let's Go
         </Button>
       </Container>
     </Screen>

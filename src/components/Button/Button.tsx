@@ -17,8 +17,8 @@ const Container = styled(TouchableOpacity)<ContainerProps>`
   justify-content: center;
   align-items: center;
 
-  min-width: ${({ variant }) => (variant === 'lean' ? 'none' : '64px')};
-  min-height: ${({ variant }) => (variant === 'lean' ? 'none' : '40px')};
+  min-width: ${({ variant }) => (variant === 'lean' ? '0px' : '64px')};
+  min-height: ${({ variant }) => (variant === 'lean' ? '0px' : '40px')};
   ${({ width }) => (width ? `width: ${width}px;` : '')}
   ${({ height }) => (height ? `height: ${height}px;` : '')}
 

@@ -1,28 +1,163 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
-import { Button } from 'react-native';
-import { Text } from 'react-native';
+import { Formik } from 'formik';
+import React, { useContext, useState } from 'react';
+import {
+  ActivityIndicator,
+  NativeSyntheticEvent,
+  NativeTouchEvent,
+} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import styled, { useTheme } from 'styled-components';
 
+import Banner from '../../components/Banner';
+import Button from '../../components/Button';
+import Column from '../../components/Column';
+import Logo from '../../components/Logo';
+import Row from '../../components/Row';
 import Screen from '../../components/Screen';
+import Spacer from '../../components/Spacer';
+import TextField from '../../components/TextField';
+import Typography from '../../components/Typography';
+import { UserContext } from '../../context/user/state';
+import { useLoginMutation } from '../../generated/graphql';
 import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootStack';
+import TokenStore from '../../stores/TokenStore';
 
-const Login: React.FC = () => {
+const Container = styled(Column)`
+  padding: 80px 24px 0 24px;
+`;
+
+const FullWidthButton = styled(Button)`
+  width: 100%;
+`;
+
+type FormValues = {
+  email: string;
+  password: string;
+};
+
+const initialFormValues: FormValues = {
+  email: '',
+  password: '',
+};
+
+const LoginPage: React.FC = () => {
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, SCREENS.LANDING>>();
 
-  const goToMain = () => navigation.push(NAVIGATORS.MAIN_STACK);
+  const theme = useTheme();
+  const { top } = useSafeAreaInsets();
+
+  const { setUser } = useContext(UserContext);
+
+  const [login, { loading }] = useLoginMutation();
+
+  const [isBannerOpen, setIsBannerOpen] = useState(false);
+
+  const handleCloseBanner = () => {
+    setIsBannerOpen(false);
+  };
+
+  const handleLogin = async ({ email, password }: FormValues) => {
+    try {
+      const { data, errors } = await login({
+        variables: {
+          data: { email, password },
+        },
+      });
+      if (data && !errors) {
+        const { user, accessToken, refreshToken } = data.userLogin;
+        setUser(user);
+        TokenStore.setTokens({ accessToken, refreshToken });
+        navigation.push(NAVIGATORS.MAIN_STACK);
+      } else {
+        setIsBannerOpen(true);
+      }
+    } catch (error) {
+      setIsBannerOpen(true);
+    }
+  };
+
   const goToSignUp = () => navigation.push(NAVIGATORS.SIGNUP_STACK);
 
   return (
-    <Screen>
-      <Text>Login</Text>
-      <Button title="Main" onPress={goToMain} />
-      <Button title="Sign Up" onPress={goToSignUp} />
-    </Screen>
+    <>
+      <Banner
+        isOpen={isBannerOpen}
+        close={handleCloseBanner}
+        color={theme.colors.warning.primary}
+        paddingTop={top}
+        alert
+      >
+        Unable to login with those credentials
+      </Banner>
+      <Screen unsafe>
+        <Container justifyContent="center" alignItems="center">
+          <Logo size={64} />
+          <Spacer height={24} />
+          <Formik initialValues={initialFormValues} onSubmit={handleLogin}>
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
+              <>
+                <TextField
+                  placeholder="Email Address"
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  value={values.email}
+                  keyboardType="email-address"
+                  textContentType="emailAddress"
+                />
+                <Spacer height={16} />
+                <TextField
+                  placeholder="Password"
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                  textContentType="password"
+                  secureTextEntry
+                />
+                <Spacer height={16} />
+                <FullWidthButton
+                  onPress={
+                    handleSubmit as unknown as (
+                      e: NativeSyntheticEvent<NativeTouchEvent>,
+                    ) => void
+                  }
+                  disabled={loading}
+                  color={theme.colors.main.secondary}
+                >
+                  Login
+                </FullWidthButton>
+              </>
+            )}
+          </Formik>
+          {loading && (
+            <>
+              <Spacer height={16} />
+              <Column justifyContent="center" alignItems="center" fullWidth>
+                <ActivityIndicator />
+              </Column>
+            </>
+          )}
+          <Spacer height={16} />
+          <Row justifyContent="space-between" alignItems="center" fullWidth>
+            <Button>
+              <Typography tag="p" color={theme.colors.main.secondary}>
+                Forgot password?
+              </Typography>
+            </Button>
+            <Button onPress={goToSignUp}>
+              <Typography tag="p" color={theme.colors.main.secondary}>
+                Sign up for an account
+              </Typography>
+            </Button>
+          </Row>
+        </Container>
+      </Screen>
+    </>
   );
 };
 
-export default Login;
+export default LoginPage;
