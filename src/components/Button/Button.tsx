@@ -22,9 +22,9 @@ const Container = styled(TouchableOpacity)<ContainerProps>`
   ${({ width }) => (width ? `width: ${width}px;` : '')}
   ${({ height }) => (height ? `height: ${height}px;` : '')}
 
-  border-radius: 3px;
+  border-radius: 4px;
   border: none;
-  padding: ${({ variant }) => (variant === 'lean' ? 0 : '8px')};
+  padding: ${({ variant }) => (variant === 'lean' ? 0 : '12px')};
 
   background-color: ${({ color, variant, theme }) =>
     color?.toString() ??
