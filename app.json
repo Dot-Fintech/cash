@@ -14,10 +14,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
-      "associatedDomains": ["applinks:link.dot.cash"]
+      "associatedDomains": [
+        "applinks:link.dot.cash"
+      ],
+      "bundleIdentifier": "com.dot.cash"
     },
     "android": {
       "adaptiveIcon": {
@@ -34,9 +39,13 @@
               "pathPrefix": "/"
             }
           ],
-          "category": ["BROWSABLE", "DEFAULT"]
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
-      ]
+      ],
+      "package": "com.dot.cash"
     },
     "web": {
       "favicon": "./assets/favicon.png"
