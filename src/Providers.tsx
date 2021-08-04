@@ -4,6 +4,7 @@ import React from 'react';
 
 import { client } from './config/apollo';
 import UserContextProvider from './context/user/provider';
+import { linking } from './linking';
 import { ThemeProvider } from './theme';
 
 const Providers: React.FC = ({ children }) => {
@@ -11,7 +12,9 @@ const Providers: React.FC = ({ children }) => {
     <ApolloProvider client={client}>
       <ThemeProvider>
         <UserContextProvider>
-          <NavigationContainer>{children}</NavigationContainer>
+          <NavigationContainer linking={linking}>
+            {children}
+          </NavigationContainer>
         </UserContextProvider>
       </ThemeProvider>
     </ApolloProvider>
