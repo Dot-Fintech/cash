@@ -6,6 +6,7 @@ import { DarkTheme, LightTheme } from './themes';
 
 const StyledThemeProvider: React.FC = ({ children }) => {
   const { theme } = useContext(ThemeContext);
+
   return (
     <ThemeProvider theme={theme === 'light' ? LightTheme : DarkTheme}>
       {children}

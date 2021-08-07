@@ -1,0 +1,1 @@
+npx uri-scheme open exp://127.0.0.1:19000/--/email-verified

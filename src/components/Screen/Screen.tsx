@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components';
 const styles = css`
   width: 100%;
   height: 100%;
+  background-color: ${({ theme }) =>
+    theme.colors.background.primary.toString()};
 `;
 
 const Safe = styled(SafeAreaView)`
