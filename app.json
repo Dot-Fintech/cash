@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "cash",
+    "name": "Cash",
     "slug": "cash",
     "scheme": "dotcash",
     "version": "1.0.0",
@@ -18,30 +18,39 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "associatedDomains": ["applinks:link.dot.cash"],
       "bundleIdentifier": "com.dot.cash",
       "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#FFFFFF",
+        "config": {
+          "branch": {
+            "apiKey": "key_test_ga3Aj1x4tkuBHIqF1488tndprxbmSE5z"
+          }
+        },
+        "intentFilters": [
+          {
+            "action": "VIEW",
+            "data": [
+              {
+                "scheme": "https",
+                "host": "dotcash.app.link",
+                "pathPrefix": "/"
+              }
+            ],
+            "category": ["BROWSABLE", "DEFAULT"]
+          }
+        ]
       },
-      "intentFilters": [
-        {
-          "action": "VIEW",
-          "data": [
-            {
-              "scheme": "https",
-              "host": "link.dot.cash",
-              "pathPrefix": "/"
-            }
-          ],
-          "category": ["BROWSABLE", "DEFAULT"]
-        }
-      ],
       "package": "com.dot.cash",
-      "versionCode": 1
+      "versionCode": 1,
+      "config": {
+        "branch": {
+          "apiKey": "key_test_ga3Aj1x4tkuBHIqF1488tndprxbmSE5z"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
