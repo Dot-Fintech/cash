@@ -68,7 +68,8 @@ const ProfilePhotoPage: React.FC<Props> = ({
         await action.setPhoto(photoId);
       }
       setSuccess(true);
-      next();
+      // show the success ui for 3s before navigating away
+      setTimeout(next, 3000);
     }
   };
 
