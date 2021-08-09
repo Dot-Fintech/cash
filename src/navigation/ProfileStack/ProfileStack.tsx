@@ -1,6 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 
+import Overlay from '../../components/Overlay';
 import {
   ProfileStackParamList,
   ProfileStackScreenConfigs,
@@ -11,15 +12,17 @@ const Stack = createStackNavigator<ProfileStackParamList>();
 
 const ProfileStack: React.FC = () => {
   return (
-    <Stack.Navigator>
-      {ProfileStackScreenNames.map((name) => (
-        <Stack.Screen
-          key={name}
-          name={name}
-          {...ProfileStackScreenConfigs[name]}
-        />
-      ))}
-    </Stack.Navigator>
+    <Overlay>
+      <Stack.Navigator>
+        {ProfileStackScreenNames.map((name) => (
+          <Stack.Screen
+            key={name}
+            name={name}
+            {...ProfileStackScreenConfigs[name]}
+          />
+        ))}
+      </Stack.Navigator>
+    </Overlay>
   );
 };
 
