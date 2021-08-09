@@ -38,10 +38,13 @@ type TextProps = {
 };
 const ButtonText = styled(Text)<TextProps>`
   font-family: SourceSansPro_400Regular;
-  color: ${({ disabled }) =>
+  color: ${({ disabled, theme }) =>
     disabled
-      ? new Color({ ...Colors.white, opacity: 0.5 }).toString()
-      : Colors.white.toString()};
+      ? new Color({
+          ...theme.colors.background.primary,
+          opacity: 0.5,
+        }).toString()
+      : theme.colors.background.primary.toString()};
   font-size: 18px;
   margin: 0;
 `;
