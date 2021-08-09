@@ -20,6 +20,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.dot.cash",
       "buildNumber": "1.0.0",
+      "requireFullScreen": true,
       "config": {
         "branch": {
           "apiKey": "key_test_ga3Aj1x4tkuBHIqF1488tndprxbmSE5z"

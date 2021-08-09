@@ -38,7 +38,11 @@ const EmailVerified: React.FC = () => {
         </Typography>
         <Spacer height={16} />
         <Typography tag="p" textAlign="center">
-          You have successfully verified your email
+          We have successfully verified your email.
+        </Typography>
+        <Spacer height={8} />
+        <Typography tag="p" textAlign="center">
+          Your journey to cashless spending with Dot is about to begin.
         </Typography>
         <Spacer height={16} />
         <CheckedIcon width={200} />
