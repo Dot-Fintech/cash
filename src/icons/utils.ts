@@ -31,13 +31,13 @@ export const getIconDimensions = ({
   maxWidth,
   maxHeight,
 }: GetIconDimensionsArg): Result => {
+  if (!width && !height) return { width: 0, height: 0 };
+
   const dimensions = calculateIconDimensions({ AR, width, height });
 
   if (maxWidth && dimensions.width > maxWidth) {
     return calculateIconDimensions({ AR, width: maxWidth });
-  }
-
-  if (maxHeight && dimensions.height > maxHeight) {
+  } else if (maxHeight && dimensions.height > maxHeight) {
     return calculateIconDimensions({ AR, height: maxHeight });
   }
 
