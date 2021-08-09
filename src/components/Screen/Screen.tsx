@@ -1,10 +1,11 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import { SafeAreaView, View } from 'react-native';
 import styled, { css } from 'styled-components';
 
 const styles = css`
-  width: 100%;
-  height: 100%;
+  width: ${Dimensions.get('window').width}px;
+  height: ${Dimensions.get('window').height}px;
   background-color: ${({ theme }) =>
     theme.colors.background.primary.toString()};
 `;
