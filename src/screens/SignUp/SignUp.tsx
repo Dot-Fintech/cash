@@ -229,7 +229,7 @@ const SignUpPage: React.FC = () => {
               <Spacer height={16} />
               <Column justifyContent="center" alignItems="center" fullWidth>
                 <ActivityIndicator
-                  color={theme.colors.main.primary.toString()}
+                  color={theme.colors.main.secondary.toString()}
                 />
               </Column>
             </>
