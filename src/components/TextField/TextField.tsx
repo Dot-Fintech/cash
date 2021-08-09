@@ -62,7 +62,11 @@ const TextField: React.FC<Props> = ({
           <Spacer width={4} />
         </>
       )}
-      <Input {...props} color={color ?? theme.colors.text.primary} />
+      <Input
+        {...props}
+        color={color ?? theme.colors.text.primary}
+        placeholderTextColor={theme.colors.text.secondary.toString()}
+      />
     </Container>
   );
 };
