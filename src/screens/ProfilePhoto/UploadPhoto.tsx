@@ -91,7 +91,7 @@ const ProfilePhotoPage: React.FC<Props> = ({
               <>
                 <Spacer height={16} />
                 <Button onPress={next}>
-                  <Typography tag="h6" color={theme.colors.main.primary}>
+                  <Typography tag="h6" color={theme.colors.main.secondary}>
                     Skip
                   </Typography>
                 </Button>
