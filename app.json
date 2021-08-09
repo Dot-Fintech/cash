@@ -19,31 +19,31 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.dot.cash",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.0",
+      "config": {
+        "branch": {
+          "apiKey": "key_test_ga3Aj1x4tkuBHIqF1488tndprxbmSE5z"
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF",
-        "config": {
-          "branch": {
-            "apiKey": "key_test_ga3Aj1x4tkuBHIqF1488tndprxbmSE5z"
-          }
-        },
-        "intentFilters": [
-          {
-            "action": "VIEW",
-            "data": [
-              {
-                "scheme": "https",
-                "host": "dotcash.app.link",
-                "pathPrefix": "/"
-              }
-            ],
-            "category": ["BROWSABLE", "DEFAULT"]
-          }
-        ]
+        "backgroundColor": "#FFFFFF"
       },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "dotcash.app.link",
+              "pathPrefix": "/"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
       "package": "com.dot.cash",
       "versionCode": 1,
       "config": {
