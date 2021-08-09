@@ -1,11 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import { Button } from 'react-native';
 import styled from 'styled-components';
 
 import Column from '../../components/Column';
-import Screen from '../../components/Screen';
+import OnboardingScreen from '../../components/OnboardingScreen';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
 import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
@@ -26,7 +25,7 @@ const Biometrics: React.FC = () => {
   const goToMain = () => navigation.navigate(NAVIGATORS.MAIN_STACK);
 
   return (
-    <Screen>
+    <OnboardingScreen next={goToMain}>
       <Container alignItems="center">
         <Typography tag="h3">Even more secure</Typography>
         <Spacer height={16} />
@@ -35,9 +34,8 @@ const Biometrics: React.FC = () => {
           to log into the app.
         </Typography>
         <Spacer height={16} />
-        <Button title="Main" onPress={goToMain} />
       </Container>
-    </Screen>
+    </OnboardingScreen>
   );
 };
 

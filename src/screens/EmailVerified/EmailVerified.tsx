@@ -3,10 +3,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import styled from 'styled-components';
 
-import Button from '../../components/Button';
 import Column from '../../components/Column';
-import Logo from '../../components/Logo';
-import Screen from '../../components/Screen';
+import OnboardingScreen from '../../components/OnboardingScreen';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
 import CheckedIcon from '../../icons/CheckedIcon';
@@ -15,7 +13,7 @@ import { useBlockBack } from '../../navigation/utils/hooks/useBlockBack';
 import { SignUpStackParamList } from '../../navigation/utils/screenConfigs/SignUpStack';
 
 const Container = styled(Column)`
-  padding: 80px 24px 0 24px;
+  padding: 16px 24px 0 24px;
 `;
 
 const EmailVerified: React.FC = () => {
@@ -29,10 +27,8 @@ const EmailVerified: React.FC = () => {
   const goToProfilePhoto = () => navigation.navigate(SCREENS.SET_PROFILE_PHOTO);
 
   return (
-    <Screen unsafe>
+    <OnboardingScreen next={goToProfilePhoto}>
       <Container justifyContent="center" alignItems="center">
-        <Logo size={64} />
-        <Spacer height={24} />
         <Typography tag="h3" textAlign="center">
           Nice!
         </Typography>
@@ -42,14 +38,13 @@ const EmailVerified: React.FC = () => {
         </Typography>
         <Spacer height={8} />
         <Typography tag="p" textAlign="center">
-          Your journey to cashless spending with Dot is about to begin.
+          Your journey to cashless spending with Dot is about to begin!
         </Typography>
-        <Spacer height={16} />
+        <Spacer height={32} />
         <CheckedIcon width={200} />
         <Spacer height={16} />
-        <Button onPress={goToProfilePhoto}>Next</Button>
       </Container>
-    </Screen>
+    </OnboardingScreen>
   );
 };
 

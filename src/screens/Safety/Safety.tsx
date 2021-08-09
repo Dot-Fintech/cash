@@ -6,9 +6,8 @@ import { Dimensions, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components';
 
-import Button from '../../components/Button';
 import Column from '../../components/Column';
-import Screen from '../../components/Screen';
+import OnboardingScreen from '../../components/OnboardingScreen';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
 import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
@@ -48,7 +47,7 @@ const Safety: React.FC = () => {
   };
 
   return (
-    <Screen>
+    <OnboardingScreen next={next}>
       <Container alignItems="center">
         <Typography tag="h3" textAlign="center">
           Security is our priority
@@ -65,9 +64,8 @@ const Safety: React.FC = () => {
             itemHeight={CARD_HEIGHT}
           />
         </CarouselWrapper>
-        <Button onPress={next}>Continue</Button>
       </Container>
-    </Screen>
+    </OnboardingScreen>
   );
 };
 

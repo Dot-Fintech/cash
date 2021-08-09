@@ -28,10 +28,12 @@ type Props = {
 const Screen: React.FC<Props> = ({ unsafe, children }) => {
   const { theme } = useContext(ThemeContext);
 
-  return (
+  return unsafe ? (
+    <Unsafe>{children}</Unsafe>
+  ) : (
     <>
       <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />
-      {unsafe ? <Unsafe>{children}</Unsafe> : <Safe>{children}</Safe>}
+      <Safe>{children}</Safe>
     </>
   );
 };

@@ -10,7 +10,7 @@ import { Card } from './utils';
 const RAIL_SPACING = 16;
 
 export const CARD_WIDTH = Dimensions.get('window').width - 2 * RAIL_SPACING;
-export const CARD_HEIGHT = 400;
+export const CARD_HEIGHT = 360;
 
 const Container = styled(Column)`
   padding: 16px ${RAIL_SPACING}px;

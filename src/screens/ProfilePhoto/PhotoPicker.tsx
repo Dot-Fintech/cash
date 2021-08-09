@@ -15,7 +15,7 @@ const Container = styled(TouchableOpacity)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 400px;
+  height: 300px;
   padding: 16px ${RAIL_SPACING}px;
   background-color: ${({ theme }) =>
     theme.colors.background.secondary.toString()};

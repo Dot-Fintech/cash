@@ -13,9 +13,8 @@ import Banner from '../../components/Banner';
 import Button from '../../components/Button';
 import Column from '../../components/Column';
 import FormValidationError from '../../components/FormValidationError';
-import Logo from '../../components/Logo';
+import OnboardingScreen from '../../components/OnboardingScreen';
 import Row from '../../components/Row';
-import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
 import TextField from '../../components/TextField';
 import Typography from '../../components/Typography';
@@ -28,7 +27,7 @@ import TokenStore from '../../stores/TokenStore';
 import { loginValidationSchema } from './utils';
 
 const Container = styled(Column)`
-  padding: 80px 24px 0 24px;
+  padding: 16px 24px 0 24px;
 `;
 
 const FullWidthButton = styled(Button)`
@@ -93,10 +92,8 @@ const LoginPage: React.FC = () => {
       >
         Unable to login with those credentials
       </Banner>
-      <Screen unsafe>
+      <OnboardingScreen>
         <Container justifyContent="center" alignItems="center">
-          <Logo size={64} />
-          <Spacer height={24} />
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={initialFormValues}
@@ -111,6 +108,7 @@ const LoginPage: React.FC = () => {
                   value={values.email}
                   keyboardType="email-address"
                   textContentType="emailAddress"
+                  autoCapitalize="none"
                 />
                 {errors.email && (
                   <>
@@ -172,7 +170,7 @@ const LoginPage: React.FC = () => {
             </Button>
           </Row>
         </Container>
-      </Screen>
+      </OnboardingScreen>
     </>
   );
 };

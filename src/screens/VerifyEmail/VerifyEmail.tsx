@@ -4,8 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Column from '../../components/Column';
-import Logo from '../../components/Logo';
-import Screen from '../../components/Screen';
+import OnboardingScreen from '../../components/OnboardingScreen';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
 import { SCREENS } from '../../navigation/utils/enums/screens';
@@ -13,7 +12,7 @@ import { useBlockBack } from '../../navigation/utils/hooks/useBlockBack';
 import { SignUpStackParamList } from '../../navigation/utils/screenConfigs/SignUpStack';
 
 const Container = styled(Column)`
-  padding: 80px 24px 0 24px;
+  padding: 16px 24px 0 24px;
 `;
 
 const VerifyEmail: React.FC = () => {
@@ -25,10 +24,8 @@ const VerifyEmail: React.FC = () => {
   useBlockBack(navigation);
 
   return (
-    <Screen unsafe>
+    <OnboardingScreen>
       <Container justifyContent="center" alignItems="center">
-        <Logo size={64} />
-        <Spacer height={24} />
         <Typography tag="h3" textAlign="center">
           Verify your email address
         </Typography>
@@ -45,7 +42,7 @@ const VerifyEmail: React.FC = () => {
           of the sign up process.
         </Typography>
       </Container>
-    </Screen>
+    </OnboardingScreen>
   );
 };
 

@@ -5,7 +5,6 @@ import Button from '../../components/Button';
 import Column from '../../components/Column';
 import Photo from '../../components/Photo';
 import Row from '../../components/Row';
-import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
 import { UserContext } from '../../context/user/state';
@@ -16,7 +15,7 @@ import PhotoPicker from './PhotoPicker';
 const RAIL_SPACING = 16;
 
 const Container = styled(Column)`
-  padding: 16px ${RAIL_SPACING}px 0;
+  padding: 0 ${RAIL_SPACING}px 0;
 `;
 
 type Props = {
@@ -76,57 +75,55 @@ const ProfilePhotoPage: React.FC<Props> = ({
   const loading = uploadResult.loading || action.loading;
 
   return (
-    <Screen>
-      <Container alignItems="center">
-        <Typography tag="h3">{title}</Typography>
-        <Spacer height={8} />
-        <Typography tag="h6" textAlign="center">
-          {description}
-        </Typography>
-        <Spacer height={32} />
-        {!uri ? (
-          <>
-            <PhotoPicker aspect={photo.aspect} setUri={setUri} />
-            {canSkip && (
-              <>
-                <Spacer height={16} />
-                <Button onPress={next}>
-                  <Typography tag="h6" color={theme.colors.main.secondary}>
-                    Skip
-                  </Typography>
-                </Button>
-              </>
-            )}
-          </>
-        ) : !success ? (
-          <>
-            <Photo
-              size={window.innerWidth - 2 * RAIL_SPACING}
-              uri={uri}
-              {...photo}
-            />
-            <Spacer height={16} />
-            <Row justifyContent="space-between" fullWidth>
-              <Button onPress={unsetImage} disabled={loading}>
-                Back
+    <Container alignItems="center">
+      <Typography tag="h3">{title}</Typography>
+      <Spacer height={8} />
+      <Typography tag="h6" textAlign="center">
+        {description}
+      </Typography>
+      <Spacer height={32} />
+      {!uri ? (
+        <>
+          <PhotoPicker aspect={photo.aspect} setUri={setUri} />
+          {canSkip && (
+            <>
+              <Spacer height={16} />
+              <Button onPress={next}>
+                <Typography tag="h6" color={theme.colors.main.secondary}>
+                  Skip
+                </Typography>
               </Button>
-              <Button onPress={handleSave} disabled={loading}>
-                Save
-              </Button>
-            </Row>
-          </>
-        ) : (
-          <>
-            <Typography tag="h2">Success!</Typography>
-            <Spacer height={16} />
-            <CheckedIcon
-              height={300}
-              maxWidth={window.innerWidth - 2 * RAIL_SPACING}
-            />
-          </>
-        )}
-      </Container>
-    </Screen>
+            </>
+          )}
+        </>
+      ) : !success ? (
+        <>
+          <Photo
+            size={window.innerWidth - 2 * RAIL_SPACING}
+            uri={uri}
+            {...photo}
+          />
+          <Spacer height={16} />
+          <Row justifyContent="space-between" fullWidth>
+            <Button onPress={unsetImage} disabled={loading}>
+              Back
+            </Button>
+            <Button onPress={handleSave} disabled={loading}>
+              Save
+            </Button>
+          </Row>
+        </>
+      ) : (
+        <>
+          <Typography tag="h2">Success!</Typography>
+          <Spacer height={16} />
+          <CheckedIcon
+            height={300}
+            maxWidth={window.innerWidth - 2 * RAIL_SPACING}
+          />
+        </>
+      )}
+    </Container>
   );
 };
 

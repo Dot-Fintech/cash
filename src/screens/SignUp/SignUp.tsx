@@ -13,8 +13,7 @@ import Banner from '../../components/Banner';
 import Button from '../../components/Button';
 import Column from '../../components/Column';
 import FormValidationError from '../../components/FormValidationError';
-import Logo from '../../components/Logo';
-import Screen from '../../components/Screen';
+import OnboardingScreen from '../../components/OnboardingScreen';
 import Spacer from '../../components/Spacer';
 import TextField from '../../components/TextField';
 import { UserContext } from '../../context/user/state';
@@ -25,7 +24,7 @@ import TokenStore from '../../stores/TokenStore';
 import { useSignUpValidationSchema } from './utils';
 
 const Container = styled(Column)`
-  padding: 80px 24px 0 24px;
+  padding: 16px 24px 0 24px;
 `;
 
 const FullWidthButton = styled(Button)`
@@ -115,10 +114,8 @@ const SignUpPage: React.FC = () => {
       >
         Hmm. Something went wrong while trying to sign up
       </Banner>
-      <Screen unsafe>
+      <OnboardingScreen>
         <Container justifyContent="center" alignItems="center">
-          <Logo size={64} />
-          <Spacer height={24} />
           <Formik
             validationSchema={signUpValidationSchema}
             initialValues={initialFormValues}
@@ -233,7 +230,7 @@ const SignUpPage: React.FC = () => {
           )}
           <Spacer height={16} />
         </Container>
-      </Screen>
+      </OnboardingScreen>
     </>
   );
 };
