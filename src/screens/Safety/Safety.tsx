@@ -56,7 +56,7 @@ const Safety: React.FC = () => {
         <Spacer height={16} />
         <CarouselWrapper>
           <Carousel
-            layout="tinder"
+            layout="stack"
             data={CARDS}
             renderItem={Card}
             sliderWidth={Dimensions.get('window').width}
