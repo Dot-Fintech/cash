@@ -78,7 +78,7 @@ const ProfilePhotoPage: React.FC<Props> = ({
   return (
     <Screen>
       <Container alignItems="center">
-        <Typography tag="h2">{title}</Typography>
+        <Typography tag="h3">{title}</Typography>
         <Spacer height={8} />
         <Typography tag="h6" textAlign="center">
           {description}

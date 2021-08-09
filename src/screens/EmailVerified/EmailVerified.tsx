@@ -33,7 +33,7 @@ const EmailVerified: React.FC = () => {
       <Container justifyContent="center" alignItems="center">
         <Logo size={64} />
         <Spacer height={24} />
-        <Typography tag="h2" textAlign="center">
+        <Typography tag="h3" textAlign="center">
           Nice!
         </Typography>
         <Spacer height={16} />
