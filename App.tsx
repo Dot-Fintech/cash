@@ -6,7 +6,6 @@ import { SourceSansPro_400Regular } from '@expo-google-fonts/source-sans-pro';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import * as ScreenOrientation from 'expo-screen-orientation';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useEffect } from 'react';
 
@@ -30,7 +29,6 @@ const App: React.FC = () => {
 
   return fontsLoaded ? (
     <Providers>
-      <StatusBar style="auto" />
       <RootStack />
     </Providers>
   ) : (

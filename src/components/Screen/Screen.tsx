@@ -1,7 +1,10 @@
-import React from 'react';
+import { StatusBar } from 'expo-status-bar';
+import React, { useContext } from 'react';
 import { Dimensions } from 'react-native';
 import { SafeAreaView, View } from 'react-native';
 import styled, { css } from 'styled-components';
+
+import { ThemeContext } from '../../theme';
 
 const styles = css`
   width: ${Dimensions.get('window').width}px;
@@ -23,7 +26,14 @@ type Props = {
 };
 
 const Screen: React.FC<Props> = ({ unsafe, children }) => {
-  return unsafe ? <Unsafe>{children}</Unsafe> : <Safe>{children}</Safe>;
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <>
+      <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />
+      {unsafe ? <Unsafe>{children}</Unsafe> : <Safe>{children}</Safe>}
+    </>
+  );
 };
 
 export default Screen;
