@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import * as LocalAuthentication from 'expo-local-authentication';
 import React from 'react';
 import { useWindowDimensions } from 'react-native';
 import styled from 'styled-components';
@@ -12,7 +13,9 @@ import Spacer from '../../components/Spacer';
 import SafetyPaymentsIcon from '../../icons/SafetyPaymentsIcon';
 import SafetyPersonalIcon from '../../icons/SafetyPersonalIcon';
 import SafetySavingIcon from '../../icons/SafetySavingIcon';
+import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
 import { SCREENS } from '../../navigation/utils/enums/screens';
+import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootStack';
 import { SignUpStackParamList } from '../../navigation/utils/screenConfigs/SignUpStack';
 import Paragraph from './Paragraph';
 
@@ -27,11 +30,22 @@ const Container = styled(Column)`
 
 const Safety: React.FC = () => {
   const navigation =
-    useNavigation<StackNavigationProp<SignUpStackParamList, SCREENS.SAFETY>>();
+    useNavigation<
+      StackNavigationProp<
+        RootStackParamList & SignUpStackParamList,
+        SCREENS.SAFETY
+      >
+    >();
 
   const { width } = useWindowDimensions();
 
-  const goToBiometrics = () => navigation.push(SCREENS.BIOMETRICS);
+  const next = async () => {
+    if (await LocalAuthentication.hasHardwareAsync()) {
+      navigation.push(SCREENS.BIOMETRICS);
+    } else {
+      navigation.push(NAVIGATORS.MAIN_STACK);
+    }
+  };
 
   const ICON_WIDTH = Math.min(
     Math.floor((width - 2 * RAIL_SPACING - 0.5 * MIDDLE_SPACER_WIDTH) / 2),
@@ -47,7 +61,7 @@ const Safety: React.FC = () => {
           <Paragraph
             width={ICON_WIDTH}
             title="Safe"
-            description="Now it's easier than ever before to send money, but that doesn't mean it shouldn't be safe. Dot utilizes a myriad of safety features to process transactions."
+            description="Now it's easier than ever before to send money, and Dot utilizes a myriad of safety features to process transactions."
           />
         </Row>
         <Row fullWidth>
@@ -68,7 +82,7 @@ const Safety: React.FC = () => {
             description="Security is our top priority and we invest a lot of resources ensuring that Dot protects its customers."
           />
         </Row>
-        <Button onPress={goToBiometrics}>Continue</Button>
+        <Button onPress={next}>Continue</Button>
       </Container>
     </Screen>
   );

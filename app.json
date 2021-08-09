@@ -24,6 +24,9 @@
         "branch": {
           "apiKey": "key_test_ga3Aj1x4tkuBHIqF1488tndprxbmSE5z"
         }
+      },
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Dot requires FaceID to authenticate access to users' ewallets"
       }
     },
     "android": {
