@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
 import { Color } from '../../theme';
@@ -29,19 +30,13 @@ export type Props = {
   close: () => void;
   color?: Color;
   alert?: boolean;
-  paddingTop?: number;
 };
 
-const Banner: React.FC<Props> = ({
-  children,
-  isOpen,
-  close,
-  color,
-  alert,
-  paddingTop,
-}) => {
+const Banner: React.FC<Props> = ({ children, isOpen, close, color, alert }) => {
+  const { top } = useSafeAreaInsets();
+
   return isOpen ? (
-    <Container color={color ?? Colors.white} paddingTop={paddingTop}>
+    <Container color={color ?? Colors.white} paddingTop={top}>
       <Row justifyContent="center" alignItems="center" fullWidth>
         {alert && (
           <>

@@ -7,7 +7,6 @@ import {
   NativeSyntheticEvent,
   NativeTouchEvent,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components';
 
 import Banner from '../../components/Banner';
@@ -54,7 +53,6 @@ const SignUpPage: React.FC = () => {
     useNavigation<StackNavigationProp<SignUpStackParamList, SCREENS.SIGN_UP>>();
 
   const theme = useTheme();
-  const { top } = useSafeAreaInsets();
 
   const { setUser } = useContext(UserContext);
 
@@ -113,7 +111,6 @@ const SignUpPage: React.FC = () => {
         isOpen={isBannerOpen}
         color={theme.colors.warning.primary}
         close={handleCloseBanner}
-        paddingTop={top}
         alert
       >
         Hmm. Something went wrong while trying to sign up

@@ -7,7 +7,6 @@ import {
   NativeSyntheticEvent,
   NativeTouchEvent,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components';
 
 import Banner from '../../components/Banner';
@@ -51,7 +50,6 @@ const LoginPage: React.FC = () => {
     useNavigation<StackNavigationProp<RootStackParamList, SCREENS.LANDING>>();
 
   const theme = useTheme();
-  const { top } = useSafeAreaInsets();
 
   const { setUser } = useContext(UserContext);
 
@@ -91,7 +89,6 @@ const LoginPage: React.FC = () => {
         isOpen={isBannerOpen}
         close={handleCloseBanner}
         color={theme.colors.warning.primary}
-        paddingTop={top}
         alert
       >
         Unable to login with those credentials
