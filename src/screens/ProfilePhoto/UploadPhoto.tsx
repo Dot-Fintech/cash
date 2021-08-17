@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Dimensions } from 'react-native';
 import styled from 'styled-components';
 
 import Button from '../../components/Button';
@@ -9,10 +10,9 @@ import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
 import { UserContext } from '../../context/user/state';
 import CheckedIcon from '../../icons/CheckedIcon';
+import { RAIL_SPACING } from '../../styles/spacing';
 import { useUploadImage } from '../../utils/uploadImage';
 import PhotoPicker from './PhotoPicker';
-
-const RAIL_SPACING = 16;
 
 const Container = styled(Column)`
   padding: 0 ${RAIL_SPACING}px 0;
@@ -83,7 +83,7 @@ const ProfilePhotoPage: React.FC<Props> = ({
       ) : !success ? (
         <>
           <Photo
-            size={window.innerWidth - 2 * RAIL_SPACING}
+            size={Dimensions.get('window').width - 2 * RAIL_SPACING}
             uri={uri}
             {...photo}
           />
@@ -103,7 +103,7 @@ const ProfilePhotoPage: React.FC<Props> = ({
           <Spacer height={16} />
           <CheckedIcon
             height={300}
-            maxWidth={window.innerWidth - 2 * RAIL_SPACING}
+            maxWidth={Dimensions.get('window').width - 2 * RAIL_SPACING}
           />
         </>
       )}

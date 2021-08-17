@@ -17,8 +17,9 @@ import PhoneSendIcon from '../../icons/PhoneSendIcon';
 import POSIcon from '../../icons/POSIcon';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootStack';
+import { RAIL_SPACING } from '../../styles/spacing';
 import FutureText from './FutureText';
-import { MIDDLE_SPACER_WIDTH, RAIL_SPACING } from './utils';
+import { MIDDLE_SPACER_WIDTH } from './utils';
 
 const Container = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;

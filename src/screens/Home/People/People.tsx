@@ -1,4 +1,5 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import Column from '../../../components/Column';
@@ -8,7 +9,7 @@ import Spacer from '../../../components/Spacer';
 import Typography from '../../../components/Typography';
 import UserListItem from '../../../components/UserListItem';
 import { UserListItemFragment } from '../../../generated/graphql';
-import { RAIL_SPACING } from '../utils';
+import { RAIL_SPACING } from '../../../styles/spacing';
 import { useInteractions } from './useInteractions';
 
 const Container = styled(Column)`
@@ -26,7 +27,8 @@ const People: React.FC = () => {
   const { data, loading, error } = useInteractions();
 
   const goToUser = (user: UserListItemFragment) => {
-    history.push(`${BASE_ROUTES.USER}/${user.username}`);
+    void user;
+    // history.push(`${BASE_ROUTES.USER}/${user.username}`);
   };
 
   const interactions = data?.getInteractions.interactions;
@@ -38,7 +40,7 @@ const People: React.FC = () => {
           interactions.map(({ user }, index) => (
             <Column key={user._id} fullWidth>
               {index > 0 && <Spacer height={16} />}
-              <UserListItem user={user} onClick={() => goToUser(user)} />
+              <UserListItem user={user} onPress={() => goToUser(user)} />
             </Column>
           ))
         ) : (
@@ -48,7 +50,10 @@ const People: React.FC = () => {
           />
         )
       ) : loading ? (
-        <LoadingList width={window.innerWidth - RAIL_SPACING} numRows={6} />
+        <LoadingList
+          width={Dimensions.get('window').width - RAIL_SPACING}
+          numRows={6}
+        />
       ) : error ? (
         <ErrorContainer justifyContent="center" alignItems="center" fullWidth>
           <Typography tag="h4" textAlign="center">

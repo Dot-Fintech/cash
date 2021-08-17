@@ -12,13 +12,12 @@ import {
   Reminder_Code,
   useAcknowledgeReminderMutation,
 } from '../../../generated/graphql';
-
-const RAIL_SPACING = 16;
+import { RAIL_SPACING } from '../../../styles/spacing';
 
 const ModalContainer = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;
   width: calc(100% - ${2 * RAIL_SPACING}px);
-  height: ${window.innerHeight}px;
+  height: 100vh;
 `;
 
 const WelcomeModal: React.FC = () => {

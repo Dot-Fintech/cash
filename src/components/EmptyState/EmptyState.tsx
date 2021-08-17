@@ -33,7 +33,7 @@ const EmptyState: React.FC<Props> = ({ title, description }) => {
         {title}
       </Typography>
       <Spacer height={16} />
-      <BigPayIcon width={window.innerWidth / 3} />
+      <BigPayIcon width={Dimensions.get('window').width / 3} />
       <Spacer height={16} />
       <Typography tag="h6" textAlign="center">
         {description}

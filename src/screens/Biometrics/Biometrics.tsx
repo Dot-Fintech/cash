@@ -15,8 +15,8 @@ import FaceIdIcon from '../../icons/FaceIdIcon';
 import FingerprintIcon from '../../icons/FingerprintIcon';
 import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
 import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootStack';
+import { RAIL_SPACING } from '../../styles/spacing';
 
-const RAIL_SPACING = 16;
 const MIDDLE_SPACER_WIDTH = 12;
 
 const Container = styled(Column)`

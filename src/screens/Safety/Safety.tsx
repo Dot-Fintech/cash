@@ -14,10 +14,9 @@ import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootStack';
 import { SignUpStackParamList } from '../../navigation/utils/screenConfigs/SignUpStack';
+import { RAIL_SPACING } from '../../styles/spacing';
 import Card, { CARD_HEIGHT, CARD_WIDTH } from './Card';
 import { CARDS } from './utils';
-
-const RAIL_SPACING = 16;
 
 const Container = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;

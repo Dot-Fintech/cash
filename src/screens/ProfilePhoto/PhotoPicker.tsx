@@ -7,8 +7,7 @@ import styled, { useTheme } from 'styled-components';
 
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
-
-const RAIL_SPACING = 16;
+import { RAIL_SPACING } from '../../styles/spacing';
 
 const Container = styled(TouchableOpacity)`
   display: flex;

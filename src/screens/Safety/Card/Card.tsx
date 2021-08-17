@@ -5,10 +5,9 @@ import styled from 'styled-components';
 import Column from '../../../components/Column';
 import Spacer from '../../../components/Spacer';
 import Typography from '../../../components/Typography';
+import { RAIL_SPACING } from '../../../styles/spacing';
 import { Card } from '../utils';
 import { getShadowColor } from './utils';
-
-const RAIL_SPACING = 16;
 
 export const CARD_WIDTH = Dimensions.get('window').width - 2 * RAIL_SPACING;
 export const CARD_HEIGHT = 360;

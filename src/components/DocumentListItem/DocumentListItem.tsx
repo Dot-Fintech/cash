@@ -4,6 +4,7 @@ import styled, { useTheme } from 'styled-components';
 
 import { UserContext } from '../../context/user/state';
 import { FullUserFragment, Kyc_Document_Status } from '../../generated/graphql';
+import { RAIL_SPACING } from '../../styles/spacing';
 import Column from '../Column';
 import Row from '../Row';
 import Spacer from '../Spacer';
@@ -20,7 +21,6 @@ const Container = styled.button`
   background: none;
 `;
 
-const RAIL_SPACING = 16;
 const NotesWrapper = styled(Column)`
   width: calc(100% - ${2 * RAIL_SPACING}px);
   padding: 0 ${RAIL_SPACING}px;

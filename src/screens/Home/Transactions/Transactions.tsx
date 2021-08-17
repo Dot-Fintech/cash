@@ -1,28 +1,24 @@
-import {
-  Column,
-  InfiniteScroll,
-  Row,
-  Spacer,
-  Typography,
-} from '@dot-fintech/web-ui';
-import Chip from 'components/Chip';
-import EmptyState from 'components/EmptyState';
-import { LoadingChips, LoadingList } from 'components/Loading';
-import TransactionListItem from 'components/TransactionListItem';
-import { Transaction_Action } from 'generated/graphql';
 import React, { useState } from 'react';
+import { Dimensions } from 'react-native';
 import styled, { useTheme } from 'styled-components';
-import { FilterOption, useTransactions } from 'utils/hooks/useTransactions';
 
-import { RAIL_SPACING } from '../utils';
-
-const CONTAINER_ID = 'home_transactions_container_id';
+import Chip from '../../../components/Chip';
+import Column from '../../../components/Column';
+import EmptyState from '../../../components/EmptyState';
+import { LoadingChips, LoadingList } from '../../../components/Loading';
+import Row from '../../../components/Row';
+import Spacer from '../../../components/Spacer';
+import TransactionListItem from '../../../components/TransactionListItem';
+import Typography from '../../../components/Typography';
+import { Transaction_Action } from '../../../generated/graphql';
+import { RAIL_SPACING } from '../../../styles/spacing';
+import {
+  FilterOption,
+  useTransactions,
+} from '../../../utils/hooks/useTransactions';
 
 const Container = styled(Column)`
   overflow-y: scroll;
-  ::-webkit-scrollbar {
-    width: 0px;
-  }
 `;
 
 const FilterOptionsContainer = styled(Row)`
@@ -46,14 +42,12 @@ const Transactions: React.FC = () => {
 
   const [filterOption, setFilterOption] = useState(filterOptions[0]);
 
-  const { data, loading, error, onNext, onRefresh } =
-    useTransactions(filterOption);
+  const { data, loading, error } = useTransactions(filterOption);
 
-  const count = data?.getTransactions.pageData.count;
   const transactions = data?.getTransactions.transactions;
 
   return (
-    <Container id={CONTAINER_ID} fullWidth>
+    <Container fullWidth>
       {data ? (
         <FilterOptionsContainer fullWidth>
           {filterOptions.map((option, index) => (
@@ -61,7 +55,7 @@ const Transactions: React.FC = () => {
               {index > 0 && <Spacer width={16} />}
               <Chip
                 isSelected={filterOption.id === option.id}
-                onClick={() => setFilterOption(option)}
+                onPress={() => setFilterOption(option)}
               >
                 {option.label}
               </Chip>
@@ -74,30 +68,22 @@ const Transactions: React.FC = () => {
       <Spacer height={16} />
       {data ? (
         transactions && transactions.length > 0 ? (
-          <InfiniteScroll
-            dataLength={transactions.length}
-            hasMore={transactions.length < (count ?? 0)}
-            scrollableTarget={CONTAINER_ID}
-            next={onNext}
-            refresh={onRefresh}
-          >
-            {transactions?.map((transaction, index) => (
-              <Column key={transaction._id} justifyContent="center" fullWidth>
-                {index > 0 && <Spacer height={16} />}
-                {(index === 0 ||
-                  new Date(transactions[index - 1].createdAt).toDateString() !==
-                    new Date(transaction.createdAt).toDateString()) && (
-                  <>
-                    <Typography as="h6">
-                      {new Date(transaction.createdAt).toDateString()}
-                    </Typography>
-                    <Spacer height={16} />
-                  </>
-                )}
-                <TransactionListItem transaction={transaction} />
-              </Column>
-            ))}
-          </InfiniteScroll>
+          transactions?.map((transaction, index) => (
+            <Column key={transaction._id} justifyContent="center" fullWidth>
+              {index > 0 && <Spacer height={16} />}
+              {(index === 0 ||
+                new Date(transactions[index - 1].createdAt).toDateString() !==
+                  new Date(transaction.createdAt).toDateString()) && (
+                <>
+                  <Typography tag="h6">
+                    {new Date(transaction.createdAt).toDateString()}
+                  </Typography>
+                  <Spacer height={16} />
+                </>
+              )}
+              <TransactionListItem transaction={transaction} />
+            </Column>
+          ))
         ) : (
           <EmptyState
             title="No transactions just yet"
@@ -105,21 +91,24 @@ const Transactions: React.FC = () => {
           />
         )
       ) : loading ? (
-        <LoadingList width={window.innerWidth - RAIL_SPACING} numRows={8} />
+        <LoadingList
+          width={Dimensions.get('window').width - RAIL_SPACING}
+          numRows={8}
+        />
       ) : error ? (
         <ErrorContainer alignItems="center" fullWidth>
-          <Typography as="h4" textAlign="center">
+          <Typography tag="h4" textAlign="center">
             Looks like something went wrong
           </Typography>
           <Spacer height={16} />
-          <Typography as="h5" textAlign="center">
+          <Typography tag="h5" textAlign="center">
             There was an issue fetching your transactions
           </Typography>
           <Spacer height={16} />
           <Typography
-            as="h5"
+            tag="h5"
             textAlign="center"
-            textColor={theme.colors.error.primary}
+            color={theme.colors.error.primary}
           >
             {error.message}
           </Typography>
