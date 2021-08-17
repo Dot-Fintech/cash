@@ -26,7 +26,6 @@ const ProfilePhoto: React.FC<Props> = ({ next }) => {
       title="Profile Photo"
       description="Let people know who you are. Upload a picture of yourself."
       compressedSize={100}
-      canSkip
       action={{
         containerName,
         loading,

@@ -47,7 +47,7 @@ const Safety: React.FC = () => {
   };
 
   return (
-    <OnboardingScreen next={next}>
+    <OnboardingScreen primary={{ label: 'Next', action: next }}>
       <Container alignItems="center">
         <Typography tag="h3" textAlign="center">
           Security is our priority

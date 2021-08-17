@@ -16,7 +16,7 @@ const SetProfilePhoto: React.FC = () => {
   const goToSafety = () => navigation.push(SCREENS.SAFETY);
 
   return (
-    <OnboardingScreen>
+    <OnboardingScreen secondary={{ label: 'Skip', action: goToSafety }}>
       <ProfilePhoto next={goToSafety} />
     </OnboardingScreen>
   );

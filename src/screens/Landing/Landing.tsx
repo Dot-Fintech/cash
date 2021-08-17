@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import { useWindowDimensions } from 'react-native';
+import { Dimensions, useWindowDimensions } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import Button from '../../components/Button';
@@ -23,6 +23,10 @@ import { MIDDLE_SPACER_WIDTH, RAIL_SPACING } from './utils';
 const Container = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;
   height: 100%;
+`;
+
+const PrimaryButton = styled(Button)`
+  width: ${Dimensions.get('window').width - 2 * 32}px;
 `;
 
 const LandingPage: React.FC = () => {
@@ -64,10 +68,10 @@ const LandingPage: React.FC = () => {
             <PhoneSendIcon width={ICON_WIDTH} />
           </Column>
         </Row>
-        <Spacer height={16} />
-        <Button onPress={goToLogin} color={colors.main.secondary}>
+        <Spacer height={24} />
+        <PrimaryButton onPress={goToLogin} color={colors.main.secondary}>
           Let's Go
-        </Button>
+        </PrimaryButton>
       </Container>
     </Screen>
   );

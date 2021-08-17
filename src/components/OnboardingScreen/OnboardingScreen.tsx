@@ -1,26 +1,43 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import Button from '../Button';
 import Column from '../Column';
 import Screen from '../Screen';
+import Spacer from '../Spacer';
+import Typography from '../Typography';
 import Header from './Header';
 
-type NextButtonProps = {
+type ButtonContainerProps = {
   bottomInset: number;
 };
-const NextButton = styled(Button)<NextButtonProps>`
-  width: ${Dimensions.get('window').width - 2 * 32}px;
+const ButtonContainer = styled(Column)<ButtonContainerProps>`
   bottom: ${({ bottomInset }) => bottomInset + 120}px;
 `;
 
-type Props = {
-  next?: () => void;
+const PrimaryButton = styled(Button)`
+  width: ${Dimensions.get('window').width - 2 * 32}px;
+`;
+
+type OnboardingButton = {
+  label: string;
+  action: () => void;
 };
 
-const OnboardingScreen: React.FC<Props> = ({ next, children }) => {
+type Props = {
+  primary?: OnboardingButton;
+  secondary?: OnboardingButton;
+};
+
+const OnboardingScreen: React.FC<Props> = ({
+  primary,
+  secondary,
+  children,
+}) => {
+  const theme = useTheme();
+
   const { bottom } = useSafeAreaInsets();
 
   return (
@@ -29,10 +46,22 @@ const OnboardingScreen: React.FC<Props> = ({ next, children }) => {
         <Header />
         {children}
       </Screen>
-      {next && (
-        <NextButton onPress={next} bottomInset={bottom}>
-          Next
-        </NextButton>
+      {(primary || secondary) && (
+        <ButtonContainer bottomInset={bottom}>
+          {primary && (
+            <PrimaryButton onPress={primary.action}>
+              {primary.label}
+            </PrimaryButton>
+          )}
+          {primary && secondary && <Spacer height={16} />}
+          {secondary && (
+            <Button onPress={secondary.action}>
+              <Typography tag="h6" color={theme.colors.main.secondary}>
+                {secondary.label}
+              </Typography>
+            </Button>
+          )}
+        </ButtonContainer>
       )}
     </Column>
   );

@@ -27,7 +27,7 @@ const EmailVerified: React.FC = () => {
   const goToProfilePhoto = () => navigation.navigate(SCREENS.SET_PROFILE_PHOTO);
 
   return (
-    <OnboardingScreen next={goToProfilePhoto}>
+    <OnboardingScreen primary={{ label: 'Next', action: goToProfilePhoto }}>
       <Container justifyContent="center" alignItems="center">
         <Typography tag="h3" textAlign="center">
           Nice!

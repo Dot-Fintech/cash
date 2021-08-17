@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Button from '../../components/Button';
 import Column from '../../components/Column';
@@ -22,7 +22,6 @@ type Props = {
   title: string;
   description: string;
   compressedSize: number;
-  canSkip?: boolean;
   action: {
     containerName: string;
     loading?: boolean;
@@ -39,13 +38,10 @@ const ProfilePhotoPage: React.FC<Props> = ({
   title,
   description,
   compressedSize,
-  canSkip,
   action,
   photo,
   next,
 }) => {
-  const theme = useTheme();
-
   const { user } = useContext(UserContext);
 
   const [upload, uploadResult] = useUploadImage(compressedSize);
@@ -83,19 +79,7 @@ const ProfilePhotoPage: React.FC<Props> = ({
       </Typography>
       <Spacer height={32} />
       {!uri ? (
-        <>
-          <PhotoPicker aspect={photo.aspect} setUri={setUri} />
-          {canSkip && (
-            <>
-              <Spacer height={16} />
-              <Button onPress={next}>
-                <Typography tag="h6" color={theme.colors.main.secondary}>
-                  Skip
-                </Typography>
-              </Button>
-            </>
-          )}
-        </>
+        <PhotoPicker aspect={photo.aspect} setUri={setUri} />
       ) : !success ? (
         <>
           <Photo
