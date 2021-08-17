@@ -2,11 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Path, Rect, Svg } from 'react-native-svg';
+import { Path, Svg } from 'react-native-svg';
 import { useTheme } from 'styled-components';
 
 const HEADER_WIDTH = Dimensions.get('window').width;
-const HEADER_BLOCK_HEIGHT = 120;
+const HEADER_BLOCK_HEIGHT = 80;
 
 const Header: React.FC = () => {
   const theme = useTheme();
@@ -24,36 +24,28 @@ const Header: React.FC = () => {
         viewBox={`0 0 ${HEADER_WIDTH} ${HEADER_HEIGHT}`}
         fill="none"
       >
-        <Rect
-          width="400"
-          height="120"
+        <Path
+          d="M400 0H0V80H400V0Z"
           fill={theme.colors.main.secondary.toString()}
         />
-        <Rect
-          x="100"
-          y="80"
-          width="50"
-          height="40"
+        <Path
+          d="M130 53H90V80H130V53Z"
           fill={theme.colors.background.primary.toString()}
         />
         <Path
-          d="M50 40C56.5661 40 63.0679 41.0346 69.1342 43.0448C75.2005 45.055 80.7124 48.0014 85.3553 51.7157C89.9983 55.4301 93.6812 59.8396 96.194 64.6927C98.7067 69.5457 100 74.7471 100 80L50 80L50 40Z"
+          d="M50 27C55.2529 27 60.4543 27.3565 65.3074 28.6966C70.1604 30.0367 74.5699 32.001 78.2842 34.4772C81.9986 36.9535 84.945 39.8932 86.9552 43.1286C88.9654 46.3639 90 49.8315 90 53H50V27Z"
           fill={theme.colors.background.primary.toString()}
         />
         <Path
-          d="M150 120C143.434 120 136.932 118.965 130.866 116.955C124.8 114.945 119.288 111.999 114.645 108.284C110.002 104.57 106.319 100.16 103.806 95.3073C101.293 90.4543 100 85.2529 100 80L150 80L150 120Z"
+          d="M130 80C124.747 80 119.546 79.3099 114.693 77.9699C109.84 76.6299 105.43 74.6659 101.716 72.1892C98.0016 69.7132 95.0552 66.7732 93.0448 63.5381C91.0344 60.3028 90 56.8352 90 53H130V80Z"
           fill={theme.colors.main.secondary.toString()}
         />
-        <Rect
-          y="40"
-          width="50"
-          height="40"
+        <Path
+          d="M50 27H0V53H50V27Z"
           fill={theme.colors.background.primary.toString()}
         />
-        <Rect
-          y="80"
-          width="100"
-          height="40"
+        <Path
+          d="M90 53H0V80H90V53Z"
           fill={theme.colors.background.primary.toString()}
         />
       </Svg>

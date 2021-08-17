@@ -14,7 +14,7 @@ type ButtonContainerProps = {
   bottomInset: number;
 };
 const ButtonContainer = styled(Column)<ButtonContainerProps>`
-  bottom: ${({ bottomInset }) => bottomInset + 120}px;
+  bottom: ${({ bottomInset }) => bottomInset + 100}px;
 `;
 
 const PrimaryButton = styled(Button)`
@@ -53,7 +53,7 @@ const OnboardingScreen: React.FC<Props> = ({
               {primary.label}
             </PrimaryButton>
           )}
-          {primary && secondary && <Spacer height={16} />}
+          {primary && secondary && <Spacer height={12} />}
           {secondary && (
             <Button onPress={secondary.action}>
               <Typography tag="h6" color={theme.colors.main.secondary}>

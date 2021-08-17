@@ -1,6 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import * as LocalAuthentication from 'expo-local-authentication';
 import React from 'react';
+import { Alert } from 'react-native';
 import { useWindowDimensions } from 'react-native';
 import styled from 'styled-components';
 
@@ -31,13 +33,28 @@ const Biometrics: React.FC = () => {
 
   const goToMain = () => navigation.navigate(NAVIGATORS.MAIN_STACK);
 
+  const authenticate = async () => {
+    const result = await LocalAuthentication.authenticateAsync();
+    if (result.success) {
+      goToMain();
+    } else {
+      Alert.alert(
+        'Something went wrong',
+        "We couldn't authenticate you. Please try again.",
+      );
+    }
+  };
+
   const ICON_WIDTH = Math.min(
     Math.floor((width - 2 * RAIL_SPACING - 0.5 * MIDDLE_SPACER_WIDTH) / 2),
     220,
   );
 
   return (
-    <OnboardingScreen primary={{ label: 'Next', action: goToMain }}>
+    <OnboardingScreen
+      primary={{ label: 'Set up', action: authenticate }}
+      secondary={{ label: 'Skip', action: goToMain }}
+    >
       <Container alignItems="center">
         <Typography tag="h3">Even more secure</Typography>
         <Spacer height={16} />
