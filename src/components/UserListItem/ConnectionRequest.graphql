@@ -1,0 +1,5 @@
+mutation sendConnectionRequest($data: SendConnectionRequestInput!) {
+  sendConnectionRequest(data: $data) {
+    _id
+  }
+}

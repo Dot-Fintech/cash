@@ -1,0 +1,11 @@
+query transactions($data: GetTransactionsInput!, $pageData: PaginationInput!) {
+  getTransactions(data: $data, pageData: $pageData) {
+    transactions {
+      ...FullTransaction
+    }
+    pageData {
+      count
+      pageNumber
+    }
+  }
+}
