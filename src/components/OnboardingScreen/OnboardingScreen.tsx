@@ -47,7 +47,7 @@ const OnboardingScreen: React.FC<Props> = ({
         {children}
       </Screen>
       {(primary || secondary) && (
-        <ButtonContainer bottomInset={bottom}>
+        <ButtonContainer bottomInset={bottom} alignItems="center">
           {primary && (
             <PrimaryButton onPress={primary.action}>
               {primary.label}
