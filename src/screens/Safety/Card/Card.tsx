@@ -2,10 +2,11 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import styled from 'styled-components';
 
-import Column from '../../components/Column';
-import Spacer from '../../components/Spacer';
-import Typography from '../../components/Typography';
-import { Card } from './utils';
+import Column from '../../../components/Column';
+import Spacer from '../../../components/Spacer';
+import Typography from '../../../components/Typography';
+import { Card } from '../utils';
+import { getShadowColor } from './utils';
 
 const RAIL_SPACING = 16;
 
@@ -19,7 +20,7 @@ const Container = styled(Column)`
   background-color: ${({ theme }) =>
     theme.colors.background.primary.toString()};
   border-radius: 16px;
-  box-shadow: 0 2px 4px ${({ theme }) => theme.colors.text.secondary.toString()};
+  box-shadow: 2px 2px 4px ${({ theme }) => getShadowColor(theme.name)};
 `;
 
 type Props = {
