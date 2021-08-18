@@ -20,7 +20,7 @@ import { RAIL_SPACING } from '../../styles/spacing';
 const MIDDLE_SPACER_WIDTH = 12;
 
 const Container = styled(Column)`
-  padding: 0 ${RAIL_SPACING}px;
+  padding: 32px ${RAIL_SPACING}px 0;
 `;
 
 const Biometrics: React.FC = () => {

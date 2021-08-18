@@ -19,7 +19,7 @@ import Card, { CARD_HEIGHT, CARD_WIDTH } from './Card';
 import { CARDS } from './utils';
 
 const Container = styled(Column)`
-  padding: 0 ${RAIL_SPACING}px;
+  padding: 32px ${RAIL_SPACING}px 0;
   width: 100%;
   height: 100%;
 `;

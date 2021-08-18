@@ -15,7 +15,7 @@ import { useUploadImage } from '../../utils/uploadImage';
 import PhotoPicker from './PhotoPicker';
 
 const Container = styled(Column)`
-  padding: 0 ${RAIL_SPACING}px 0;
+  padding: 32px ${RAIL_SPACING}px 0;
 `;
 
 type Props = {

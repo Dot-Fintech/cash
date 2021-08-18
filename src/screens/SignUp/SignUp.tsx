@@ -16,6 +16,7 @@ import FormValidationError from '../../components/FormValidationError';
 import OnboardingScreen from '../../components/OnboardingScreen';
 import Spacer from '../../components/Spacer';
 import TextField from '../../components/TextField';
+import Typography from '../../components/Typography';
 import { UserContext } from '../../context/user/state';
 import { useSignUpMutation } from '../../generated/graphql';
 import { SCREENS } from '../../navigation/utils/enums/screens';
@@ -24,7 +25,7 @@ import TokenStore from '../../stores/TokenStore';
 import { useSignUpValidationSchema } from './utils';
 
 const Container = styled(Column)`
-  padding: 16px 24px 0 24px;
+  padding: 32px 24px 0 24px;
 `;
 
 const FullWidthButton = styled(Button)`
@@ -103,6 +104,8 @@ const SignUpPage: React.FC = () => {
       setIsBannerOpen(true);
     }
   };
+
+  const goBack = () => navigation.pop();
 
   return (
     <>
@@ -229,6 +232,14 @@ const SignUpPage: React.FC = () => {
             </>
           )}
           <Spacer height={16} />
+          <Button onPress={goBack}>
+            <Typography tag="p" color={theme.colors.main.secondary}>
+              Already have an account?
+            </Typography>
+            <Typography tag="p" color={theme.colors.main.secondary}>
+              Tap here to log in
+            </Typography>
+          </Button>
         </Container>
       </OnboardingScreen>
     </>

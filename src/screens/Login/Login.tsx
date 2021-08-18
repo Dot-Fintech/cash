@@ -27,7 +27,7 @@ import TokenStore from '../../stores/TokenStore';
 import { loginValidationSchema } from './utils';
 
 const Container = styled(Column)`
-  padding: 16px 24px 0 24px;
+  padding: 32px 24px 0 24px;
 `;
 
 const FullWidthButton = styled(Button)`

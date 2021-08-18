@@ -13,7 +13,7 @@ import { useBlockBack } from '../../navigation/utils/hooks/useBlockBack';
 import { SignUpStackParamList } from '../../navigation/utils/screenConfigs/SignUpStack';
 
 const Container = styled(Column)`
-  padding: 16px 24px 0 24px;
+  padding: 32px 24px 0 24px;
 `;
 
 const EmailVerified: React.FC = () => {
