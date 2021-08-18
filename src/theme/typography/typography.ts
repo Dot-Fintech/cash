@@ -50,4 +50,11 @@ export const typography: ThemeTypography = {
     lineHeight: 18,
     letterSpacing: 0.25,
   },
+  sp: {
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 13,
+    fontWeight: 300,
+    lineHeight: 14,
+    letterSpacing: 0.25,
+  },
 };

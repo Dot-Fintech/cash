@@ -1,3 +1,7 @@
+import React from 'react';
+
+import TabBarIcon from '../../../components/TabBarIcon';
+import TabBarLabel from '../../../components/TabBarLabel';
 import Metrics from '../../../screens/Metrics';
 import ExploreTabs from '../../ExploreTabs';
 import HomeStack from '../../HomeStack';
@@ -9,22 +13,42 @@ import { TabScreenConfig } from '../types/ScreenConfig';
 
 const HomeStackConfig: TabScreenConfig = {
   component: HomeStack,
+  options: {
+    tabBarIcon: (props) => <TabBarIcon name="home" {...props} />,
+    tabBarLabel: (props) => <TabBarLabel text="Home" {...props} />,
+  },
 };
 
 const ExploreTabsConfig: TabScreenConfig = {
   component: ExploreTabs,
+  options: {
+    tabBarIcon: (props) => <TabBarIcon name="compass" {...props} />,
+    tabBarLabel: (props) => <TabBarLabel text="Explore" {...props} />,
+  },
 };
 
 const MoneyStackConfig: TabScreenConfig = {
   component: MoneyStack,
+  options: {
+    tabBarIcon: (props) => <TabBarIcon name="money" {...props} />,
+    tabBarLabel: () => null,
+  },
 };
 
 const MetricsConfig: TabScreenConfig = {
   component: Metrics,
+  options: {
+    tabBarIcon: (props) => <TabBarIcon name="trending-up" {...props} />,
+    tabBarLabel: (props) => <TabBarLabel text="Metrics" {...props} />,
+  },
 };
 
 const ProfileConfig: TabScreenConfig = {
   component: ProfileStack,
+  options: {
+    tabBarIcon: (props) => <TabBarIcon name="person" {...props} />,
+    tabBarLabel: (props) => <TabBarLabel text="Profile" {...props} />,
+  },
 };
 
 export const MainTabsScreenConfigs = {
