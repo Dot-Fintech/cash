@@ -131,6 +131,7 @@ const SignUpPage: React.FC = () => {
                   onChangeText={handleChange('firstName')}
                   onBlur={handleBlur('firstName')}
                   value={values.firstName}
+                  autoCompleteType="name"
                 />
                 {errors.firstName && (
                   <>
@@ -146,6 +147,7 @@ const SignUpPage: React.FC = () => {
                   onChangeText={handleChange('lastName')}
                   onBlur={handleBlur('lastName')}
                   value={values.lastName}
+                  autoCompleteType="name"
                 />
                 {errors.lastName && (
                   <>
@@ -160,6 +162,8 @@ const SignUpPage: React.FC = () => {
                   onBlur={handleBlur('username')}
                   value={values.username}
                   autoCapitalize="none"
+                  autoCorrect={false}
+                  autoCompleteType="username"
                 />
                 {(isUsernameTaken || errors.username) && (
                   <>
@@ -180,6 +184,8 @@ const SignUpPage: React.FC = () => {
                   keyboardType="email-address"
                   textContentType="emailAddress"
                   autoCapitalize="none"
+                  autoCorrect={false}
+                  autoCompleteType="email"
                 />
                 {(isEmailTaken || errors.email) && (
                   <>
@@ -198,6 +204,9 @@ const SignUpPage: React.FC = () => {
                   onBlur={handleBlur('password')}
                   value={values.password}
                   textContentType="password"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  autoCompleteType="password"
                   secureTextEntry
                 />
                 {errors.password && (

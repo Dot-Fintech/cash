@@ -71,7 +71,7 @@ const LoginPage: React.FC = () => {
         const { user, accessToken, refreshToken } = data.userLogin;
         setUser(user);
         TokenStore.setTokens({ accessToken, refreshToken });
-        navigation.push(NAVIGATORS.MAIN_STACK);
+        navigation.push(NAVIGATORS.MAIN_TABS);
       } else {
         setIsBannerOpen(true);
       }
@@ -109,6 +109,8 @@ const LoginPage: React.FC = () => {
                   keyboardType="email-address"
                   textContentType="emailAddress"
                   autoCapitalize="none"
+                  autoCorrect={false}
+                  autoCompleteType="email"
                 />
                 {errors.email && (
                   <>
@@ -123,6 +125,9 @@ const LoginPage: React.FC = () => {
                   onBlur={handleBlur('password')}
                   value={values.password}
                   textContentType="password"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  autoCompleteType="password"
                   secureTextEntry
                 />
                 {errors.password && (
