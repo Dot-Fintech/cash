@@ -1,3 +1,4 @@
+import MainHeader from '../../../components/MainHeader';
 import Banking from '../../../screens/Banking';
 import Notifications from '../../../screens/Notifications';
 import Scan from '../../../screens/Scan';
@@ -23,7 +24,7 @@ const NotificationsConfig: StackScreenConfig = {
 
 const MainTabsConfig: StackScreenConfig = {
   component: MainTabs,
-  options: { headerShown: false },
+  options: { header: MainHeader },
 };
 
 export const MainStackScreenConfigs = {

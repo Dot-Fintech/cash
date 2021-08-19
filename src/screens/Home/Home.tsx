@@ -7,6 +7,7 @@ import { Button } from 'react-native';
 import styled from 'styled-components';
 
 import Column from '../../components/Column';
+import { HEADER_HEIGHT } from '../../components/MainHeader/MainHeader';
 import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
@@ -17,7 +18,7 @@ import { RAIL_SPACING } from '../../styles/spacing';
 import { formatter } from '../../utils/money';
 
 const Container = styled(Column)`
-  padding: 16px ${RAIL_SPACING}px;
+  padding: ${HEADER_HEIGHT + 8}px ${RAIL_SPACING}px 0;
 `;
 
 const Home: React.FC = () => {
