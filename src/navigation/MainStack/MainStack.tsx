@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/stack';
 import React from 'react';
 
+import Overlay from '../../components/Overlay';
 import { NAVIGATORS } from '../utils/enums/navigators';
 import { SCREENS } from '../utils/enums/screens';
 import { useBlockBack } from '../utils/hooks/useBlockBack';
@@ -24,15 +25,17 @@ const MainStack: React.FC = () => {
   useBlockBack(navigation);
 
   return (
-    <Stack.Navigator initialRouteName={NAVIGATORS.MAIN_TABS}>
-      {MainStackScreenNames.map((name) => (
-        <Stack.Screen
-          key={name}
-          name={name}
-          {...MainStackScreenConfigs[name]}
-        />
-      ))}
-    </Stack.Navigator>
+    <Overlay>
+      <Stack.Navigator initialRouteName={NAVIGATORS.MAIN_TABS}>
+        {MainStackScreenNames.map((name) => (
+          <Stack.Screen
+            key={name}
+            name={name}
+            {...MainStackScreenConfigs[name]}
+          />
+        ))}
+      </Stack.Navigator>
+    </Overlay>
   );
 };
 
