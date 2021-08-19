@@ -5,7 +5,7 @@ import { Button, Text } from 'react-native';
 
 import Screen from '../../components/Screen';
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { ExploreTabsParamList } from '../../navigation/utils/screenConfigs/ExploreTabs';
+import { ExploreTabsParamList } from '../../navigation/utils/paramLists/ExploreTabs';
 
 const ExplorePeople: React.FC = () => {
   const navigation =

@@ -5,7 +5,7 @@ import { Button, Text } from 'react-native';
 
 import Screen from '../../components/Screen';
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { ProfileStackParamList } from '../../navigation/utils/screenConfigs/ProfileStack';
+import { ProfileStackParamList } from '../../navigation/utils/paramLists/ProfileStack';
 
 const Profile: React.FC = () => {
   const navigation =

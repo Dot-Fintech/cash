@@ -13,7 +13,7 @@ import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
 import { UserContext } from '../../context/user/state';
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { HomeStackParamList } from '../../navigation/utils/screenConfigs/HomeStack';
+import { HomeStackParamList } from '../../navigation/utils/paramLists/HomeStack';
 import { RAIL_SPACING } from '../../styles/spacing';
 import { formatter } from '../../utils/money';
 

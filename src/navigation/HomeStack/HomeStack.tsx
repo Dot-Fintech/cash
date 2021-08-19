@@ -2,11 +2,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 
 import Overlay from '../../components/Overlay';
-import {
-  HomeStackParamList,
-  HomeStackScreenConfigs,
-  HomeStackScreenNames,
-} from '../utils/screenConfigs/HomeStack';
+import Home from '../../screens/Home';
+import TransactionWithUser from '../../screens/TransactionWithUser';
+import UserSummary from '../../screens/UserSummary';
+import { SCREENS } from '../utils/enums/screens';
+import { HomeStackParamList } from '../utils/paramLists/HomeStack';
 
 const Stack = createStackNavigator<HomeStackParamList>();
 
@@ -14,13 +14,21 @@ const HomeStack: React.FC = () => {
   return (
     <Overlay>
       <Stack.Navigator>
-        {HomeStackScreenNames.map((name) => (
-          <Stack.Screen
-            key={name}
-            name={name}
-            {...HomeStackScreenConfigs[name]}
-          />
-        ))}
+        <Stack.Screen
+          component={Home}
+          name={SCREENS.HOME}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          component={UserSummary}
+          name={SCREENS.USER_SUMMARY}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          component={TransactionWithUser}
+          name={SCREENS.TRANSACTION_WITH_USER}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </Overlay>
   );

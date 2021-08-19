@@ -10,7 +10,7 @@ import Typography from '../../components/Typography';
 import CheckedIcon from '../../icons/CheckedIcon';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { useBlockBack } from '../../navigation/utils/hooks/useBlockBack';
-import { SignUpStackParamList } from '../../navigation/utils/screenConfigs/SignUpStack';
+import { SignUpStackParamList } from '../../navigation/utils/paramLists/SignUpStack';
 
 const Container = styled(Column)`
   padding: 32px 24px 0 24px;

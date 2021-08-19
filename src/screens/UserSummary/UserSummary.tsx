@@ -5,7 +5,7 @@ import { Button, Text } from 'react-native';
 
 import Screen from '../../components/Screen';
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { HomeStackParamList } from '../../navigation/utils/screenConfigs/HomeStack';
+import { HomeStackParamList } from '../../navigation/utils/paramLists/HomeStack';
 
 const UserSummary: React.FC = () => {
   const navigation =

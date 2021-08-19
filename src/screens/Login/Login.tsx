@@ -22,7 +22,7 @@ import { UserContext } from '../../context/user/state';
 import { useLoginMutation } from '../../generated/graphql';
 import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootStack';
+import { RootStackParamList } from '../../navigation/utils/paramLists/RootStack';
 import TokenStore from '../../stores/TokenStore';
 import { loginValidationSchema } from './utils';
 

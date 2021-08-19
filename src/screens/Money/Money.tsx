@@ -5,7 +5,7 @@ import { Button, Text } from 'react-native';
 
 import Screen from '../../components/Screen';
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { MoneyStackParamList } from '../../navigation/utils/screenConfigs/MoneyStack';
+import { MoneyStackParamList } from '../../navigation/utils/paramLists/MoneyStack';
 
 const Money: React.FC = () => {
   const navigation =

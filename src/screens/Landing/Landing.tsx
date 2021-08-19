@@ -16,7 +16,7 @@ import PhoneScanIcon from '../../icons/PhoneSendIcon';
 import PhoneSendIcon from '../../icons/PhoneSendIcon';
 import POSIcon from '../../icons/POSIcon';
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootStack';
+import { RootStackParamList } from '../../navigation/utils/paramLists/RootStack';
 import { RAIL_SPACING } from '../../styles/spacing';
 import FutureText from './FutureText';
 import { MIDDLE_SPACER_WIDTH } from './utils';

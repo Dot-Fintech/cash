@@ -1,24 +1,26 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
-import {
-  ExploreTabsParamList,
-  ExploreTabsScreenConfigs,
-  ExploreTabsScreenNames,
-} from '../utils/screenConfigs/ExploreTabs';
+import ExplorePeople from '../../screens/ExplorePeople';
+import ExploreStores from '../../screens/ExploreStores';
+import { SCREENS } from '../utils/enums/screens';
+import { ExploreTabsParamList } from '../utils/paramLists/ExploreTabs';
 
 const Tabs = createBottomTabNavigator<ExploreTabsParamList>();
 
 const ExploreTabs: React.FC = () => {
   return (
     <Tabs.Navigator>
-      {ExploreTabsScreenNames.map((name) => (
-        <Tabs.Screen
-          key={name}
-          name={name}
-          {...ExploreTabsScreenConfigs[name]}
-        />
-      ))}
+      <Tabs.Screen
+        component={ExploreStores}
+        name={SCREENS.EXPLORE_STORES}
+        options={{ tabBarVisible: false }}
+      />
+      <Tabs.Screen
+        component={ExplorePeople}
+        name={SCREENS.EXPLORE_PEOPLE}
+        options={{ tabBarVisible: false }}
+      />
     </Tabs.Navigator>
   );
 };

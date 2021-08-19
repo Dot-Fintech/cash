@@ -3,10 +3,10 @@ import { StackHeaderProps } from '@react-navigation/stack';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { Colors } from '../../theme';
+import { Color, Colors } from '../../theme';
 import Row from '../Row';
 
 const VERTICAL_PADDING = 4;
@@ -23,9 +23,11 @@ const Container = styled(Row)<ContainerProps>`
   background-color: ${Colors.transparent.toString()};
 `;
 
-const MainHeader: React.FC<StackHeaderProps> = ({ navigation }) => {
-  const theme = useTheme();
+type Props = StackHeaderProps & {
+  iconColor: Color;
+};
 
+const MainHeader: React.FC<Props> = ({ iconColor, navigation }) => {
   const { top } = useSafeAreaInsets();
 
   const goToBanking = () => navigation.navigate(SCREENS.BANKING);
@@ -40,23 +42,15 @@ const MainHeader: React.FC<StackHeaderProps> = ({ navigation }) => {
       fullWidth
     >
       <TouchableOpacity onPress={goToBanking}>
-        <Ionicons
-          name="card"
-          color={theme.colors.text.primary.toString()}
-          size={ICON_SIZE}
-        />
+        <Ionicons name="card" color={iconColor.toString()} size={ICON_SIZE} />
       </TouchableOpacity>
       <TouchableOpacity onPress={goToScan}>
-        <Ionicons
-          name="camera"
-          color={theme.colors.text.primary.toString()}
-          size={ICON_SIZE}
-        />
+        <Ionicons name="camera" color={iconColor.toString()} size={ICON_SIZE} />
       </TouchableOpacity>
       <TouchableOpacity onPress={goToNotifications}>
         <Ionicons
           name="notifications"
-          color={theme.colors.text.primary.toString()}
+          color={iconColor.toString()}
           size={ICON_SIZE}
         />
       </TouchableOpacity>

@@ -14,7 +14,7 @@ import Typography from '../../components/Typography';
 import FaceIdIcon from '../../icons/FaceIdIcon';
 import FingerprintIcon from '../../icons/FingerprintIcon';
 import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
-import { RootStackParamList } from '../../navigation/utils/screenConfigs/RootStack';
+import { RootStackParamList } from '../../navigation/utils/paramLists/RootStack';
 import { RAIL_SPACING } from '../../styles/spacing';
 
 const MIDDLE_SPACER_WIDTH = 12;

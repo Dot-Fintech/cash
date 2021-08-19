@@ -4,7 +4,7 @@ import React from 'react';
 
 import OnboardingScreen from '../../components/OnboardingScreen';
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { SignUpStackParamList } from '../../navigation/utils/screenConfigs/SignUpStack';
+import { SignUpStackParamList } from '../../navigation/utils/paramLists/SignUpStack';
 import ProfilePhoto from './ProfilePhoto';
 
 const SetProfilePhoto: React.FC = () => {

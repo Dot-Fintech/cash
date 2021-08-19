@@ -9,7 +9,7 @@ import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { useBlockBack } from '../../navigation/utils/hooks/useBlockBack';
-import { SignUpStackParamList } from '../../navigation/utils/screenConfigs/SignUpStack';
+import { SignUpStackParamList } from '../../navigation/utils/paramLists/SignUpStack';
 
 const Container = styled(Column)`
   padding: 16px 24px 0 24px;

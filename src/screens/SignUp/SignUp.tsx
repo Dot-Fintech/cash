@@ -20,7 +20,7 @@ import Typography from '../../components/Typography';
 import { UserContext } from '../../context/user/state';
 import { useSignUpMutation } from '../../generated/graphql';
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { SignUpStackParamList } from '../../navigation/utils/screenConfigs/SignUpStack';
+import { SignUpStackParamList } from '../../navigation/utils/paramLists/SignUpStack';
 import TokenStore from '../../stores/TokenStore';
 import { useSignUpValidationSchema } from './utils';
 

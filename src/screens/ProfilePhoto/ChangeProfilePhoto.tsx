@@ -4,7 +4,7 @@ import React from 'react';
 
 import Screen from '../../components/Screen';
 import { SCREENS } from '../../navigation/utils/enums/screens';
-import { ProfileStackParamList } from '../../navigation/utils/screenConfigs/ProfileStack';
+import { ProfileStackParamList } from '../../navigation/utils/paramLists/ProfileStack';
 import ProfilePhoto from './ProfilePhoto';
 
 const ChangeProfilePhoto: React.FC = () => {
