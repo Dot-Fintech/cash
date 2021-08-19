@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
@@ -13,6 +14,7 @@ import { UserContext } from '../../context/user/state';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { HomeStackParamList } from '../../navigation/utils/screenConfigs/HomeStack';
 import { RAIL_SPACING } from '../../styles/spacing';
+import { formatter } from '../../utils/money';
 
 const Container = styled(Column)`
   padding: 16px ${RAIL_SPACING}px;
@@ -30,9 +32,17 @@ const Home: React.FC = () => {
     <Screen>
       <Container>
         <Column alignItems="center" fullWidth>
-          <Typography tag="h5">Welcome back {user?.firstName}</Typography>
-          <Spacer height={8} />
-          <Typography tag="h3">{user?.primaryAccount.balance}</Typography>
+          <Typography tag="h6">Welcome back, {user?.firstName}</Typography>
+          <Spacer height={16} />
+          <Typography tag="h2">
+            {formatter.format(user?.primaryAccount.balance ?? 0)}
+          </Typography>
+          {user?.primaryAccount.frozen && (
+            <>
+              <Spacer height={8} />
+              <Ionicons name="snow" size={36} />
+            </>
+          )}
         </Column>
         <Spacer height={16} />
         <Button title="User" onPress={goToUser} />
