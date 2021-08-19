@@ -1,6 +1,7 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components';
 
 import Row from '../../components/Row';
@@ -10,9 +11,12 @@ import { Colors } from '../../theme';
 import TabBarIcon from './TabBarIcon';
 import { getTabBarIconName } from './utils';
 
-const Container = styled(Row)`
+type ContainerProps = {
+  insetBottom: number;
+};
+const Container = styled(Row)<ContainerProps>`
   position: absolute;
-  bottom: 0;
+  bottom: ${({ insetBottom }) => insetBottom}px;
   background-color: ${Colors.transparent.toString()};
   margin-bottom: 4px;
 `;
@@ -30,17 +34,14 @@ const TabBar: React.FC<BottomTabBarProps> = ({
 }) => {
   const theme = useTheme();
 
+  const { bottom } = useSafeAreaInsets();
+
   return (
-    <Container justifyContent="space-around" fullWidth>
+    <Container insetBottom={bottom} justifyContent="space-around" fullWidth>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
 
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
+        const label = options.title;
 
         const isFocused = state.index === index;
 
@@ -65,7 +66,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({
 
         const iconName = getTabBarIconName(route.name);
 
-        return (
+        return label ? (
           <Tab
             key={route.key}
             accessibilityRole="button"
@@ -92,7 +93,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({
               {label}
             </Typography>
           </Tab>
-        );
+        ) : null;
       })}
     </Container>
   );

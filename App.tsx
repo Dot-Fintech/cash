@@ -6,8 +6,7 @@ import { SourceSansPro_400Regular } from '@expo-google-fonts/source-sans-pro';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import * as ScreenOrientation from 'expo-screen-orientation';
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import RootStack from './src/navigation/RootStack';
 import Providers from './src/Providers';

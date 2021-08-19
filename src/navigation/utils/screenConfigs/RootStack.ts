@@ -1,6 +1,7 @@
+import MainHeader from '../../../components/MainHeader';
 import Landing from '../../../screens/Landing';
 import Login from '../../../screens/Login';
-import MainStack from '../../MainStack';
+import MainTabs from '../../MainTabs';
 import SignUpStack from '../../SignUpStack';
 import { NAVIGATORS } from '../enums/navigators';
 import { SCREENS } from '../enums/screens';
@@ -16,9 +17,9 @@ const LoginConfig: StackScreenConfig = {
   options: { headerShown: false },
 };
 
-const MainStackConfig: StackScreenConfig = {
-  component: MainStack,
-  options: { headerShown: false, gestureEnabled: false },
+const MainTabsConfig: StackScreenConfig = {
+  component: MainTabs,
+  options: { header: MainHeader, gestureEnabled: false },
 };
 
 const SignUpStackConfig: StackScreenConfig = {
@@ -29,7 +30,7 @@ const SignUpStackConfig: StackScreenConfig = {
 export const RootStackScreenConfigs = {
   [SCREENS.LANDING]: LandingConfig,
   [SCREENS.LOGIN]: LoginConfig,
-  [NAVIGATORS.MAIN_STACK]: MainStackConfig,
+  [NAVIGATORS.MAIN_TABS]: MainTabsConfig,
   [NAVIGATORS.SIGNUP_STACK]: SignUpStackConfig,
 };
 
@@ -40,6 +41,6 @@ export const RootStackScreenNames = Object.keys(
 export type RootStackParamList = {
   [SCREENS.LANDING]: undefined;
   [SCREENS.LOGIN]: undefined;
-  [NAVIGATORS.MAIN_STACK]: undefined;
+  [NAVIGATORS.MAIN_TABS]: undefined;
   [NAVIGATORS.SIGNUP_STACK]: undefined;
 };

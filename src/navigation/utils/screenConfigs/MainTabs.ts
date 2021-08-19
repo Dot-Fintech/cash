@@ -1,4 +1,7 @@
+import Banking from '../../../screens/Banking';
 import Metrics from '../../../screens/Metrics';
+import Notifications from '../../../screens/Notifications';
+import Scan from '../../../screens/Scan';
 import ExploreTabs from '../../ExploreTabs';
 import HomeStack from '../../HomeStack';
 import MoneyStack from '../../MoneyStack';
@@ -42,12 +45,30 @@ const ProfileConfig: TabScreenConfig = {
   },
 };
 
+const BankingConfig: TabScreenConfig = {
+  component: Banking,
+  options: { title: '' },
+};
+
+const ScanConfig: TabScreenConfig = {
+  component: Scan,
+  options: { title: '' },
+};
+
+const NotificationsConfig: TabScreenConfig = {
+  component: Notifications,
+  options: { title: '' },
+};
+
 export const MainTabsScreenConfigs = {
   [NAVIGATORS.HOME_STACK]: HomeStackConfig,
   [NAVIGATORS.EXPLORE_TABS]: ExploreTabsConfig,
   [NAVIGATORS.MONEY_STACK]: MoneyStackConfig,
   [SCREENS.METRICS]: MetricsConfig,
   [NAVIGATORS.PROFILE_STACK]: ProfileConfig,
+  [SCREENS.BANKING]: BankingConfig,
+  [SCREENS.SCAN]: ScanConfig,
+  [SCREENS.NOTIFICATIONS]: NotificationsConfig,
 };
 
 export const MainTabsScreenNames = Object.keys(
@@ -60,4 +81,7 @@ export type MainTabsParamList = {
   [NAVIGATORS.MONEY_STACK]: undefined;
   [SCREENS.METRICS]: undefined;
   [NAVIGATORS.PROFILE_STACK]: undefined;
+  [SCREENS.BANKING]: undefined;
+  [SCREENS.SCAN]: undefined;
+  [SCREENS.NOTIFICATIONS]: undefined;
 };

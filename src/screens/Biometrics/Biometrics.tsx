@@ -26,12 +26,12 @@ const Container = styled(Column)`
 const Biometrics: React.FC = () => {
   const navigation =
     useNavigation<
-      StackNavigationProp<RootStackParamList, NAVIGATORS.MAIN_STACK>
+      StackNavigationProp<RootStackParamList, NAVIGATORS.MAIN_TABS>
     >();
 
   const { width } = useWindowDimensions();
 
-  const goToMain = () => navigation.navigate(NAVIGATORS.MAIN_STACK);
+  const goToMain = () => navigation.navigate(NAVIGATORS.MAIN_TABS);
 
   const authenticate = async () => {
     const result = await LocalAuthentication.authenticateAsync();

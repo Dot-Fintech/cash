@@ -41,7 +41,7 @@ const Safety: React.FC = () => {
     if (await LocalAuthentication.hasHardwareAsync()) {
       navigation.push(SCREENS.BIOMETRICS);
     } else {
-      navigation.push(NAVIGATORS.MAIN_STACK);
+      navigation.push(NAVIGATORS.MAIN_TABS);
     }
   };
 

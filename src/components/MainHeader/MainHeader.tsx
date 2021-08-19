@@ -28,9 +28,9 @@ const MainHeader: React.FC<StackHeaderProps> = ({ navigation }) => {
 
   const { top } = useSafeAreaInsets();
 
-  const goToBanking = () => navigation.push(SCREENS.BANKING);
-  const goToScan = () => navigation.push(SCREENS.SCAN);
-  const goToNotifications = () => navigation.push(SCREENS.NOTIFICATIONS);
+  const goToBanking = () => navigation.navigate(SCREENS.BANKING);
+  const goToScan = () => navigation.navigate(SCREENS.SCAN);
+  const goToNotifications = () => navigation.navigate(SCREENS.NOTIFICATIONS);
 
   return (
     <Container
