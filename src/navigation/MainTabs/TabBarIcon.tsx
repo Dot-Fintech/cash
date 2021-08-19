@@ -8,7 +8,7 @@ import Typography from '../../components/Typography';
 import { Colors } from '../../theme';
 import { IconName } from '../../utils/types/Ionicons';
 
-const ICON_SIZE = 40;
+const ICON_SIZE = 32;
 
 const MoneyWrapper = styled(LinearGradient)`
   display: flex;
