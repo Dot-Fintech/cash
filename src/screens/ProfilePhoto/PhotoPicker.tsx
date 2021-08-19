@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useEffect } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Alert, TouchableOpacity } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import Spacer from '../../components/Spacer';
@@ -35,7 +35,7 @@ const PhotoPicker: React.FC<Props> = ({ aspect, setUri }) => {
         const cameraRollStatus =
           await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (cameraRollStatus.status !== 'granted') {
-          alert('Sorry, we need these permissions to make this work!');
+          Alert.alert('Sorry', 'We need these permissions to make this work!');
         }
       }
     })();

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 
 import { useChangeProfilePhotoMutation } from '../../generated/graphql';
 import UploadPhoto from './UploadPhoto';
@@ -17,7 +18,10 @@ const ProfilePhoto: React.FC<Props> = ({ next }) => {
       variables: { data: { photoId, containerName } },
     });
     if (errors) {
-      alert('Something went wrong while changing your profile picture.');
+      Alert.alert(
+        'Hmm',
+        'Something went wrong while changing your profile picture.',
+      );
     }
   };
 
