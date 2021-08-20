@@ -1,16 +1,30 @@
+import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
 import { Dimensions } from 'react-native';
-import styled from 'styled-components';
-
-import Column from '../Column';
+import styled, { useTheme } from 'styled-components';
 
 export const TOP_BLOCK_HEIGHT = 264;
 
-const TopBlock = styled(Column)`
+const Container = styled(LinearGradient)`
   position: absolute;
   top: 0;
   width: ${Dimensions.get('window').width}px;
   height: ${TOP_BLOCK_HEIGHT}px;
-  background-color: ${({ theme }) => theme.colors.main.primary.toString()};
 `;
+
+const TopBlock: React.FC = ({ children }) => {
+  const theme = useTheme();
+
+  return (
+    <Container
+      colors={[
+        theme.colors.main.primary.toString(),
+        theme.colors.main.secondary.toString(),
+      ]}
+    >
+      {children}
+    </Container>
+  );
+};
 
 export default TopBlock;
