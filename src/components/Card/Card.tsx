@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import styled from 'styled-components';
 
 import { Card_Provider, FullCardFragment } from '../../generated/graphql';
@@ -52,7 +53,7 @@ const Card: React.FC<Props> = ({ card }) => {
         ) : card.provider === Card_Provider.Mastercard ? (
           <MastercardIcon height={20} />
         ) : (
-          <div />
+          <View />
         )}
         <Typography tag="h4" color={Colors.white}>
           **** {card.last4Digits}

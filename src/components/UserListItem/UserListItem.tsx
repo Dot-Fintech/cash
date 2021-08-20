@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import Chip from '../../components/Chip';
@@ -15,7 +15,7 @@ import Spacer from '../Spacer';
 import Typography from '../Typography';
 import Container from './Container';
 
-const SpinnerWrapper = styled.div`
+const SpinnerWrapper = styled(View)`
   display: flex;
   justify-content: center;
   align-items: center;

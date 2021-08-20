@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useContext, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import { UserContext } from '../../context/user/state';
@@ -12,13 +13,12 @@ import Typography from '../Typography';
 import AddDocumentButton from './AddDocumentButton';
 import { formatStatus, getTitle } from './utils';
 
-const Container = styled.button`
+const Container = styled(TouchableOpacity)`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   border: none;
-  background: none;
 `;
 
 const NotesWrapper = styled(Column)`
@@ -48,7 +48,7 @@ const DocumentListItem: React.FC<Props> = ({ type }) => {
   return (
     <>
       <Container
-        onClick={toggleShowNotes}
+        onPress={toggleShowNotes}
         disabled={status !== Kyc_Document_Status.Unverified || !notes}
       >
         <Row alignItems="center">

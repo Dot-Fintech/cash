@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
+import { View } from 'react-native';
 import styled from 'styled-components';
 
 import Row from '../Row';
@@ -7,7 +8,7 @@ import Spacer from '../Spacer';
 import Number from './Number';
 import { popValue, pushValue } from './utils';
 
-const EmptyBox = styled.div`
+const EmptyBox = styled(View)`
   width: 100%;
 `;
 

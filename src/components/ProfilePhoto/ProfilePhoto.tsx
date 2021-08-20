@@ -15,7 +15,11 @@ const ProfilePhoto: React.FC<Props> = ({ size, uri }) => {
   return uri ? (
     <Photo size={size} uri={uri} circular />
   ) : (
-    <Ionicons name="person" color={theme.name === 'light' ? 'dark' : 'light'} />
+    <Ionicons
+      name="person"
+      size={size}
+      color={theme.colors.text.primary.toString()}
+    />
   );
 };
 

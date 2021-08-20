@@ -4,13 +4,12 @@ import styled, { css } from 'styled-components';
 
 const containerStyles = css`
   display: flex;
+  flex-direction: row;
   align-items: center;
   width: 100%;
 `;
 
 const ClickableContainer = styled(TouchableOpacity)`
-  background: none;
-  border: none;
   margin: 0;
   padding: 0;
   ${containerStyles};
