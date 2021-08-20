@@ -13,10 +13,15 @@ const MoneyStack: React.FC = () => {
   return (
     <Overlay>
       <Stack.Navigator>
-        <Stack.Screen component={Money} name={SCREENS.MONEY} />
+        <Stack.Screen
+          component={Money}
+          name={SCREENS.MONEY}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           component={TransactionWithAmount}
           name={SCREENS.TRANSACTION_WITH_AMOUNT}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </Overlay>
