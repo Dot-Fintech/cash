@@ -1,12 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useContext, useEffect } from 'react';
-import { useState } from 'react';
+import React from 'react';
 import { useTheme } from 'styled-components';
 
 import MainHeader from '../../components/MainHeader';
 import Overlay from '../../components/Overlay';
-import { UserContext } from '../../context/user/state';
-import { useMeLazyQuery } from '../../generated/graphql';
 import Landing from '../../screens/Landing';
 import Login from '../../screens/Login';
 import MainTabs from '../MainTabs';
@@ -20,33 +17,9 @@ const Stack = createStackNavigator<RootStackParamList>();
 const RootStack: React.FC = () => {
   const theme = useTheme();
 
-  const { setUser } = useContext(UserContext);
-
-  const [getMe, { data, loading, error }] = useMeLazyQuery();
-
-  const [initialRouteName, setInitialRouteName] =
-    useState<keyof RootStackParamList>();
-
-  useEffect(() => {
-    if (data) {
-      setUser(data.user);
-      setInitialRouteName(NAVIGATORS.MAIN_TABS);
-    } else if (!error) {
-      getMe();
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (error) {
-      // TODO: if error exists => internal server error
-      // replace with an error screen
-      setInitialRouteName(SCREENS.LANDING);
-    }
-  }, [error]);
-
-  return !loading ? (
+  return (
     <Overlay>
-      <Stack.Navigator initialRouteName={initialRouteName}>
+      <Stack.Navigator initialRouteName={SCREENS.LANDING}>
         <Stack.Screen
           component={Landing}
           name={SCREENS.LANDING}
@@ -74,7 +47,7 @@ const RootStack: React.FC = () => {
         />
       </Stack.Navigator>
     </Overlay>
-  ) : null;
+  );
 };
 
 export default RootStack;

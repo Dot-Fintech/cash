@@ -14,22 +14,20 @@ import { useInteractions } from './useInteractions';
 
 const Container = styled(Column)`
   padding-top: 16px;
-  overflow-y: scroll;
 `;
 
 const ErrorContainer = styled(Column)`
   height: 100%;
 `;
 
-const People: React.FC = () => {
+type Props = {
+  goToUser: (user: UserListItemFragment) => void;
+};
+
+const People: React.FC<Props> = ({ goToUser }) => {
   const theme = useTheme();
 
   const { data, loading, error } = useInteractions();
-
-  const goToUser = (user: UserListItemFragment) => {
-    void user;
-    // history.push(`${BASE_ROUTES.USER}/${user.username}`);
-  };
 
   const interactions = data?.getInteractions.interactions;
 

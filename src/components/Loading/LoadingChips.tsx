@@ -12,6 +12,8 @@ const LoadingChips: React.FC = () => {
       <LoadingBox width={64} height={20} />
       <Spacer width={16} />
       <LoadingBox width={64} height={20} />
+      <Spacer width={16} />
+      <LoadingBox width={64} height={20} />
     </Row>
   );
 };

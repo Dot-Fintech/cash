@@ -25,7 +25,7 @@ let clientIp: string | undefined;
 })();
 
 const getNewAccessToken = async () => {
-  const { getRefreshToken, setTokens } = TokenStore;
+  const { getRefreshToken, setTokens, setAccessToken } = TokenStore;
   const refreshToken = await getRefreshToken();
   try {
     if (!refreshToken) return;
@@ -33,6 +33,7 @@ const getNewAccessToken = async () => {
       `${process.env.SERVER_URL}/auth/generate-token`,
       { params: { refreshToken } },
     );
+    setAccessToken(accessTokenResponse.data);
     return accessTokenResponse.data;
   } catch (error) {
     setTokens();
@@ -44,7 +45,6 @@ const getNewAccessToken = async () => {
 const retryOperation = (operation: Operation, forward: NextLink) =>
   fromPromise(getNewAccessToken()).flatMap((accessToken) => {
     if (accessToken) {
-      TokenStore.setAccessToken(accessToken);
       operation.setContext({
         headers: {
           ...operation.getContext().headers,

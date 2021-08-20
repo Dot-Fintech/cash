@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Dimensions, useWindowDimensions } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
@@ -11,13 +11,17 @@ import Row from '../../components/Row';
 import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
+import { UserContext } from '../../context/user/state';
+import { useMeLazyQuery } from '../../generated/graphql';
 import MetricsIcon from '../../icons/MetricsIcon';
 import PhoneScanIcon from '../../icons/PhoneSendIcon';
 import PhoneSendIcon from '../../icons/PhoneSendIcon';
 import POSIcon from '../../icons/POSIcon';
+import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { RootStackParamList } from '../../navigation/utils/paramLists/RootStack';
 import { RAIL_SPACING } from '../../styles/spacing';
+import LoadingScreen from '../Loading';
 import FutureText from './FutureText';
 import { MIDDLE_SPACER_WIDTH } from './utils';
 
@@ -38,6 +42,28 @@ const LandingPage: React.FC = () => {
 
   const { width } = useWindowDimensions();
 
+  const { setUser } = useContext(UserContext);
+
+  const [getMe, { data, loading, error }] = useMeLazyQuery();
+
+  const [requested, setRequested] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      setUser(data.user);
+      navigation.navigate(NAVIGATORS.MAIN_TABS);
+    } else {
+      getMe();
+      setRequested(true);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (!data && error) {
+      // TODO: go to error page
+    }
+  }, [error]);
+
   const goToLogin = () => navigation.push(SCREENS.LOGIN);
 
   const ICON_WIDTH = Math.min(
@@ -45,7 +71,7 @@ const LandingPage: React.FC = () => {
     220,
   );
 
-  return (
+  return requested && !loading && !data && !error ? (
     <Screen>
       <Container justifyContent="center" alignItems="center">
         <Typography tag="h3" textAlign="center">
@@ -75,6 +101,8 @@ const LandingPage: React.FC = () => {
         </PrimaryButton>
       </Container>
     </Screen>
+  ) : (
+    <LoadingScreen />
   );
 };
 

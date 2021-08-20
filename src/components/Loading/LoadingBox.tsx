@@ -1,9 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
-import styled, { keyframes, useTheme } from 'styled-components';
+import { useRef } from 'react';
+import { Animated, View } from 'react-native';
+import styled from 'styled-components';
 
-import type { Color } from '../../theme';
-import { getAnimationColors } from './utils';
+import { Color } from '../../theme';
+
+const ANIMATION_DURATION = 1000;
 
 type ContainerProps = {
   width: number;
@@ -14,59 +16,22 @@ const Container = styled(View)<ContainerProps>`
   height: ${({ height }) => height}px;
   background-color: ${({ theme }) =>
     theme.colors.background.secondary.toString()};
-
-  position: relative;
   border-radius: 8px;
-`;
-
-const animation = (
-  width: number,
-  primary: Color,
-  secondary: Color,
-) => keyframes`
-  0% {
-    background-color: ${primary.toString()};
-    width: 0;
-    left: 0;
-  }
-  25%{
-    background-color: ${primary.toString()};
-    width: ${width}px;
-    left: 0;
-  }
-  50%{
-    background-color: ${secondary.toString()};
-    width: 0;
-    left: ${width}px;
-  }
-  75% {
-    background-color: ${secondary.toString()};
-    width: ${width}px;
-    left: 0;
-  }
-  100% {
-    background-color: ${primary.toString()};
-    width: 0;
-    left: 0;
-  }
+  overflow: hidden;
 `;
 
 type AnimationProps = {
-  width: number;
   height: number;
-  primary: Color;
-  secondary: Color;
+  width: number;
 };
-const Animation = styled(View)<AnimationProps>`
+const Animation = styled(Animated.View)<AnimationProps>`
   height: ${({ height }) => height}px;
-
-  animation: ${({ width, primary, secondary }) =>
-      animation(width, primary, secondary)}
-    2s ease infinite;
-
-  position: absolute;
   border-radius: 8px;
-  width: 0;
+  background-color: ${({ theme }) =>
+    new Color({
+      ...theme.colors.text.secondary,
+      opacity: 0.2,
+    }).toString()};
 `;
 
 type Props = {
@@ -75,17 +40,31 @@ type Props = {
 };
 
 const Box: React.FC<Props> = ({ width, height }) => {
-  const theme = useTheme();
+  const positionAnimation = useRef(new Animated.Value(0)).current;
 
-  const { primary, secondary } = getAnimationColors(theme);
+  Animated.loop(
+    Animated.sequence([
+      Animated.timing(positionAnimation, {
+        toValue: width,
+        duration: ANIMATION_DURATION,
+        useNativeDriver: true,
+      }),
+      Animated.timing(positionAnimation, {
+        toValue: -width,
+        duration: ANIMATION_DURATION,
+        useNativeDriver: true,
+      }),
+    ]),
+  ).start();
 
   return (
     <Container width={width} height={height}>
       <Animation
+        style={{
+          transform: [{ translateX: positionAnimation }],
+        }}
         width={width}
         height={height}
-        primary={primary}
-        secondary={secondary}
       />
     </Container>
   );
