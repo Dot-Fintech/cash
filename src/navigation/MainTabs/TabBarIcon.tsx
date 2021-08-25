@@ -8,7 +8,7 @@ import Typography from '../../components/Typography';
 import { Colors } from '../../theme';
 import { IconName } from '../../utils/types/Ionicons';
 
-const ICON_SIZE = 32;
+export const TAB_BAR_ICON_SIZE = 32;
 
 const MoneyWrapper = styled(LinearGradient)`
   display: flex;
@@ -16,9 +16,9 @@ const MoneyWrapper = styled(LinearGradient)`
   justify-content: center;
   align-items: center;
 
-  width: ${ICON_SIZE}px;
-  height: ${ICON_SIZE}px;
-  border-radius: ${ICON_SIZE / 2}px;
+  width: ${TAB_BAR_ICON_SIZE}px;
+  height: ${TAB_BAR_ICON_SIZE}px;
+  border-radius: ${TAB_BAR_ICON_SIZE / 2}px;
   margin-bottom: 3px;
 `;
 
@@ -33,7 +33,7 @@ const TabBarIcon: React.FC<Props> = ({ focused, name }) => {
   return name !== 'money' ? (
     <Ionicons
       name={name}
-      size={ICON_SIZE}
+      size={TAB_BAR_ICON_SIZE}
       color={
         focused
           ? theme.colors.main.secondary.toString()

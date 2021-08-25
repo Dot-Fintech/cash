@@ -1,39 +1,38 @@
-import { Column, Row, Spacer, Typography } from '@dot-fintech/web-ui';
-import UserListItem from 'components/UserListItem';
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
+import styled, { useTheme } from 'styled-components';
+
+import UserListItem from '../../components/UserListItem';
 import {
   FullP2PTransactionSourceFragment,
   P2P_Transaction_Action,
   P2P_Transaction_Type,
-} from 'generated/graphql';
-import { BASE_ROUTES } from 'pages/utils/routes';
-import React from 'react';
-import { useHistory } from 'react-router';
-import styled, { useTheme } from 'styled-components';
-import { formatter } from 'utils/money';
+} from '../../generated/graphql';
+import { formatter } from '../../utils/money';
+import Column from '../Column';
+import Row from '../Row';
+import Spacer from '../Spacer';
+import Typography from '../Typography';
 
-const Container = styled.button`
+const Container = styled(TouchableOpacity)`
   width: 100%;
-  border: none;
-  background: none;
   padding: 0;
 `;
 
 type Props = {
   amount: number;
   source: FullP2PTransactionSourceFragment;
-  token: string;
+  goToTransaction: () => void;
 };
 
-const P2PTransactionListItem: React.FC<Props> = ({ amount, source, token }) => {
-  const history = useHistory();
-
+const P2PTransactionListItem: React.FC<Props> = ({
+  amount,
+  source,
+  goToTransaction,
+}) => {
   const { colors } = useTheme();
 
   const { sender, recipient, action, type } = source;
-
-  const handleClick = () => {
-    history.push(`${BASE_ROUTES.P2P_TRANSACTION_SUMMARY}/${token}`);
-  };
 
   const subText =
     type === P2P_Transaction_Type.Send
@@ -44,14 +43,14 @@ const P2PTransactionListItem: React.FC<Props> = ({ amount, source, token }) => {
   const otherUser = action === P2P_Transaction_Action.Sent ? recipient : sender;
 
   return (
-    <Container onClick={handleClick}>
-      <Row alignItems="center" fullWidth>
+    <Container onPress={goToTransaction}>
+      <Row justifyContent="space-between" alignItems="center" fullWidth>
         <UserListItem user={otherUser} />
         <Spacer width={8} />
         <Column alignItems="flex-end">
           <Typography
-            as="h5"
-            textColor={
+            tag="h5"
+            color={
               action === P2P_Transaction_Action.Received &&
               type === P2P_Transaction_Type.Send
                 ? colors.success.primary
@@ -65,7 +64,7 @@ const P2PTransactionListItem: React.FC<Props> = ({ amount, source, token }) => {
                 : ''
             }${formatter.format(amount)}`}
           </Typography>
-          <Typography as="p">{subText}</Typography>
+          <Typography tag="p">{subText}</Typography>
         </Column>
       </Row>
     </Container>

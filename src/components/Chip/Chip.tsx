@@ -1,11 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import styled, { useTheme } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 
 import { Color, Colors } from '../../theme';
 import Typography from '../Typography';
 
-const HEIGHT = 32;
+export const CHIP_HEIGHT = 32;
 
 type ContainerProps = {
   isSelected?: boolean;
@@ -15,10 +15,9 @@ const Container = styled(TouchableOpacity)<ContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
   padding: 8px;
-  height: ${HEIGHT}px;
-  border-radius: ${HEIGHT / 2}px;
+  height: ${CHIP_HEIGHT}px;
+  border-radius: ${CHIP_HEIGHT / 2}px;
   background: ${({ theme, variant }) =>
     (variant === 'neutral'
       ? theme.name === 'light'
@@ -26,13 +25,16 @@ const Container = styled(TouchableOpacity)<ContainerProps>`
         : Colors.black
       : theme.colors.main.secondary
     ).toString()};
-  box-shadow: ${({ isSelected, theme }) =>
+  ${({ isSelected, theme }) =>
     isSelected
-      ? `4px 4px ${(theme.name === 'light'
-          ? new Color({ ...Colors.black, opacity: 0.1 })
-          : new Color({ r: 30, g: 30, b: 30 })
-        ).toString()}`
-      : 'none'};
+      ? css`
+          box-shadow: 4px 4px
+            ${(theme.name === 'light'
+              ? new Color({ ...Colors.black, opacity: 0.1 })
+              : new Color({ r: 30, g: 30, b: 30 })
+            ).toString()};
+        `
+      : ''}
 `;
 
 type Props = TouchableOpacityProps & ContainerProps;

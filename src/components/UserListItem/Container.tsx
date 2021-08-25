@@ -6,7 +6,6 @@ const containerStyles = css`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
 `;
 
 const ClickableContainer = styled(TouchableOpacity)`

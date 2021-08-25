@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import styled, { useTheme } from 'styled-components';
 
-import Chip from '../../../components/Chip';
+import Chip, { CHIP_HEIGHT } from '../../../components/Chip';
 import Column from '../../../components/Column';
 import EmptyState from '../../../components/EmptyState';
 import { LoadingChips, LoadingList } from '../../../components/Loading';
@@ -17,12 +18,13 @@ import {
   useTransactions,
 } from '../../../utils/hooks/useTransactions';
 
-const Container = styled(Column)`
-  overflow-y: scroll;
+const FilterOptionsContainer = styled(ScrollView)`
+  height: ${CHIP_HEIGHT + 16}px;
+  padding: 8px 0;
 `;
 
-const FilterOptionsContainer = styled(Row)`
-  overflow-x: scroll;
+const TransactionContainer = styled(Column)`
+  padding: 0 ${RAIL_SPACING}px;
 `;
 
 const ErrorContainer = styled(Column)`
@@ -47,9 +49,13 @@ const Transactions: React.FC = () => {
   const transactions = data?.getTransactions.transactions;
 
   return (
-    <Container fullWidth>
+    <Column fullWidth>
       {data ? (
-        <FilterOptionsContainer fullWidth>
+        <FilterOptionsContainer
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        >
+          <Spacer width={8} />
           {filterOptions.map((option, index) => (
             <Row key={option.id}>
               {index > 0 && <Spacer width={16} />}
@@ -61,6 +67,7 @@ const Transactions: React.FC = () => {
               </Chip>
             </Row>
           ))}
+          <Spacer width={8} />
         </FilterOptionsContainer>
       ) : loading ? (
         <LoadingChips />
@@ -69,7 +76,11 @@ const Transactions: React.FC = () => {
       {data ? (
         transactions && transactions.length > 0 ? (
           transactions?.map((transaction, index) => (
-            <Column key={transaction._id} justifyContent="center" fullWidth>
+            <TransactionContainer
+              key={transaction._id}
+              justifyContent="center"
+              fullWidth
+            >
               {index > 0 && <Spacer height={16} />}
               {(index === 0 ||
                 new Date(transactions[index - 1].createdAt).toDateString() !==
@@ -82,7 +93,7 @@ const Transactions: React.FC = () => {
                 </>
               )}
               <TransactionListItem transaction={transaction} />
-            </Column>
+            </TransactionContainer>
           ))
         ) : (
           <EmptyState
@@ -114,7 +125,7 @@ const Transactions: React.FC = () => {
           </Typography>
         </ErrorContainer>
       ) : null}
-    </Container>
+    </Column>
   );
 };
 

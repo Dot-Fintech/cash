@@ -11,7 +11,7 @@ import Row from '../Row';
 
 const VERTICAL_PADDING = 4;
 const ICON_SIZE = 32;
-export const HEADER_HEIGHT = ICON_SIZE + 2 * VERTICAL_PADDING;
+export const MAIN_HEADER_HEIGHT = ICON_SIZE + 2 * VERTICAL_PADDING;
 
 type ContainerProps = {
   insetTop: number;

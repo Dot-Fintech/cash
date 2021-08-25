@@ -1,38 +1,41 @@
-import { Column, Row, Spacer, Typography, Vector } from '@dot-fintech/web-ui';
-import Container from 'components/UserListItem/Container';
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
+import styled, { useTheme } from 'styled-components';
+
 import {
   Bank_Transaction_Type,
   Card_Provider,
   FullBankTransactionSourceFragment,
-} from 'generated/graphql';
-import { MastercardIcon, VisaIcon } from 'icons';
-import { BASE_ROUTES } from 'pages/utils/routes';
-import React from 'react';
-import { useHistory } from 'react-router';
-import { useTheme } from 'styled-components';
-import { formatter } from 'utils/money';
+} from '../../generated/graphql';
+import MastercardIcon from '../../icons/MastercardIcon';
+import VisaIcon from '../../icons/VisaIcon';
+import { formatter } from '../../utils/money';
+import Column from '../Column';
+import Row from '../Row';
+import Spacer from '../Spacer';
+import Typography from '../Typography';
+
+const Container = styled(TouchableOpacity)`
+  width: 100%;
+  padding: 0;
+`;
 
 type Props = {
   amount: number;
   source: FullBankTransactionSourceFragment;
-  token: string;
+  goToTransaction: () => void;
 };
 
 const BankTransactionListItem: React.FC<Props> = ({
   amount,
   source,
-  token,
+  goToTransaction,
 }) => {
-  const history = useHistory();
-
   const { colors } = useTheme();
-
-  const handleClick = () =>
-    history.push(`${BASE_ROUTES.BANK_TRANSACTION_SUMMARY}/${token}`);
 
   const { card, type } = source;
 
-  const vectorIcon =
+  const Icon =
     card.provider === Card_Provider.Visa
       ? VisaIcon
       : card.provider === Card_Provider.Mastercard
@@ -40,18 +43,18 @@ const BankTransactionListItem: React.FC<Props> = ({
       : undefined;
 
   return (
-    <Container onClick={handleClick}>
+    <Container onPress={goToTransaction}>
       <Row justifyContent="space-between" alignItems="center" fullWidth>
         <Row>
-          {vectorIcon && <Vector vectorIcon={vectorIcon} height={20} />}
+          {Icon && <Icon height={20} />}
           <Spacer width={16} />
-          <Typography as="h5">**** {card.last4Digits}</Typography>
+          <Typography tag="h5">**** {card.last4Digits}</Typography>
         </Row>
         <Spacer width={8} />
         <Column alignItems="flex-end">
           <Typography
-            as="h5"
-            textColor={
+            tag="h5"
+            color={
               type === Bank_Transaction_Type.Deposit
                 ? colors.success.primary
                 : colors.text.primary
@@ -60,7 +63,7 @@ const BankTransactionListItem: React.FC<Props> = ({
             {type === Bank_Transaction_Type.Deposit ? '+' : ''}
             {formatter.format(amount)}
           </Typography>
-          <Typography as="p">
+          <Typography tag="p">
             {type === Bank_Transaction_Type.Deposit ? 'Deposited' : 'Withdrew'}
           </Typography>
         </Column>

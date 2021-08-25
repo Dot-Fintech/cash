@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import Chip from '../../components/Chip';
@@ -15,10 +15,7 @@ import Spacer from '../Spacer';
 import Typography from '../Typography';
 import Container from './Container';
 
-const SpinnerWrapper = styled(View)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const SpinnerWrapper = styled(Row)`
   min-width: 64px;
 `;
 
@@ -48,7 +45,7 @@ const UserListItem: React.FC<Props> = ({
     user;
 
   return (
-    <Row alignItems="center" fullWidth>
+    <Row alignItems="center">
       <Container
         onPress={onPress ? handleUserClick : undefined}
         disabled={!onPress}
@@ -72,7 +69,7 @@ const UserListItem: React.FC<Props> = ({
               Request Sent
             </Typography>
           ) : loading ? (
-            <SpinnerWrapper>
+            <SpinnerWrapper justifyContent="center" alignItems="center">
               <ActivityIndicator
                 color={theme.colors.main.secondary.toString()}
               />

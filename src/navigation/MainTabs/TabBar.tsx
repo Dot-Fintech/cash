@@ -7,18 +7,24 @@ import styled, { useTheme } from 'styled-components';
 import Row from '../../components/Row';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
-import { Colors } from '../../theme';
-import TabBarIcon from './TabBarIcon';
+import { typography } from '../../theme';
+import TabBarIcon, { TAB_BAR_ICON_SIZE } from './TabBarIcon';
 import { getTabBarIconName } from './utils';
+
+const LABEL_SPACING = 4;
+const LABEL_TAG = 'sp';
+
+export const TAB_BAR_HEIGHT =
+  TAB_BAR_ICON_SIZE + LABEL_SPACING + typography[LABEL_TAG].lineHeight;
 
 type ContainerProps = {
   insetBottom: number;
 };
 const Container = styled(Row)<ContainerProps>`
-  position: absolute;
-  bottom: ${({ insetBottom }) => insetBottom}px;
-  background-color: ${Colors.transparent.toString()};
-  margin-bottom: 4px;
+  padding-bottom: ${({ insetBottom }) => insetBottom}px;
+  padding-top: 4px;
+  background-color: ${({ theme }) =>
+    theme.colors.background.primary.toString()};
 `;
 
 const Tab = styled(TouchableOpacity)`
@@ -39,11 +45,9 @@ const TabBar: React.FC<BottomTabBarProps> = ({
   return (
     <Container insetBottom={bottom} justifyContent="space-around" fullWidth>
       {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-
-        const label = options.title;
-
+        const label = descriptors[route.key].options.title;
         const isFocused = state.index === index;
+        const iconName = getTabBarIconName(route.name);
 
         const onPress = () => {
           const event = navigation.emit({
@@ -64,26 +68,16 @@ const TabBar: React.FC<BottomTabBarProps> = ({
           });
         };
 
-        const iconName = getTabBarIconName(route.name);
-
         return label ? (
-          <Tab
-            key={route.key}
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-          >
+          <Tab key={route.key} onPress={onPress} onLongPress={onLongPress}>
             {iconName && (
               <>
                 <TabBarIcon name={iconName} focused={isFocused} />
-                <Spacer height={4} />
+                <Spacer height={LABEL_SPACING} />
               </>
             )}
             <Typography
-              tag="sp"
+              tag={LABEL_TAG}
               color={
                 isFocused
                   ? theme.colors.main.secondary
