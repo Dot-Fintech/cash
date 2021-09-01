@@ -3,7 +3,7 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
-export const TOP_BLOCK_HEIGHT = 264;
+export const TOP_BLOCK_HEIGHT = 286;
 
 const Container = styled(LinearGradient)`
   position: absolute;

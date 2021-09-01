@@ -15,7 +15,7 @@ export const LightTheme: Theme = {
     },
     text: {
       primary: new Color({ r: 0, g: 0, b: 0 }),
-      secondary: new Color({ r: 150, g: 150, b: 150 }),
+      secondary: new Color({ r: 50, g: 50, b: 50 }),
     },
     textLink: {
       primary: new Color({ r: 0, g: 82, b: 204 }),

@@ -22,7 +22,6 @@ const Container = styled(TouchableOpacity)`
 `;
 
 const NotesWrapper = styled(Column)`
-  width: calc(100% - ${2 * RAIL_SPACING}px);
   padding: 0 ${RAIL_SPACING}px;
 `;
 
