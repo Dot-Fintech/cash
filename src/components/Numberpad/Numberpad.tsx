@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { View } from 'react-native';
-import styled from 'styled-components';
+import { TouchableOpacity, View } from 'react-native';
+import styled, { useTheme } from 'styled-components';
 
 import Row from '../Row';
 import Spacer from '../Spacer';
@@ -9,17 +9,15 @@ import Number from './Number';
 import { popValue, pushValue } from './utils';
 
 const EmptyBox = styled(View)`
-  width: 100%;
+  width: 33%;
 `;
 
-const BackspaceContainer = styled.button`
+const BackspaceContainer = styled(TouchableOpacity)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 33%;
   height: 64px;
-  border: none;
-  background: none;
   padding: 0;
 `;
 
@@ -29,6 +27,8 @@ type Props = {
 };
 
 const Numberpad: React.FC<Props> = ({ amount, setAmount }) => {
+  const theme = useTheme();
+
   const handlePushValue = (value: number) => {
     setAmount(pushValue(amount, value));
   };
@@ -60,8 +60,12 @@ const Numberpad: React.FC<Props> = ({ amount, setAmount }) => {
       <Row justifyContent="center" fullWidth>
         <EmptyBox />
         <Number value={0} onClick={handlePushValue} />
-        <BackspaceContainer onClick={handlePopValue} type="button">
-          <Ionicons name="arrow-back-sharp" color="light" />
+        <BackspaceContainer onPress={handlePopValue}>
+          <Ionicons
+            name="arrow-back-sharp"
+            color={theme.colors.text.primary.toString()}
+            size={36}
+          />
         </BackspaceContainer>
       </Row>
     </>

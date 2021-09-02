@@ -1,12 +1,11 @@
 import React from 'react';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import styled from 'styled-components';
 
 import Button from '../Button';
 import Typography from '../Typography';
 
 const NumberButton = styled(Button)`
-  width: 100%;
+  width: 33%;
   padding: 0;
 `;
 
@@ -21,10 +20,8 @@ const Number: React.FC<Props> = ({ value, onClick }) => {
   };
 
   return (
-    <NumberButton variant="lean" onPress={handleClick}>
-      <Typography tag="h2" color={Colors.white}>
-        {value}
-      </Typography>
+    <NumberButton onPress={handleClick}>
+      <Typography tag="h2">{value}</Typography>
     </NumberButton>
   );
 };

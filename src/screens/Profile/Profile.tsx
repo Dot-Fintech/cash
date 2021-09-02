@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext } from 'react';
-import { ActivityIndicator, Dimensions } from 'react-native';
+import { ActivityIndicator, Alert, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components';
 
@@ -64,7 +64,11 @@ const Profile: React.FC = () => {
 
   const handleLogout = async () => {
     const { errors } = await logout();
-    if (errors) return alert('We encountered an issue while trying to log out');
+    if (errors)
+      return Alert.alert(
+        'Something went wrong',
+        'We encountered an issue while trying to log you out.',
+      );
     TokenStore.setTokens();
     setUser();
     rootStackNavigation.navigate(SCREENS.LANDING);
@@ -78,7 +82,9 @@ const Profile: React.FC = () => {
           <Spacer height={8} />
           <ProfilePhoto size={100} uri={user?.profilePhotoUrl} />
           <Spacer height={16} />
-          <Pill onPress={goToProfilePhoto}>Change Profile Picture</Pill>
+          <Pill onPress={goToProfilePhoto} variant="translucent">
+            Change Profile Picture
+          </Pill>
         </TopContainer>
       </TopBlock>
       <BottomBlock>

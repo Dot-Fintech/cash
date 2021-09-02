@@ -11,18 +11,22 @@ import { typography } from '../../theme';
 import TabBarIcon, { TAB_BAR_ICON_SIZE } from './TabBarIcon';
 import { getTabBarIconName } from './utils';
 
+const PADDING_TOP = 8;
 const LABEL_SPACING = 4;
 const LABEL_TAG = 'sp';
 
 export const TAB_BAR_HEIGHT =
-  TAB_BAR_ICON_SIZE + LABEL_SPACING + typography[LABEL_TAG].lineHeight;
+  PADDING_TOP +
+  TAB_BAR_ICON_SIZE +
+  LABEL_SPACING +
+  typography[LABEL_TAG].lineHeight;
 
 type ContainerProps = {
   insetBottom: number;
 };
 const Container = styled(Row)<ContainerProps>`
   padding-bottom: ${({ insetBottom }) => insetBottom}px;
-  padding-top: 4px;
+  padding-top: ${PADDING_TOP}px;
   background-color: ${({ theme }) =>
     theme.colors.background.primary.toString()};
 `;
