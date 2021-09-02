@@ -1,8 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { useTheme } from 'styled-components';
 
-import MainHeader from '../../components/MainHeader';
 import Overlay from '../../components/Overlay';
 import Landing from '../../screens/Landing';
 import Login from '../../screens/Login';
@@ -15,8 +13,6 @@ import { RootStackParamList } from '../utils/paramLists/RootStack';
 const Stack = createStackNavigator<RootStackParamList>();
 
 const RootStack: React.FC = () => {
-  const theme = useTheme();
-
   return (
     <Overlay>
       <Stack.Navigator initialRouteName={SCREENS.LANDING}>
@@ -34,9 +30,7 @@ const RootStack: React.FC = () => {
           component={MainTabs}
           name={NAVIGATORS.MAIN_TABS}
           options={{
-            header: (props) => (
-              <MainHeader iconColor={theme.colors.text.primary} {...props} />
-            ),
+            headerShown: false,
             gestureEnabled: false,
           }}
         />

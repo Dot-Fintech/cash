@@ -9,7 +9,7 @@ import BottomBlock from '../../components/BottomBlock';
 import Button from '../../components/Button';
 import Column from '../../components/Column';
 import Divider from '../../components/Divider';
-import { MAIN_HEADER_HEIGHT } from '../../components/MainHeader';
+import MainHeader from '../../components/MainHeader';
 import Pill from '../../components/Pill';
 import ProfilePhoto from '../../components/ProfilePhoto';
 import Row from '../../components/Row';
@@ -24,13 +24,13 @@ import { ProfileStackParamList } from '../../navigation/utils/paramLists/Profile
 import { RootStackParamList } from '../../navigation/utils/paramLists/RootStack';
 import TokenStore from '../../stores/TokenStore';
 import { RAIL_SPACING } from '../../styles/spacing';
-import { ThemeContext } from '../../theme';
+import { Colors, ThemeContext } from '../../theme';
 
 type TopContainerProps = {
   topInset: number;
 };
 const TopContainer = styled(Column)<TopContainerProps>`
-  padding-top: ${({ topInset }) => MAIN_HEADER_HEIGHT + topInset}px;
+  padding-top: ${({ topInset }) => topInset}px;
   height: 100%;
 `;
 
@@ -74,6 +74,7 @@ const Profile: React.FC = () => {
     <Screen>
       <TopBlock>
         <TopContainer topInset={top} alignItems="center" fullWidth>
+          <MainHeader iconColor={Colors.white} />
           <Spacer height={8} />
           <ProfilePhoto size={100} uri={user?.profilePhotoUrl} />
           <Spacer height={16} />

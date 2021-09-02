@@ -1,11 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
-import { StackHeaderProps } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
 import { SCREENS } from '../../navigation/utils/enums/screens';
+import { MainTabsParamList } from '../../navigation/utils/paramLists/MainTabs';
 import { Color, Colors } from '../../theme';
 import Row from '../Row';
 
@@ -17,17 +19,17 @@ type ContainerProps = {
   insetTop: number;
 };
 const Container = styled(Row)<ContainerProps>`
-  position: absolute;
-  top: ${({ insetTop }) => insetTop}px;
   padding: ${VERTICAL_PADDING}px 8px;
   background-color: ${Colors.transparent.toString()};
 `;
 
-type Props = StackHeaderProps & {
+type Props = {
   iconColor: Color;
 };
 
-const MainHeader: React.FC<Props> = ({ iconColor, navigation }) => {
+const MainHeader: React.FC<Props> = ({ iconColor }) => {
+  const navigation = useNavigation<StackNavigationProp<MainTabsParamList>>();
+
   const { top } = useSafeAreaInsets();
 
   const goToBanking = () => navigation.navigate(SCREENS.BANKING);
