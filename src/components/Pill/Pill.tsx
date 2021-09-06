@@ -35,7 +35,7 @@ const Pill: React.FC<Props> = ({ children, ...props }) => {
         color={
           props.variant === 'translucent'
             ? Colors.white
-            : theme.colors.main.primary
+            : theme.colors.main.secondary
         }
       >
         {children}
