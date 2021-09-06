@@ -1,0 +1,5 @@
+query getTransactionFromToken($data: GetTransactionFromTokenInput!) {
+  getTransactionFromToken(data: $data) {
+    ...FullTransaction
+  }
+}

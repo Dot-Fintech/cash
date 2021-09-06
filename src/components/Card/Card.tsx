@@ -31,7 +31,6 @@ const Container = styled(Button)`
 const InfoRow = styled(Row)`
   position: absolute;
   bottom: 0;
-  width: calc(100% - ${2 * CARD_PADDING}px);
 `;
 
 type Props = {

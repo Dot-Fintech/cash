@@ -20,7 +20,6 @@ import {
 
 const Container = styled(Column)`
   padding: 16px ${RAIL_SPACING}px;
-  width: calc(100% - ${2 * RAIL_SPACING}px);
   height: 100vh;
 `;
 

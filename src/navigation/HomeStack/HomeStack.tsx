@@ -3,6 +3,7 @@ import React from 'react';
 
 import Overlay from '../../components/Overlay';
 import Home from '../../screens/Home';
+import TransactionSummary from '../../screens/TransactionSummary';
 import TransactionWithUser from '../../screens/TransactionWithUser';
 import UserSummary from '../../screens/UserSummary';
 import { SCREENS } from '../utils/enums/screens';
@@ -17,6 +18,11 @@ const HomeStack: React.FC = () => {
         <Stack.Screen
           component={Home}
           name={SCREENS.HOME}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          component={TransactionSummary}
+          name={SCREENS.TRANSACTION_SUMMARY}
           options={{ headerShown: false }}
         />
         <Stack.Screen

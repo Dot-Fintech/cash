@@ -16,7 +16,6 @@ import { RAIL_SPACING } from '../../../styles/spacing';
 
 const ModalContainer = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;
-  width: calc(100% - ${2 * RAIL_SPACING}px);
   height: 100vh;
 `;
 

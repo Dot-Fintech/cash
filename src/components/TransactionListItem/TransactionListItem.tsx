@@ -18,10 +18,10 @@ type Props = {
 const TransactionListItem: React.FC<Props> = ({ transaction }) => {
   const navigation = useNavigation<StackNavigationProp<HomeStackParamList>>();
 
-  const { _id, amount, bank, p2p, source } = transaction;
+  const { amount, bank, p2p, source, token } = transaction;
 
   const goToTransaction = () =>
-    navigation.push(SCREENS.TRANSACTION_SUMMARY, { id: _id });
+    navigation.push(SCREENS.TRANSACTION_SUMMARY, { token });
 
   return source === Transaction_Source_Type.P2P && p2p ? (
     <P2PTransactionListItem
