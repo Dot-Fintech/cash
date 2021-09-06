@@ -1,0 +1,11 @@
+query searchUsers($data: SearchUsersInput!, $pageData: PaginationInput!) {
+  searchUsers(data: $data, pageData: $pageData) {
+    users {
+      ...UserListItem
+    }
+    pageData {
+      count
+      pageNumber
+    }
+  }
+}

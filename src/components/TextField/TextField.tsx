@@ -4,7 +4,7 @@ import { TextInputProps } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import styled, { css, useTheme } from 'styled-components';
 
-import { Color } from '../../theme';
+import { Color, Colors } from '../../theme';
 import Row from '../Row';
 import Spacer from '../Spacer';
 
@@ -58,14 +58,16 @@ const TextField: React.FC<Props> = ({
     >
       {search && (
         <>
-          <Ionicons name="search" size={32} />
+          <Ionicons name="search" size={16} color={Colors.white.toString()} />
           <Spacer width={4} />
         </>
       )}
       <Input
         {...props}
         color={color ?? theme.colors.text.primary}
-        placeholderTextColor={theme.colors.text.secondary.toString()}
+        placeholderTextColor={
+          color?.toString() ?? theme.colors.text.secondary.toString()
+        }
       />
     </Container>
   );

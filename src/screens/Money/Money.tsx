@@ -68,6 +68,7 @@ const Money: React.FC = () => {
 
   const handleContinue = () => {
     if (validateTransaction({ amount, type, user })) {
+      setAmount(0);
       navigation.push(SCREENS.TRANSACTION_WITH_AMOUNT, { amount, type });
     }
   };

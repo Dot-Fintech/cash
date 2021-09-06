@@ -1,9 +1,10 @@
 import { ApolloCache, Reference } from '@apollo/client';
+
 import {
   FullAccountFragment,
   FullUserFragment,
   FullUserFragmentDoc,
-} from 'generated/graphql';
+} from '../../generated/graphql';
 
 export const updateUserAccountCache = <T>(
   cache: ApolloCache<T>,
