@@ -5,9 +5,9 @@ import { DesiredIconDimensions } from '../types';
 import { getIconDimensions } from '../utils';
 import { xml } from './xml';
 
-const PhoneScanIcon: React.FC<DesiredIconDimensions> = (props) => {
+const PhoneSendIcon: React.FC<DesiredIconDimensions> = (props) => {
   const dimensions = getIconDimensions({ AR: 512 / 467.91, ...props });
   return <SvgXml xml={xml} {...dimensions} />;
 };
 
-export default PhoneScanIcon;
+export default PhoneSendIcon;
