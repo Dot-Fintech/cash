@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Dimensions } from 'react-native';
 import { Path, Svg } from 'react-native-svg';
@@ -12,7 +11,6 @@ const ShortHeader: React.FC = () => {
 
   return (
     <>
-      <StatusBar style={theme.name} />
       <Svg
         width={HEADER_WIDTH}
         height={HEADER_BLOCK_HEIGHT}
