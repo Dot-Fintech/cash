@@ -18,6 +18,7 @@ import { TAB_BAR_HEIGHT } from '../../navigation/MainTabs/TabBar';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { HomeStackParamList } from '../../navigation/utils/paramLists/HomeStack';
 import { RAIL_SPACING } from '../../styles/spacing';
+import { Color } from '../../theme';
 import { formatter } from '../../utils/money';
 import People from './People';
 import Transactions from './Transactions';
@@ -34,6 +35,7 @@ const TransactionContainer = styled(Column)`
   background-color: ${({ theme }) =>
     theme.colors.background.primary.toString()};
   border-radius: 24px;
+  box-shadow: 0px -5px 2px ${({ theme }) => new Color({ ...theme.colors.text.primary, opacity: 0.125 }).toString()};
 `;
 
 const TAB_HEIGHT = 6;
