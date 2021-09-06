@@ -1,0 +1,5 @@
+query getUserFromUsername($data: GetUserFromUsernameInput!) {
+  getUserFromUsername(data: $data) {
+    ...UserListItem
+  }
+}

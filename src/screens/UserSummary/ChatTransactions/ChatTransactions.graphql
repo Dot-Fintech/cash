@@ -1,0 +1,14 @@
+query chatTransactions(
+  $data: GetP2PTransactionsInput!
+  $pageData: PaginationInput!
+) {
+  getP2PTransactions(data: $data, pageData: $pageData) {
+    transactions {
+      ...ChatTransaction
+    }
+    pageData {
+      count
+      pageNumber
+    }
+  }
+}

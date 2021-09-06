@@ -57,7 +57,7 @@ const Home: React.FC = () => {
   const { user } = useContext(UserContext);
 
   const goToUser = (user: UserListItemFragment) =>
-    navigation.push(SCREENS.USER_SUMMARY, { id: user._id });
+    navigation.push(SCREENS.USER_SUMMARY, { username: user.username });
 
   const draggableHeight = height - top - MAIN_HEADER_HEIGHT - 8;
 

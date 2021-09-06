@@ -1,6 +1,6 @@
 import Checkbox from 'expo-checkbox';
 import React, { useContext, useState } from 'react';
-import { Modal } from 'react-native';
+import { Dimensions, Modal } from 'react-native';
 import styled from 'styled-components';
 
 import Button from '../../../components/Button';
@@ -18,8 +18,7 @@ const RAIL_SPACING = 16;
 
 const ModalContainer = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;
-  width: calc(100% - ${2 * RAIL_SPACING}px);
-  height: ${window.innerHeight}px;
+  height: ${Dimensions.get('window').height}px;
 `;
 
 const RequestFromConnectionsModal: React.FC = () => {

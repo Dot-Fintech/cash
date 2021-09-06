@@ -1,0 +1,5 @@
+mutation disconnect($data: DisconnectInput!) {
+  disconnect(data: $data) {
+    ...FullConnection
+  }
+}

@@ -75,7 +75,7 @@ const Transactions: React.FC = () => {
       <Spacer height={16} />
       {data ? (
         transactions && transactions.length > 0 ? (
-          transactions?.map((transaction, index) => (
+          transactions.map((transaction, index) => (
             <TransactionContainer
               key={transaction._id}
               justifyContent="center"

@@ -115,7 +115,7 @@ const TransactionWithAmount: React.FC = () => {
   };
 
   return !result ? (
-    <Screen unsafe>
+    <Screen>
       <TopBlock>
         <TopContainer topInset={top}>
           <Formik initialValues={initialFormValues} onSubmit={handleSubmit}>

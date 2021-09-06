@@ -1,0 +1,16 @@
+fragment ChatTransactionSource on P2PTransactionSource {
+  _id
+  action
+  type
+}
+
+fragment ChatTransaction on Transaction {
+  _id
+  amount
+  createdAt
+  p2p {
+    ...ChatTransactionSource
+  }
+  source
+  token
+}
