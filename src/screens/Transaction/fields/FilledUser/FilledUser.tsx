@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import styled from 'styled-components';
 
@@ -12,7 +13,7 @@ import { LABEL_SPACER_WIDTH, LABEL_WRAPPER_WIDTH } from '../utils';
 export const NAME_TAG = 'h4';
 export const USERNAME_TAG = 'p';
 
-const LabelWrapper = styled.div`
+const LabelWrapper = styled(View)`
   width: ${LABEL_WRAPPER_WIDTH}px;
 `;
 
@@ -22,22 +23,25 @@ const SelectedUserWrapper = styled(Column)`
 
 type Props = {
   user: UserListItemFragment;
+  variant?: 'default' | 'white';
 };
 
-const FilledUser: React.FC<Props> = ({ user }) => {
+const FilledUser: React.FC<Props> = ({ user, variant = 'default' }) => {
+  const color = variant === 'white' ? Colors.white : undefined;
+
   return (
     <Row alignItems="center" fullWidth>
       <LabelWrapper>
-        <Typography tag="h5" color={Colors.white}>
+        <Typography tag="h5" color={color}>
           To
         </Typography>
       </LabelWrapper>
       <Spacer width={LABEL_SPACER_WIDTH} />
       <SelectedUserWrapper justifyContent="center" fullWidth>
-        <Typography tag={NAME_TAG} color={Colors.white}>
+        <Typography tag={NAME_TAG} color={color}>
           {user.firstName} {user.lastName}
         </Typography>
-        <Typography tag={USERNAME_TAG} color={Colors.white}>
+        <Typography tag={USERNAME_TAG} color={color}>
           @{user.username}
         </Typography>
       </SelectedUserWrapper>

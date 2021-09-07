@@ -12,7 +12,7 @@ import { LoadingList } from '../../components/Loading';
 import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
 import TopBlock from '../../components/TopBlock';
-import Success from '../../components/TransactionSuccess';
+import TransactionSuccess from '../../components/TransactionSuccess';
 import Typography from '../../components/Typography';
 import UserListItem from '../../components/UserListItem';
 import {
@@ -132,10 +132,11 @@ const TransactionWithAmount: React.FC = () => {
                   type={type}
                   userState={[selectedUser, setSelectedUser]}
                   showResultsState={[showResults, setShowResults]}
+                  variant="white"
                   {...props}
                 />
-                <Spacer height={8} />
-                <NoteField hideField={showResults} {...props} />
+                <Spacer height={16} />
+                <NoteField hideField={showResults} variant="white" {...props} />
               </>
             )}
           </Formik>
@@ -187,7 +188,7 @@ const TransactionWithAmount: React.FC = () => {
       </BottomBlock>
     </Screen>
   ) : (
-    <Success
+    <TransactionSuccess
       description={buildSuccessDescription({
         recipientName: `${selectedUser?.firstName}\u00a0${selectedUser?.lastName}`,
         amount,

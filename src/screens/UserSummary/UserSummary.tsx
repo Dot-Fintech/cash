@@ -90,7 +90,7 @@ const UserSummary: React.FC = () => {
   const goToRequest = () => {
     if (data) {
       navigation.push(SCREENS.TRANSACTION_WITH_USER, {
-        userId: data?.getUserFromUsername._id,
+        username: data?.getUserFromUsername.username,
         type: P2P_Transaction_Type.Request,
       });
     }
@@ -99,7 +99,7 @@ const UserSummary: React.FC = () => {
   const goToSend = () => {
     if (data) {
       navigation.push(SCREENS.TRANSACTION_WITH_USER, {
-        userId: data?.getUserFromUsername._id,
+        username: data?.getUserFromUsername.username,
         type: P2P_Transaction_Type.Send,
       });
     }

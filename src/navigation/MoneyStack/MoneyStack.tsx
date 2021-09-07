@@ -3,7 +3,7 @@ import React from 'react';
 
 import Overlay from '../../components/Overlay';
 import Money from '../../screens/Money';
-import TransactionWithAmount from '../../screens/TransactionWithAmount';
+import { TransactionWithAmount } from '../../screens/Transaction';
 import { SCREENS } from '../utils/enums/screens';
 import { MoneyStackParamList } from '../utils/paramLists/MoneyStack';
 

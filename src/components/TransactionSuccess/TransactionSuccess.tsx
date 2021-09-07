@@ -23,6 +23,8 @@ const ICON_PROPS = {
 const Container = styled(Column)`
   height: 100%;
   padding: 0 ${RAIL_SPACING}px;
+  background-color: ${({ theme }) =>
+    theme.colors.background.primary.toString()};
 `;
 
 type Props = {

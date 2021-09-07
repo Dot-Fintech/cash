@@ -3,8 +3,8 @@ import React from 'react';
 
 import Overlay from '../../components/Overlay';
 import Home from '../../screens/Home';
+import { TransactionWithUser } from '../../screens/Transaction';
 import TransactionSummary from '../../screens/TransactionSummary';
-import TransactionWithUser from '../../screens/TransactionWithUser';
 import UserSummary from '../../screens/UserSummary';
 import { SCREENS } from '../utils/enums/screens';
 import { HomeStackParamList } from '../utils/paramLists/HomeStack';

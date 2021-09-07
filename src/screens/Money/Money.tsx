@@ -37,7 +37,7 @@ type AbsoluteContainerProps = {
 };
 const AbsoluteContainer = styled(Column)<AbsoluteContainerProps>`
   position: absolute;
-  bottom: ${({ bottomInset }) => bottomInset + TAB_BAR_HEIGHT + 24}px;
+  bottom: ${({ bottomInset }) => bottomInset + TAB_BAR_HEIGHT + 16}px;
   width: 100%;
 `;
 

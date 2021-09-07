@@ -6,7 +6,7 @@ export type HomeStackParamList = {
   [SCREENS.TRANSACTION_SUMMARY]: { token: string };
   [SCREENS.USER_SUMMARY]: { username: string };
   [SCREENS.TRANSACTION_WITH_USER]: {
-    userId: string;
+    username: string;
     type: P2P_Transaction_Type;
   };
 };

@@ -2,7 +2,7 @@ import { FormikProps } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import Row from '../../../../components/Row';
 import Spacer from '../../../../components/Spacer';
@@ -25,13 +25,18 @@ const TextFieldWrapper = styled(View)`
 
 type Props = FormikProps<FormValues> & {
   hideField: boolean;
+  variant?: 'default' | 'white';
 };
 
-const Note: React.FC<Props> = ({ hideField }) => {
+const Note: React.FC<Props> = ({ hideField, variant = 'default' }) => {
+  const theme = useTheme();
+
+  const color = variant === 'white' ? Colors.white : undefined;
+
   return (
     <Row alignItems="center" fullWidth>
       <LabelWrapper>
-        <Typography tag="h5" color={Colors.white}>
+        <Typography tag="h5" color={color}>
           Note
         </Typography>
       </LabelWrapper>
@@ -40,8 +45,8 @@ const Note: React.FC<Props> = ({ hideField }) => {
         <TextFieldWrapper>
           <TextField
             placeholder="Dinner, movies, drinks"
-            color={Colors.white}
-            borderColor={Colors.white}
+            color={color}
+            borderColor={color ?? theme.colors.text.primary}
           />
         </TextFieldWrapper>
       )}

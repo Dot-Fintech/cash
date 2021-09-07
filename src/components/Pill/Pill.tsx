@@ -5,7 +5,7 @@ import styled, { useTheme } from 'styled-components';
 import { Color, Colors } from '../../theme';
 import Typography from '../Typography';
 
-const HEIGHT = 40;
+export const PILL_HEIGHT = 40;
 
 type ContainerProps = {
   variant?: 'color' | 'translucent';
@@ -14,8 +14,8 @@ const Container = styled(TouchableOpacity)<ContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${HEIGHT}px;
-  border-radius: ${HEIGHT / 2}px;
+  height: ${PILL_HEIGHT}px;
+  border-radius: ${PILL_HEIGHT / 2}px;
   background-color: ${({ theme, variant }) =>
     variant === 'translucent'
       ? new Color({ r: 0, g: 0, b: 0, opacity: 0.1 }).toString()

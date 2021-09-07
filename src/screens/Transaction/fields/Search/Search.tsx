@@ -69,6 +69,7 @@ type Props = FormikProps<FormValues> & {
     React.Dispatch<React.SetStateAction<UserListItemFragment | undefined>>,
   ];
   showResultsState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+  variant?: 'default' | 'white';
 };
 
 const Search: React.FC<Props> = ({
@@ -78,8 +79,11 @@ const Search: React.FC<Props> = ({
   values,
   userState,
   showResultsState,
+  variant,
 }) => {
   const theme = useTheme();
+
+  const color = variant === 'white' ? Colors.white : undefined;
 
   const [user, setUser] = userState;
   const [showResults, setShowResults] = showResultsState;
@@ -122,22 +126,18 @@ const Search: React.FC<Props> = ({
     <Column>
       <Row alignItems="center" fullWidth>
         <LabelWrapper>
-          <Typography tag="h5" color={Colors.white}>
+          <Typography tag="h5" color={color}>
             To
           </Typography>
         </LabelWrapper>
         <Spacer width={LABEL_SPACER_WIDTH} />
         {user ? (
           <SelectedUserRow justifyContent="space-between" alignItems="center">
-            <Typography tag="h5" color={Colors.white}>
+            <Typography tag="h5" color={color}>
               {user.firstName} {user.lastName}
             </Typography>
             <Button onPress={handleClearUser}>
-              <Ionicons
-                name="close"
-                size={24}
-                color={Colors.white.toString()}
-              />
+              <Ionicons name="close" size={24} color={color?.toString()} />
             </Button>
           </SelectedUserRow>
         ) : (
@@ -147,8 +147,8 @@ const Search: React.FC<Props> = ({
               onChangeText={handleSearchQuery}
               onBlur={handleBlur('search')}
               value={values.search}
-              color={Colors.white}
-              borderColor={Colors.white}
+              color={color}
+              borderColor={color ?? theme.colors.text.primary}
               search
             />
           </TextFieldWrapper>

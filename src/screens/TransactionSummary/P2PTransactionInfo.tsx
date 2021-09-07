@@ -34,7 +34,7 @@ const P2PTransactionInfo: React.FC<Props> = ({ amount, source, token }) => {
   const otherUser = action === P2P_Transaction_Action.Sent ? recipient : sender;
 
   const goToUser = () =>
-    navigation.push(SCREENS.USER_SUMMARY, { id: otherUser._id });
+    navigation.push(SCREENS.USER_SUMMARY, { username: otherUser.username });
 
   return (
     <>
