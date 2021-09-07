@@ -98,7 +98,7 @@ const Home: React.FC = () => {
           <Column alignItems="center" fullWidth>
             <Tab />
           </Column>
-          <Spacer height={16} />
+          <Spacer height={8} />
           <Transactions />
         </TransactionContainer>
       </SlidingUpPanel>
