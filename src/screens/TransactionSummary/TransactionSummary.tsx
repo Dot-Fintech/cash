@@ -65,14 +65,12 @@ const TransactionSummary: React.FC = () => {
               {...data.getTransactionFromToken}
               source={data.getTransactionFromToken.bank}
             />
-          ) : (
-            data.getTransactionFromToken.p2p && (
-              <P2PTransactionInfo
-                {...data.getTransactionFromToken}
-                source={data.getTransactionFromToken.p2p}
-              />
-            )
-          )
+          ) : data.getTransactionFromToken.p2p ? (
+            <P2PTransactionInfo
+              {...data.getTransactionFromToken}
+              source={data.getTransactionFromToken.p2p}
+            />
+          ) : null
         ) : loading ? (
           <LoadingList
             width={Dimensions.get('window').width - 2 * RAIL_SPACING}
