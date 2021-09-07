@@ -1,4 +1,3 @@
-import type { Dispatch, SetStateAction } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -15,7 +14,7 @@ const Container = styled(Row)`
 type Props = {
   variant?: SlideSelectVariant;
   selectedOption: SlideSelectOption;
-  setSelectedOption: Dispatch<SetStateAction<SlideSelectOption>>;
+  setSelectedOption: (selectedOption: SlideSelectOption) => void;
   options: SlideSelectOption[];
 };
 

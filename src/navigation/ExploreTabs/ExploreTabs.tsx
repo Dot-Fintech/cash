@@ -1,8 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
-import ExplorePeople from '../../screens/ExplorePeople';
-import ExploreStores from '../../screens/ExploreStores';
+import { ExplorePeople, ExploreStores } from '../../screens/Explore';
 import { SCREENS } from '../utils/enums/screens';
 import { ExploreTabsParamList } from '../utils/paramLists/ExploreTabs';
 

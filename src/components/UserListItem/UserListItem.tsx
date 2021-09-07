@@ -45,7 +45,11 @@ const UserListItem: React.FC<Props> = ({
     user;
 
   return (
-    <Row alignItems="center">
+    <Row
+      justifyContent="space-between"
+      alignItems="center"
+      fullWidth={showConnectionStatus}
+    >
       <Container
         onPress={onPress ? handleUserClick : undefined}
         disabled={!onPress}
@@ -88,7 +92,7 @@ const UserListItem: React.FC<Props> = ({
             </Chip>
           ) : connectionStatus === Connection_Status.Pending ? (
             <Typography tag="p" textAlign="center">
-              Connection Pending
+              Pending
             </Typography>
           ) : connectionStatus === Connection_Status.Connected ? (
             <Typography tag="p" color={theme.colors.main.secondary}>
