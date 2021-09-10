@@ -1,0 +1,11 @@
+query notifications($pageData: PaginationInput!) {
+  getNotifications(pageData: $pageData) {
+    notifications {
+      ...NotificationListItem
+    }
+    pageData {
+      count
+      pageNumber
+    }
+  }
+}

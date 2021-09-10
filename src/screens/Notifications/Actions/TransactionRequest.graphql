@@ -1,0 +1,16 @@
+mutation acceptRequest($data: P2PTransactionRequestInput!) {
+  acceptRequest(data: $data) {
+    transaction {
+      ...FullTransaction
+    }
+    account {
+      ...FullAccount
+    }
+  }
+}
+
+mutation declineRequest($data: P2PTransactionRequestInput!) {
+  declineRequest(data: $data) {
+    ...FullTransaction
+  }
+}

@@ -1,0 +1,13 @@
+fragment NotificationListItem on Notification {
+  _id
+  createdAt
+  reason
+  actionable
+  response
+  transaction {
+    ...FullTransaction
+  }
+  connection {
+    ...FullConnection
+  }
+}

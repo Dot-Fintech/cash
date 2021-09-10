@@ -1,0 +1,11 @@
+mutation acceptConnectionRequest($data: ConnectionRequestResponseInput!) {
+  acceptConnectionRequest(data: $data) {
+    _id
+  }
+}
+
+mutation declineConnectionRequest($data: ConnectionRequestResponseInput!) {
+  declineConnectionRequest(data: $data) {
+    _id
+  }
+}

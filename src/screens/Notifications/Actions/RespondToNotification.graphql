@@ -1,0 +1,5 @@
+mutation respondToNotification($data: RespondToNotificationInput!) {
+  respondToNotification(data: $data) {
+    ...NotificationListItem
+  }
+}
