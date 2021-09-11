@@ -1,0 +1,5 @@
+mutation uploadDocument($data: UploadKYCDocumentInput!) {
+  uploadKYCDocument(data: $data) {
+    ...FullUser
+  }
+}

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Alert } from 'react-native';
 
+import UploadPhoto from '../../components/UploadPhoto/';
 import { useChangeProfilePhotoMutation } from '../../generated/graphql';
-import UploadPhoto from './UploadPhoto';
 
 const containerName = 'userprofilephotos';
 

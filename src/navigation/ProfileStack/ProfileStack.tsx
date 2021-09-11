@@ -5,6 +5,7 @@ import Overlay from '../../components/Overlay';
 import Documents from '../../screens/Documents';
 import Profile from '../../screens/Profile';
 import { ChangeProfilePhoto } from '../../screens/ProfilePhoto';
+import UploadDocuments from '../../screens/UploadDocument';
 import { SCREENS } from '../utils/enums/screens';
 import { ProfileStackParamList } from '../utils/paramLists/ProfileStack';
 
@@ -27,6 +28,11 @@ const ProfileStack: React.FC = () => {
         <Stack.Screen
           component={Documents}
           name={SCREENS.DOCUMENTS}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          component={UploadDocuments}
+          name={SCREENS.UPLOAD_DOCUMENT}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

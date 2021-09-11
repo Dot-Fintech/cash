@@ -2,17 +2,17 @@ import React, { useContext, useState } from 'react';
 import { Dimensions } from 'react-native';
 import styled from 'styled-components';
 
-import Button from '../../components/Button';
-import Column from '../../components/Column';
-import Photo from '../../components/Photo';
-import Row from '../../components/Row';
-import Spacer from '../../components/Spacer';
-import Typography from '../../components/Typography';
 import { UserContext } from '../../context/user/state';
 import CheckedIcon from '../../icons/CheckedIcon';
+import PhotoPicker from '../../screens/ProfilePhoto/PhotoPicker';
 import { RAIL_SPACING } from '../../styles/spacing';
 import { useUploadImage } from '../../utils/uploadImage';
-import PhotoPicker from './PhotoPicker';
+import Button from '../Button';
+import Column from '../Column';
+import Photo from '../Photo';
+import Row from '../Row';
+import Spacer from '../Spacer';
+import Typography from '../Typography';
 
 const Container = styled(Column)`
   padding: 32px ${RAIL_SPACING}px 0;

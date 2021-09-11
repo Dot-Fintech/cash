@@ -9,18 +9,19 @@ import Typography from '../Typography';
 
 type Props = {
   text: string;
-  onClick: () => void;
+  onPress: () => void;
 };
 
-const AddDocumentButton: React.FC<Props> = ({ text, onClick }) => {
+const AddDocumentButton: React.FC<Props> = ({ text, onPress }) => {
   const theme = useTheme();
 
   return (
-    <Button onPress={onClick}>
+    <Button onPress={onPress}>
       <Row alignItems="center">
         <Ionicons
           name="add-circle"
-          color={theme.name === 'light' ? 'dark' : 'light'}
+          size={32}
+          color={theme.colors.text.primary.toString()}
         />
         <Spacer width={8} />
         <Typography tag="h6">{text}</Typography>

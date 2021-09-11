@@ -50,10 +50,11 @@ const DocumentListItem: React.FC<Props> = ({ type }) => {
         onPress={toggleShowNotes}
         disabled={status !== Kyc_Document_Status.Unverified || !notes}
       >
-        <Row alignItems="center">
+        <Row alignItems="center" fullWidth>
           <Ionicons
             name="document"
-            color={theme.name === 'light' ? 'dark' : 'light'}
+            size={32}
+            color={theme.colors.text.primary.toString()}
           />
           <Spacer width={16} />
           <Column>
@@ -78,14 +79,16 @@ const DocumentListItem: React.FC<Props> = ({ type }) => {
               <Spacer height={8} />
               <Ionicons
                 name="arrow-up"
-                color={theme.name === 'light' ? 'dark' : 'light'}
+                size={32}
+                color={theme.colors.text.primary.toString()}
               />
             </Column>
           ) : (
             <Column>
               <Ionicons
                 name="arrow-down"
-                color={theme.name === 'light' ? 'dark' : 'light'}
+                size={32}
+                color={theme.colors.text.primary.toString()}
               />
               <Spacer height={8} />
             </Column>
