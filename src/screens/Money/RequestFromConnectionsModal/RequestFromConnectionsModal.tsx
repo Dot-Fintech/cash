@@ -63,11 +63,11 @@ const RequestFromConnectionsModal: React.FC = () => {
           able to request money from one another!
         </Typography>
         <Spacer height={32} />
-        <Row alignItems="center" fullWidth>
+        {/* <Row alignItems="center" fullWidth>
           <Checkbox value={hideReminder} onValueChange={setHideReminder} />
           <Spacer width={16} />
           <Typography tag="p">Don't show this reminder again</Typography>
-        </Row>
+        </Row> */}
         <Spacer height={32} />
         <Button onPress={handleCloseModal}>Okay</Button>
       </ModalContainer>
