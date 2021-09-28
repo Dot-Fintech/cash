@@ -6,9 +6,11 @@ import styled, { css } from 'styled-components';
 
 import { ThemeContext } from '../../theme';
 
+const { width, height } = Dimensions.get('window');
+
 const styles = css`
-  width: ${Dimensions.get('window').width}px;
-  height: ${Dimensions.get('window').height}px;
+  width: ${width}px;
+  height: ${height}px;
   background-color: ${({ theme }) =>
     theme.colors.background.primary.toString()};
 `;

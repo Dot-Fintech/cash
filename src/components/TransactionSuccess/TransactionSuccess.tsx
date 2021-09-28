@@ -15,9 +15,11 @@ import Column from '../Column';
 import Spacer from '../Spacer';
 import Typography from '../Typography';
 
+const { width, height } = Dimensions.get('window');
+
 const ICON_PROPS = {
-  width: Dimensions.get('window').width - 2 * RAIL_SPACING,
-  maxHeight: Dimensions.get('window').height / 2.5,
+  width: width - 2 * RAIL_SPACING,
+  maxHeight: height / 2.5,
 };
 
 const Container = styled(Column)`
