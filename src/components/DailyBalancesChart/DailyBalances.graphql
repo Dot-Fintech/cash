@@ -1,0 +1,6 @@
+query getDailyBalances($data: GetDailyBalancesInput!) {
+  getDailyBalances(data: $data) {
+    date
+    balance
+  }
+}
