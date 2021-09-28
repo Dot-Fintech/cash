@@ -13,6 +13,7 @@ export type Props = {
 /** DO NOT USE THIS COMPONENT. Use Row and Column instead */
 const Flex = styled(View)<Props>`
   display: flex;
+  flex-shrink: 1;
   ${({ flexDirection, justifyContent, alignItems, fullWidth }) => css`
     flex-direction: ${flexDirection};
     justify-content: ${justifyContent ?? 'flex-start'};
