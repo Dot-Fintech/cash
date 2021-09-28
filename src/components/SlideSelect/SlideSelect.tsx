@@ -26,13 +26,15 @@ const SlideSelect: React.FC<Props> = ({
 }) => {
   return (
     <Container fullWidth>
-      {options.map((option) => (
+      {options.map((option, index) => (
         <Option
           key={option.id}
           option={option}
           isSelected={option.id === selectedOption.id}
           onPress={() => setSelectedOption(option)}
           variant={variant}
+          first={index === 0}
+          last={index === options.length - 1}
         />
       ))}
     </Container>
