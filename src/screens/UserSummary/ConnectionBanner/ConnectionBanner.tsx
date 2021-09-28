@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import { BOTTOM_BLOCK_BORDER_RADIUS } from '../../../components/BottomBlock';
@@ -66,12 +66,12 @@ const ConnectionBanner: React.FC<Props> = ({ user }) => {
             variables: { data: { userId: user._id } },
           });
           if (errors) {
-            alert(
+            Alert.alert(
               `Something went wrong. We couldn't disconnect you from that user. ${errors[0].message}`,
             );
           }
         },
-        label: 'Connected',
+        label: 'Disconnect',
       }
     : connectionStatus === Connection_Status.Disconnected
     ? {
@@ -80,7 +80,7 @@ const ConnectionBanner: React.FC<Props> = ({ user }) => {
             variables: { data: { recipientId: user._id } },
           });
           if (errors) {
-            alert(
+            Alert.alert(
               `Something went wrong. We couldn't send a connection request to that user. ${errors[0].message}`,
             );
           }

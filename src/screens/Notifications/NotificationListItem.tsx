@@ -9,7 +9,6 @@ import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
 import type { NotificationListItemFragment } from '../../generated/graphql';
 import { Notification_Response } from '../../generated/graphql';
-import { Color, Colors } from '../../theme';
 import { useNotificationActions } from './Actions/useNotificationActions';
 import { getNotificationMessage } from './utils';
 
@@ -18,7 +17,7 @@ type Props = {
 };
 
 const Notification: React.FC<Props> = ({ notification }) => {
-  const { colors } = useTheme();
+  const theme = useTheme();
 
   const [accept, decline, { loading, error }] =
     useNotificationActions(notification);
@@ -43,14 +42,11 @@ const Notification: React.FC<Props> = ({ notification }) => {
           </Typography>
           <Spacer height={4} />
           <Row justifyContent="space-between" fullWidth>
-            <Typography
-              tag="p"
-              color={new Color({ ...Colors.black, opacity: 0.5 })}
-            >
+            <Typography tag="p" color={theme.colors.text.secondary}>
               {new Date(createdAt).toDateString()}
             </Typography>
             {error ? (
-              <Typography tag="p" color={colors.error.primary}>
+              <Typography tag="p" color={theme.colors.error.primary}>
                 Something went wrong
               </Typography>
             ) : response ? (
@@ -58,8 +54,8 @@ const Notification: React.FC<Props> = ({ notification }) => {
                 tag="p"
                 color={
                   response === Notification_Response.Accepted
-                    ? colors.success.primary
-                    : colors.error.primary
+                    ? theme.colors.success.primary
+                    : theme.colors.error.primary
                 }
               >
                 {response === Notification_Response.Accepted

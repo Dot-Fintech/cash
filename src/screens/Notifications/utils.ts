@@ -13,15 +13,15 @@ export const getNotificationMessage = (
   const connectionRecipient = `${connection?.recipient.firstName} ${connection?.recipient.lastName} (@${connection?.recipient.username})`;
 
   switch (reason) {
-    case Notification_Reason.TransactionDeclined:
+    case Notification_Reason.P2PTransactionDeclined:
       return `${transactionRecipient} declined your request of ${formatter.format(
         transaction?.amount ?? 0,
       )}.`;
-    case Notification_Reason.TransactionRequest:
+    case Notification_Reason.P2PTransactionRequest:
       return `${transactionSender} requested ${formatter.format(
         transaction?.amount ?? 0,
       )} from you.`;
-    case Notification_Reason.TransactionReceipt:
+    case Notification_Reason.P2PTransactionReceipt:
       return `${transactionSender} sent you ${formatter.format(
         transaction?.amount ?? 0,
       )}!`;
