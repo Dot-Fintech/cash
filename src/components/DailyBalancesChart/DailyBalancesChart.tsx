@@ -68,6 +68,7 @@ const LabelWrapper = styled(Animated.View)`
 const LABEL_TAG = 'h5';
 const Label = styled(TextInput)`
   ${({ theme }) => css`
+    color: ${theme.colors.text.primary.toString()}
     font-family: ${theme.typography[LABEL_TAG].fontFamily};
     font-size: ${theme.typography[LABEL_TAG].fontSize}px;
     font-weight: ${theme.typography[LABEL_TAG].fontWeight};

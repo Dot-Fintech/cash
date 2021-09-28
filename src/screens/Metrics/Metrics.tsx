@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import Column from '../../components/Column';
 import DailyBalancesChart from '../../components/DailyBalancesChart';
+import MainHeader from '../../components/MainHeader';
 import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
 import TimeFramePicker from '../../components/TimeFramePicker';
@@ -22,10 +23,13 @@ const ContentContainer = styled(Column)`
 `;
 
 const Metrics: React.FC = () => {
+  const theme = useTheme();
+
   const selectedTimeFrameState = useState(Time_Frame.OneWeek);
 
   return (
     <Screen>
+      <MainHeader iconColor={theme.colors.text.primary} />
       <Container>
         <ContentContainer>
           <Typography tag="h4">Daily Balance</Typography>
