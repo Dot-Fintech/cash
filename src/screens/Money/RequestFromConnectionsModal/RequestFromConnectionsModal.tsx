@@ -1,5 +1,5 @@
 import Checkbox from 'expo-checkbox';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Dimensions, Modal } from 'react-native';
 import styled from 'styled-components';
 
@@ -13,8 +13,7 @@ import {
   Reminder_Code,
   useAcknowledgeReminderMutation,
 } from '../../../generated/graphql';
-
-const RAIL_SPACING = 16;
+import { RAIL_SPACING } from '../../../styles/spacing';
 
 const ModalContainer = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;
@@ -30,11 +29,18 @@ const RequestFromConnectionsModal: React.FC = () => {
   );
 
   const [hideReminder, setHideReminder] = useState(false);
+  const [isCheckboxAvailable, setIsCheckboxAvailable] = useState(false);
 
   const [acknowledgeReminder] = useAcknowledgeReminderMutation();
 
+  useEffect(() => {
+    (async () => {
+      setIsCheckboxAvailable(await Checkbox.isAvailableAsync());
+    })();
+  });
+
   const handleCloseModal = () => {
-    if (hideReminder) {
+    if (hideReminder || !isCheckboxAvailable) {
       acknowledgeReminder({
         variables: { data: { code: Reminder_Code.AppRequestFromConnections } },
       });
@@ -63,11 +69,13 @@ const RequestFromConnectionsModal: React.FC = () => {
           able to request money from one another!
         </Typography>
         <Spacer height={32} />
-        {/* <Row alignItems="center" fullWidth>
-          <Checkbox value={hideReminder} onValueChange={setHideReminder} />
-          <Spacer width={16} />
-          <Typography tag="p">Don't show this reminder again</Typography>
-        </Row> */}
+        {isCheckboxAvailable && (
+          <Row alignItems="center" fullWidth>
+            <Checkbox value={hideReminder} onValueChange={setHideReminder} />
+            <Spacer width={16} />
+            <Typography tag="p">Don't show this reminder again</Typography>
+          </Row>
+        )}
         <Spacer height={32} />
         <Button onPress={handleCloseModal}>Okay</Button>
       </ModalContainer>
