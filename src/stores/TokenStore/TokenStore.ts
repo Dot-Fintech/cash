@@ -30,9 +30,9 @@ class TokenStore {
     }
   };
 
-  setTokens = (tokenPair?: TokenPair) => {
+  setTokens = async (tokenPair?: TokenPair) => {
     this.setAccessToken(tokenPair?.accessToken);
-    this.setRefreshToken(tokenPair?.refreshToken);
+    await this.setRefreshToken(tokenPair?.refreshToken);
   };
 }
 

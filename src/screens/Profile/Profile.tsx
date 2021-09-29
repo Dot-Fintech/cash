@@ -69,7 +69,7 @@ const Profile: React.FC = () => {
         'Something went wrong',
         'We encountered an issue while trying to log you out.',
       );
-    TokenStore.setTokens();
+    await TokenStore.setTokens();
     setUser();
     rootStackNavigation.navigate(SCREENS.LANDING);
   };
