@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Color } from '../../theme/colors/types';
 import { Colors } from '../../theme/utils/Colors';
@@ -17,10 +17,12 @@ const Container = styled(TouchableOpacity)<ContainerProps>`
   justify-content: center;
   align-items: center;
 
-  min-width: ${({ variant }) => (variant === 'lean' ? '0px' : '64px')};
-  min-height: ${({ variant }) => (variant === 'lean' ? '0px' : '40px')};
   ${({ width }) => (width ? `width: ${width}px;` : '')}
   ${({ height }) => (height ? `height: ${height}px;` : '')}
+  ${({ variant }) => css`
+    min-width: ${variant === 'lean' ? 40 : 64}px;
+    min-height: ${variant === 'lean' ? 24 : 40}px;
+  `}
 
   border-radius: 4px;
   border: none;
@@ -46,6 +48,7 @@ const ButtonText = styled(Text)<TextProps>`
         }).toString()
       : theme.colors.background.primary.toString()};
   font-size: 18px;
+  line-height: 18px;
   margin: 0;
 `;
 
