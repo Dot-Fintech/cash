@@ -73,58 +73,56 @@ const Transactions: React.FC = () => {
         <LoadingChips />
       ) : null}
       <Spacer height={16} />
-      {data ? (
-        transactions && transactions.length > 0 ? (
-          transactions.map((transaction, index) => (
-            <TransactionContainer
-              key={transaction._id}
-              justifyContent="center"
-              fullWidth
-            >
-              {index > 0 && <Spacer height={16} />}
-              {(index === 0 ||
-                new Date(transactions[index - 1].createdAt).toDateString() !==
-                  new Date(transaction.createdAt).toDateString()) && (
-                <>
-                  <Typography tag="h6">
-                    {new Date(transaction.createdAt).toDateString()}
-                  </Typography>
-                  <Spacer height={16} />
-                </>
-              )}
-              <TransactionListItem transaction={transaction} />
-            </TransactionContainer>
-          ))
-        ) : (
-          <EmptyState
-            title="No transactions just yet"
-            description="Start moving money around to see a list of transactions here."
+      <TransactionContainer>
+        {data ? (
+          transactions && transactions.length > 0 ? (
+            transactions.map((transaction, index) => (
+              <Column key={transaction._id} justifyContent="center" fullWidth>
+                {index > 0 && <Spacer height={16} />}
+                {(index === 0 ||
+                  new Date(transactions[index - 1].createdAt).toDateString() !==
+                    new Date(transaction.createdAt).toDateString()) && (
+                  <>
+                    <Typography tag="h6">
+                      {new Date(transaction.createdAt).toDateString()}
+                    </Typography>
+                    <Spacer height={16} />
+                  </>
+                )}
+                <TransactionListItem transaction={transaction} />
+              </Column>
+            ))
+          ) : (
+            <EmptyState
+              title="No transactions just yet"
+              description="Start moving money around to see a list of transactions here."
+            />
+          )
+        ) : loading ? (
+          <LoadingList
+            width={Dimensions.get('window').width - 2 * RAIL_SPACING}
+            numRows={8}
           />
-        )
-      ) : loading ? (
-        <LoadingList
-          width={Dimensions.get('window').width - RAIL_SPACING}
-          numRows={8}
-        />
-      ) : error ? (
-        <ErrorContainer alignItems="center" fullWidth>
-          <Typography tag="h4" textAlign="center">
-            Looks like something went wrong
-          </Typography>
-          <Spacer height={16} />
-          <Typography tag="h5" textAlign="center">
-            There was an issue fetching your transactions
-          </Typography>
-          <Spacer height={16} />
-          <Typography
-            tag="h5"
-            textAlign="center"
-            color={theme.colors.error.primary}
-          >
-            {error.message}
-          </Typography>
-        </ErrorContainer>
-      ) : null}
+        ) : error ? (
+          <ErrorContainer alignItems="center" fullWidth>
+            <Typography tag="h4" textAlign="center">
+              Looks like something went wrong
+            </Typography>
+            <Spacer height={16} />
+            <Typography tag="h5" textAlign="center">
+              There was an issue fetching your transactions
+            </Typography>
+            <Spacer height={16} />
+            <Typography
+              tag="h5"
+              textAlign="center"
+              color={theme.colors.error.primary}
+            >
+              {error.message}
+            </Typography>
+          </ErrorContainer>
+        ) : null}
+      </TransactionContainer>
     </Column>
   );
 };
