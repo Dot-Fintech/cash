@@ -31,7 +31,7 @@ const Biometrics: React.FC = () => {
 
   const { width } = useWindowDimensions();
 
-  const goToMain = () => navigation.navigate(NAVIGATORS.MAIN_TABS);
+  const goToMain = () => navigation.push(NAVIGATORS.MAIN_TABS);
 
   const authenticate = async () => {
     const result = await LocalAuthentication.authenticateAsync();
