@@ -1,0 +1,5 @@
+mutation changeProfilePhoto($data: ChangeProfilePhotoInput!) {
+  changeUserProfilePhoto(data: $data) {
+    ...FullUser
+  }
+}
