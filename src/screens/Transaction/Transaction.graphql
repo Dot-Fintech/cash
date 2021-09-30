@@ -1,0 +1,16 @@
+mutation send($data: P2PTransactionInput!) {
+  sendEmoney(data: $data) {
+    transaction {
+      ...FullTransaction
+    }
+    account {
+      ...FullAccount
+    }
+  }
+}
+
+mutation request($data: P2PTransactionInput!) {
+  requestEmoney(data: $data) {
+    ...FullTransaction
+  }
+}
