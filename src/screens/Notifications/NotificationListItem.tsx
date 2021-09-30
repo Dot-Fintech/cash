@@ -1,4 +1,5 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
 import { useTheme } from 'styled-components';
 
 import Chip from '../../components/Chip';
@@ -45,11 +46,7 @@ const Notification: React.FC<Props> = ({ notification }) => {
             <Typography tag="p" color={theme.colors.text.secondary}>
               {new Date(createdAt).toDateString()}
             </Typography>
-            {error ? (
-              <Typography tag="p" color={theme.colors.error.primary}>
-                Something went wrong
-              </Typography>
-            ) : response ? (
+            {response ? (
               <Typography
                 tag="p"
                 color={
@@ -62,6 +59,10 @@ const Notification: React.FC<Props> = ({ notification }) => {
                   ? 'Accepted'
                   : 'Declined'}
               </Typography>
+            ) : loading ? (
+              <ActivityIndicator
+                color={theme.colors.main.secondary.toString()}
+              />
             ) : null}
           </Row>
         </Column>
