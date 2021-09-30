@@ -26,8 +26,7 @@ const People: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const [search, { data, loading, error }] = useSearchUsersLazyQuery();
 
-  const handleSearchQuery = (value: unknown) => {
-    const query = String(value);
+  const handleSearchQuery = (query: string) => {
     if (query.length > 2) {
       setShowResults(true);
       debounce(() => {
@@ -49,7 +48,7 @@ const People: React.FC = () => {
         <TopBlock>
           <SearchGroup
             screen={SCREENS.EXPLORE_PEOPLE}
-            onChange={handleSearchQuery}
+            onChangeText={handleSearchQuery}
           />
         </TopBlock>
         <BottomBlock>

@@ -38,10 +38,10 @@ type ExploreScreen = SCREENS.EXPLORE_STORES | SCREENS.EXPLORE_PEOPLE;
 
 type Props = {
   screen: ExploreScreen;
-  onChange?: (value: unknown) => void;
+  onChangeText?: (value: string) => void;
 };
 
-const SearchGroup: React.FC<Props> = ({ screen, onChange }) => {
+const SearchGroup: React.FC<Props> = ({ screen, onChangeText }) => {
   const navigation =
     useNavigation<BottomTabNavigationProp<ExploreTabsParamList>>();
 
@@ -66,7 +66,7 @@ const SearchGroup: React.FC<Props> = ({ screen, onChange }) => {
           variant="translucent"
         />
         <SearchField
-          onChange={onChange}
+          onChangeText={onChangeText}
           color={Colors.white}
           borderColor={Colors.transparent}
           search
