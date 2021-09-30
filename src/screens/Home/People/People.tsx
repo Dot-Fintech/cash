@@ -35,10 +35,13 @@ const People: React.FC<Props> = ({ goToUser }) => {
     <Container fullWidth>
       {data ? (
         interactions && interactions.length > 0 ? (
-          interactions.map(({ user }, index) => (
-            <Column key={user._id} fullWidth>
+          interactions.map(({ otherUser }, index) => (
+            <Column key={otherUser._id} fullWidth>
               {index > 0 && <Spacer height={16} />}
-              <UserListItem user={user} onPress={() => goToUser(user)} />
+              <UserListItem
+                user={otherUser}
+                onPress={() => goToUser(otherUser)}
+              />
             </Column>
           ))
         ) : (

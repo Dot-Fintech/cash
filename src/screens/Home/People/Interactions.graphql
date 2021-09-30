@@ -1,10 +1,7 @@
 query interactions($pageData: PaginationInput!) {
   getInteractions(pageData: $pageData) {
     interactions {
-      position
-      user {
-        ...UserListItem
-      }
+      ...FullInteraction
     }
     pageData {
       count

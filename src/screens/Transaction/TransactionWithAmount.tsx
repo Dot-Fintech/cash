@@ -151,10 +151,10 @@ const TransactionWithAmount: React.FC = () => {
           {data ? (
             <Column fullWidth>
               {data.getInteractions.interactions.map((interaction, index) => (
-                <View key={interaction.user._id}>
+                <View key={interaction.otherUser._id}>
                   {index > 0 && <Spacer height={8} />}
                   <UserListItem
-                    user={interaction.user}
+                    user={interaction.otherUser}
                     onPress={handleUserClick}
                   />
                 </View>

@@ -1,0 +1,12 @@
+fragment FullInteraction on Interaction {
+  time
+  a {
+    ...UserListItem
+  }
+  b {
+    ...UserListItem
+  }
+  otherUser {
+    ...UserListItem
+  }
+}
