@@ -35,6 +35,8 @@ import {
   useSendEmoney,
 } from './utils';
 
+const { width } = Dimensions.get('window');
+
 const containerStyles = css`
   height: 100%;
   padding: 16px ${RAIL_SPACING}px;
@@ -162,10 +164,7 @@ const TransactionWithAmount: React.FC = () => {
               ))}
             </Column>
           ) : loading ? (
-            <LoadingList
-              width={Dimensions.get('window').width - 2 * RAIL_SPACING}
-              numRows={5}
-            />
+            <LoadingList width={width - 2 * RAIL_SPACING} numRows={5} />
           ) : error ? (
             <Column alignItems="center" fullWidth>
               <Error

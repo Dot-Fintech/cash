@@ -19,6 +19,8 @@ import { HomeStackParamList } from '../../navigation/utils/paramLists/HomeStack'
 import BankTransactionInfo from './BankTransactionInfo';
 import P2PTransactionInfo from './P2PTransactionInfo';
 
+const { width } = Dimensions.get('window');
+
 const RAIL_SPACING = 16;
 
 const Container = styled(Column)`
@@ -73,10 +75,7 @@ const TransactionSummary: React.FC = () => {
             />
           ) : null
         ) : loading ? (
-          <LoadingList
-            width={Dimensions.get('window').width - 2 * RAIL_SPACING}
-            numRows={6}
-          />
+          <LoadingList width={width - 2 * RAIL_SPACING} numRows={6} />
         ) : error ? (
           <Column alignItems="center" fullWidth>
             <Error

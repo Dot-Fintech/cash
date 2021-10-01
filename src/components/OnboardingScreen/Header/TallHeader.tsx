@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { Path, Svg } from 'react-native-svg';
 import { useTheme } from 'styled-components';
 
-const HEADER_WIDTH = Dimensions.get('window').width;
+const { width } = Dimensions.get('window');
 const HEADER_BLOCK_HEIGHT = 120;
 
 const TallHeader: React.FC = () => {
@@ -12,9 +12,9 @@ const TallHeader: React.FC = () => {
   return (
     <>
       <Svg
-        width={HEADER_WIDTH}
+        width={width}
         height={HEADER_BLOCK_HEIGHT}
-        viewBox={`0 0 ${HEADER_WIDTH} ${HEADER_BLOCK_HEIGHT}`}
+        viewBox={`0 0 ${width} ${HEADER_BLOCK_HEIGHT}`}
         fill="none"
       >
         <Path

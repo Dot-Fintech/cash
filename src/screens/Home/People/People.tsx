@@ -12,6 +12,8 @@ import { UserListItemFragment } from '../../../generated/graphql';
 import { RAIL_SPACING } from '../../../styles/spacing';
 import { useInteractions } from './useInteractions';
 
+const { width } = Dimensions.get('window');
+
 const Container = styled(Column)`
   padding-top: 16px;
 `;
@@ -49,10 +51,7 @@ const People: React.FC<Props> = ({ goToUser }) => {
           />
         )
       ) : loading ? (
-        <LoadingList
-          width={Dimensions.get('window').width - RAIL_SPACING}
-          numRows={6}
-        />
+        <LoadingList width={width - 2 * RAIL_SPACING} numRows={6} />
       ) : error ? (
         <ErrorContainer justifyContent="center" alignItems="center" fullWidth>
           <Error error={error} message="We can't get those users right now." />

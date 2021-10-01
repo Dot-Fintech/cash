@@ -25,13 +25,15 @@ import LoadingScreen from '../Loading';
 import FutureText from './FutureText';
 import { MIDDLE_SPACER_WIDTH } from './utils';
 
+const { width } = Dimensions.get('window');
+
 const Container = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;
   height: 100%;
 `;
 
 const PrimaryButton = styled(Button)`
-  width: ${Dimensions.get('window').width - 2 * 32}px;
+  width: ${width - 2 * 32}px;
 `;
 
 const LandingPage: React.FC = () => {

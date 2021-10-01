@@ -3,7 +3,9 @@ import { Dimensions } from 'react-native';
 import { Path, Svg } from 'react-native-svg';
 import { useTheme } from 'styled-components';
 
-const HEADER_WIDTH = Dimensions.get('window').width;
+const { width } = Dimensions.get('window');
+
+const HEADER_WIDTH = width;
 const HEADER_BLOCK_HEIGHT = 80;
 
 const ShortHeader: React.FC = () => {

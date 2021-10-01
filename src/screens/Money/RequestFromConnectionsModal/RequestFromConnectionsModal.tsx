@@ -15,9 +15,11 @@ import {
 } from '../../../generated/graphql';
 import { RAIL_SPACING } from '../../../styles/spacing';
 
+const { height } = Dimensions.get('window');
+
 const ModalContainer = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;
-  height: ${Dimensions.get('window').height}px;
+  height: ${height}px;
 `;
 
 const RequestFromConnectionsModal: React.FC = () => {

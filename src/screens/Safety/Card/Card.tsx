@@ -9,7 +9,9 @@ import { RAIL_SPACING } from '../../../styles/spacing';
 import { Card } from '../utils';
 import { getShadowColor } from './utils';
 
-export const CARD_WIDTH = Dimensions.get('window').width - 2 * RAIL_SPACING;
+const { width } = Dimensions.get('window');
+
+export const CARD_WIDTH = width - 2 * RAIL_SPACING;
 export const CARD_HEIGHT = 360;
 
 const Container = styled(Column)`
@@ -31,7 +33,7 @@ const CardComponent: React.FC<Props> = ({ item }) => {
 
   return (
     <Container justifyContent="center" alignItems="center">
-      <Icon height={200} maxWidth={Dimensions.get('window').width - 64} />
+      <Icon height={200} maxWidth={width - 64} />
       <Spacer height={16} />
       <Typography tag="h4" textAlign="center">
         {title}

@@ -9,6 +9,8 @@ import Spacer from '../../components/Spacer';
 import TopBlock from '../../components/TopBlock';
 import { RAIL_SPACING } from '../../styles/spacing';
 
+const { width } = Dimensions.get('window');
+
 const BottomContainer = styled(Column)`
   padding: 16px;
 `;
@@ -21,10 +23,7 @@ const LoadingScreen: React.FC = () => {
         <BottomContainer>
           <LoadingChips />
           <Spacer height={16} />
-          <LoadingList
-            width={Dimensions.get('window').width - 2 * RAIL_SPACING}
-            numRows={6}
-          />
+          <LoadingList width={width - 2 * RAIL_SPACING} numRows={6} />
         </BottomContainer>
       </BottomBlock>
     </>

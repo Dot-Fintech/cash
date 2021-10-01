@@ -29,6 +29,8 @@ import { Colors } from '../../theme';
 import ChatTransactions from './ChatTransactions';
 import ConnectionBanner, { CONNECTION_BANNER_HEIGHT } from './ConnectionBanner';
 
+const { height } = Dimensions.get('window');
+
 const BANNER_SPACING = 16;
 
 const containerStyles = css`
@@ -54,7 +56,7 @@ const InteractPill = styled(Pill)`
 
 const TransactionsWrapper = styled(Column)`
   ${containerStyles}
-  height: ${Dimensions.get('window').height -
+  height: ${height -
   TOP_BLOCK_HEIGHT -
   (CONNECTION_BANNER_HEIGHT - BOTTOM_BLOCK_BORDER_RADIUS) -
   BANNER_SPACING}px;

@@ -18,6 +18,8 @@ import { RAIL_SPACING } from '../../styles/spacing';
 import Card, { CARD_HEIGHT, CARD_WIDTH } from './Card';
 import { CARDS } from './utils';
 
+const { width } = Dimensions.get('window');
+
 const Container = styled(Column)`
   padding: 32px ${RAIL_SPACING}px 0;
   width: 100%;
@@ -57,7 +59,7 @@ const Safety: React.FC = () => {
             layout="stack"
             data={CARDS}
             renderItem={Card}
-            sliderWidth={Dimensions.get('window').width}
+            sliderWidth={width}
             sliderHeight={CARD_HEIGHT}
             itemWidth={CARD_WIDTH}
             itemHeight={CARD_HEIGHT}

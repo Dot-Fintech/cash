@@ -3,12 +3,14 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
+const { width } = Dimensions.get('window');
+
 export const TOP_BLOCK_HEIGHT = 286;
 
 const Container = styled(LinearGradient)`
   position: absolute;
   top: 0;
-  width: ${Dimensions.get('window').width}px;
+  width: ${width}px;
   height: ${TOP_BLOCK_HEIGHT}px;
 `;
 

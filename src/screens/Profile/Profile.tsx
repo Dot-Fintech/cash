@@ -26,6 +26,8 @@ import TokenStore from '../../stores/TokenStore';
 import { RAIL_SPACING } from '../../styles/spacing';
 import { Colors, ThemeContext } from '../../theme';
 
+const { width } = Dimensions.get('window');
+
 type TopContainerProps = {
   topInset: number;
 };
@@ -100,7 +102,7 @@ const Profile: React.FC = () => {
             </Typography>
           </Button>
           <Spacer height={8} />
-          <Divider width={Dimensions.get('window').width - 2 * RAIL_SPACING} />
+          <Divider width={width - 2 * RAIL_SPACING} />
           <Spacer height={8} />
           <Button disabled={loading} onPress={setDarkTheme}>
             <Typography tag="h5" textAlign="left">

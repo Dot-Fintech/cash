@@ -8,8 +8,10 @@ import Spacer from '../Spacer';
 import { TOP_BLOCK_HEIGHT } from '../TopBlock';
 import Typography from '../Typography';
 
+const { width, height } = Dimensions.get('window');
+
 const Container = styled(Column)`
-  height: ${Dimensions.get('window').height - TOP_BLOCK_HEIGHT}px;
+  height: ${height - TOP_BLOCK_HEIGHT}px;
 `;
 
 type Props = {
@@ -33,7 +35,7 @@ const EmptyState: React.FC<Props> = ({ title, description }) => {
         {title}
       </Typography>
       <Spacer height={16} />
-      <BigPayIcon width={Dimensions.get('window').width / 3} />
+      <BigPayIcon width={width / 3} />
       <Spacer height={16} />
       <Typography tag="h6" textAlign="center">
         {description}

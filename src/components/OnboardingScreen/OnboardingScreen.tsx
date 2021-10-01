@@ -10,6 +10,8 @@ import Spacer from '../Spacer';
 import Typography from '../Typography';
 import Header from './Header';
 
+const { width } = Dimensions.get('window');
+
 type ButtonContainerProps = {
   bottomInset: number;
 };
@@ -18,7 +20,7 @@ const ButtonContainer = styled(Column)<ButtonContainerProps>`
 `;
 
 const PrimaryButton = styled(Button)`
-  width: ${Dimensions.get('window').width - 2 * 32}px;
+  width: ${width - 2 * 32}px;
 `;
 
 type OnboardingButton = {

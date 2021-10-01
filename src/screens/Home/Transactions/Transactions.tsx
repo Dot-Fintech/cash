@@ -19,6 +19,8 @@ import {
   useTransactions,
 } from '../../../utils/hooks/useTransactions';
 
+const { width } = Dimensions.get('window');
+
 const FilterOptionsContainer = styled(ScrollView)`
   height: ${CHIP_HEIGHT + 16}px;
   padding: 8px 0;
@@ -101,10 +103,7 @@ const Transactions: React.FC = () => {
             />
           )
         ) : loading ? (
-          <LoadingList
-            width={Dimensions.get('window').width - 2 * RAIL_SPACING}
-            numRows={8}
-          />
+          <LoadingList width={width - 2 * RAIL_SPACING} numRows={8} />
         ) : error ? (
           <ErrorContainer alignItems="center" fullWidth>
             <Error

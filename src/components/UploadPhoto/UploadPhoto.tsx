@@ -14,6 +14,8 @@ import Row from '../Row';
 import Spacer from '../Spacer';
 import Typography from '../Typography';
 
+const { width } = Dimensions.get('window');
+
 const Container = styled(Column)`
   padding: 32px ${RAIL_SPACING}px 0;
 `;
@@ -82,11 +84,7 @@ const ProfilePhotoPage: React.FC<Props> = ({
         <PhotoPicker aspect={photo.aspect} setUri={setUri} />
       ) : !success ? (
         <>
-          <Photo
-            size={Dimensions.get('window').width - 2 * RAIL_SPACING}
-            uri={uri}
-            {...photo}
-          />
+          <Photo size={width - 2 * RAIL_SPACING} uri={uri} {...photo} />
           <Spacer height={16} />
           <Row justifyContent="space-between" fullWidth>
             <Button onPress={unsetImage} disabled={loading}>
@@ -101,10 +99,7 @@ const ProfilePhotoPage: React.FC<Props> = ({
         <>
           <Typography tag="h2">Success!</Typography>
           <Spacer height={16} />
-          <CheckedIcon
-            height={300}
-            maxWidth={Dimensions.get('window').width - 2 * RAIL_SPACING}
-          />
+          <CheckedIcon height={300} maxWidth={width - 2 * RAIL_SPACING} />
         </>
       )}
     </Container>
