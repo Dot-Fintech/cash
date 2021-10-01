@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, FlatList } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import Button from '../../components/Button';
@@ -18,11 +18,14 @@ import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
 import {
   Kyc_Document_Status,
+  Kyc_Document_Type,
   useGetKycDocumentsLazyQuery,
 } from '../../generated/graphql';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { ProfileStackParamList } from '../../navigation/utils/paramLists/ProfileStack';
 import { RAIL_SPACING } from '../../styles/spacing';
+
+const { width } = Dimensions.get('window');
 
 const Container = styled(Column)`
   padding: 16px ${RAIL_SPACING}px;
@@ -70,16 +73,20 @@ const Documents: React.FC = () => {
         </Typography>
         <Spacer height={16} />
         {data ? (
-          actionableDocuments.map((document, index) => (
-            <Column key={document._id}>
-              {index > 0 && <Spacer height={16} />}
-              <DocumentListItem document={document} />
-            </Column>
-          ))
+          <FlatList
+            data={actionableDocuments}
+            keyExtractor={(document) => document._id}
+            renderItem={({ item, index }) => (
+              <>
+                {index > 0 && <Spacer height={16} />}
+                <DocumentListItem document={item} />
+              </>
+            )}
+          />
         ) : loading ? (
           <LoadingList
-            width={Dimensions.get('window').width - 2 * RAIL_SPACING}
-            numRows={3}
+            width={width - 2 * RAIL_SPACING}
+            numRows={Object.keys(Kyc_Document_Type).length}
           />
         ) : error ? (
           <>
