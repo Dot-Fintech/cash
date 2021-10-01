@@ -70,7 +70,10 @@ const Transactions: React.FC = () => {
           <Spacer width={8} />
         </FilterOptionsContainer>
       ) : loading ? (
-        <LoadingChips />
+        <Row>
+          <Spacer width={16} />
+          <LoadingChips />
+        </Row>
       ) : null}
       <Spacer height={16} />
       <TransactionContainer>
