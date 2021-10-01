@@ -1,11 +1,12 @@
 import { ErrorMessage, Field, Form } from 'formik';
 import React from 'react';
 import { Button, Modal } from 'react-native';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import { RAIL_SPACING } from '../../styles/spacing';
 import { detectCardProvider } from '../../utils/card';
 import Column from '../Column';
+import Error from '../Error';
 import Row from '../Row';
 import Spacer from '../Spacer';
 import TextField from '../TextField';
@@ -44,8 +45,6 @@ type Props = {
 };
 
 const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
-  const theme = useTheme();
-
   const [createCard, { loading, error }] = useCardActions();
 
   const handleSubmit = async (data: FormState) => {
@@ -155,24 +154,6 @@ const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
             </FullWidthForm>
           )}
         </Form>
-        {error && (
-          <>
-            <Spacer height={16} />
-            <Column alignItems="center" fullWidth>
-              <Typography tag="h4" textAlign="center">
-                Something went wrong
-              </Typography>
-              <Spacer height={8} />
-              <Typography
-                tag="h4"
-                color={theme.colors.error.primary}
-                textAlign="center"
-              >
-                {error.message}
-              </Typography>
-            </Column>
-          </>
-        )}
       </Container>
     </Modal>
   );

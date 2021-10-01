@@ -1,15 +1,15 @@
 import debounce from 'debounce';
 import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import BottomBlock from '../../../components/BottomBlock';
 import Column from '../../../components/Column';
+import Error from '../../../components/Error';
 import { LoadingList } from '../../../components/Loading';
 import Screen from '../../../components/Screen';
 import Spacer from '../../../components/Spacer';
 import TopBlock from '../../../components/TopBlock';
-import Typography from '../../../components/Typography';
 import UserListItem from '../../../components/UserListItem';
 import { useSearchUsersLazyQuery } from '../../../generated/graphql';
 import { SCREENS } from '../../../navigation/utils/enums/screens';
@@ -21,8 +21,6 @@ const BottomContainer = styled(Column)`
 `;
 
 const People: React.FC = () => {
-  const theme = useTheme();
-
   const [showResults, setShowResults] = useState(false);
   const [search, { data, loading, error }] = useSearchUsersLazyQuery();
 
@@ -67,21 +65,10 @@ const People: React.FC = () => {
               />
             ) : error ? (
               <Column alignItems="center" fullWidth>
-                <Typography tag="h4" textAlign="center">
-                  Something went wrong
-                </Typography>
-                <Spacer width={16} />
-                <Typography tag="h5" textAlign="center">
-                  There was an issue fetching users
-                </Typography>
-                <Spacer width={16} />
-                <Typography
-                  tag="p"
-                  color={theme.colors.error.primary}
-                  textAlign="center"
-                >
-                  {error.message}
-                </Typography>
+                <Error
+                  error={error}
+                  message="We can't get those users right now."
+                />
               </Column>
             ) : null}
           </BottomContainer>

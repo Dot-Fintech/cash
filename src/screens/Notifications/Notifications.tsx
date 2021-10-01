@@ -1,8 +1,9 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Column from '../../components/Column';
+import Error from '../../components/Error';
 import { LoadingList } from '../../components/Loading';
 import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
@@ -28,8 +29,6 @@ const FullHeightContainer = styled(Column)`
 `;
 
 const Notifications: React.FC = () => {
-  const theme = useTheme();
-
   const { data, loading, error } = useNotifications();
 
   const notifications = data?.getNotifications.notifications;
@@ -71,21 +70,10 @@ const Notifications: React.FC = () => {
             alignItems="center"
             fullWidth
           >
-            <Typography tag="h4" textAlign="center">
-              Something went wrong
-            </Typography>
-            <Spacer height={16} />
-            <Typography tag="h5" textAlign="center">
-              We weren't able to fetch your notifications
-            </Typography>
-            <Spacer height={16} />
-            <Typography
-              tag="p"
-              textAlign="center"
-              color={theme.colors.error.primary}
-            >
-              {error.message}
-            </Typography>
+            <Error
+              error={error}
+              message="We can't get your notifications right now."
+            />
           </FullHeightContainer>
         ) : null}
       </Container>

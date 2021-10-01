@@ -21,9 +21,8 @@ import {
 } from '../../generated/graphql';
 import { formatter } from '../../utils/money';
 import Column from '../Column';
+import Error from '../Error';
 import { LoadingBox } from '../Loading';
-import Spacer from '../Spacer';
-import Typography from '../Typography';
 import { data as dailyBalances } from './temp';
 
 const STROKE_WIDTH = 4;
@@ -218,34 +217,19 @@ const DailyBalancesChart: React.FC<Props> = ({
     </Container>
   ) : loading ? (
     <LoadingBox {...dimensions} />
-  ) : (
+  ) : error ? (
     <ErrorContainer
       width={width}
       height={height}
       justifyContent="center"
       alignItems="center"
     >
-      <Typography tag="h4" textAlign="center">
-        Something went wrong
-      </Typography>
-      <Spacer height={16} />
-      <Typography tag="h5" textAlign="center">
-        We weren't able to fetch your daily balances
-      </Typography>
-      {error && (
-        <>
-          <Spacer height={16} />
-          <Typography
-            tag="p"
-            textAlign="center"
-            color={theme.colors.error.primary}
-          >
-            {error.message}
-          </Typography>
-        </>
-      )}
+      <Error
+        error={error}
+        message="We can't get your balance history right now."
+      />
     </ErrorContainer>
-  );
+  ) : null;
 };
 
 export default DailyBalancesChart;

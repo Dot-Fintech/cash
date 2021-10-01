@@ -1,9 +1,9 @@
 import React from 'react';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Column from '../../../components/Column';
+import Error from '../../../components/Error';
 import Spacer from '../../../components/Spacer';
-import Typography from '../../../components/Typography';
 import type { UserListItemFragment } from '../../../generated/graphql';
 import ChatTransaction from './ChatTransaction';
 import LoadingMessages from './LoadingMessages';
@@ -22,8 +22,6 @@ type Props = {
 };
 
 const ChatTransactions: React.FC<Props> = ({ user }) => {
-  const theme = useTheme();
-
   const { data, loading, error } = useChatTransactions(user._id);
 
   const transactions = data?.getP2PTransactions.transactions;
@@ -51,21 +49,10 @@ const ChatTransactions: React.FC<Props> = ({ user }) => {
         <LoadingMessages />
       ) : error ? (
         <Column alignItems="center" fullWidth>
-          <Typography tag="h4" textAlign="center">
-            Something went wrong
-          </Typography>
-          <Spacer width={16} />
-          <Typography tag="h5" textAlign="center">
-            There was an issue fetching users
-          </Typography>
-          <Spacer width={16} />
-          <Typography
-            tag="p"
-            color={theme.colors.error.primary}
-            textAlign="center"
-          >
-            {error.message}
-          </Typography>
+          <Error
+            error={error}
+            message="We can't get those transactions right now."
+          />
         </Column>
       ) : null}
     </Container>

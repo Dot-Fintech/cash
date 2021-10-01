@@ -7,6 +7,7 @@ import styled, { useTheme } from 'styled-components';
 
 import Button from '../../components/Button';
 import Column from '../../components/Column';
+import Error from '../../components/Error';
 import { LoadingList } from '../../components/Loading';
 import Row from '../../components/Row';
 import Screen from '../../components/Screen';
@@ -78,21 +79,10 @@ const TransactionSummary: React.FC = () => {
           />
         ) : error ? (
           <Column alignItems="center" fullWidth>
-            <Typography tag="h4" textAlign="center">
-              Something went wrong
-            </Typography>
-            <Spacer height={16} />
-            <Typography tag="h5" textAlign="center">
-              We could not fetch the transfer
-            </Typography>
-            <Spacer height={16} />
-            <Typography
-              tag="p"
-              textAlign="center"
-              color={theme.colors.error.primary}
-            >
-              {error.message}
-            </Typography>
+            <Error
+              error={error}
+              message={"We can't get that transaction right now."}
+            />
           </Column>
         ) : null}
       </Container>

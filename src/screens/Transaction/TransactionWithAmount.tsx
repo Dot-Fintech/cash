@@ -8,6 +8,7 @@ import styled, { css, useTheme } from 'styled-components';
 
 import BottomBlock from '../../components/BottomBlock';
 import Column from '../../components/Column';
+import Error from '../../components/Error';
 import { LoadingList } from '../../components/Loading';
 import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
@@ -167,21 +168,10 @@ const TransactionWithAmount: React.FC = () => {
             />
           ) : error ? (
             <Column alignItems="center" fullWidth>
-              <Typography tag="h4" textAlign="center">
-                Something went wrong
-              </Typography>
-              <Spacer width={16} />
-              <Typography tag="h5" textAlign="center">
-                There was an issue fetching users
-              </Typography>
-              <Spacer width={16} />
-              <Typography
-                tag="p"
-                color={theme.colors.error.primary}
-                textAlign="center"
-              >
-                {error.message}
-              </Typography>
+              <Error
+                error={error}
+                message="We can't get those users right now."
+              />
             </Column>
           ) : null}
         </BottomContainer>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Chip, { CHIP_HEIGHT } from '../../../components/Chip';
 import Column from '../../../components/Column';
 import EmptyState from '../../../components/EmptyState';
+import Error from '../../../components/Error';
 import { LoadingChips, LoadingList } from '../../../components/Loading';
 import Row from '../../../components/Row';
 import Spacer from '../../../components/Spacer';
@@ -40,8 +41,6 @@ const filterOptions: FilterOption[] = [
 ];
 
 const Transactions: React.FC = () => {
-  const theme = useTheme();
-
   const [filterOption, setFilterOption] = useState(filterOptions[0]);
 
   const { data, loading, error } = useTransactions(filterOption);
@@ -108,21 +107,10 @@ const Transactions: React.FC = () => {
           />
         ) : error ? (
           <ErrorContainer alignItems="center" fullWidth>
-            <Typography tag="h4" textAlign="center">
-              Looks like something went wrong
-            </Typography>
-            <Spacer height={16} />
-            <Typography tag="h5" textAlign="center">
-              There was an issue fetching your transactions
-            </Typography>
-            <Spacer height={16} />
-            <Typography
-              tag="h5"
-              textAlign="center"
-              color={theme.colors.error.primary}
-            >
-              {error.message}
-            </Typography>
+            <Error
+              error={error}
+              message="We can't get those transactions right now."
+            />
           </ErrorContainer>
         ) : null}
       </TransactionContainer>

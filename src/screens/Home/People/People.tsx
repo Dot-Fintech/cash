@@ -1,12 +1,12 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Column from '../../../components/Column';
 import EmptyState from '../../../components/EmptyState';
+import Error from '../../../components/Error';
 import { LoadingList } from '../../../components/Loading';
 import Spacer from '../../../components/Spacer';
-import Typography from '../../../components/Typography';
 import UserListItem from '../../../components/UserListItem';
 import { UserListItemFragment } from '../../../generated/graphql';
 import { RAIL_SPACING } from '../../../styles/spacing';
@@ -25,8 +25,6 @@ type Props = {
 };
 
 const People: React.FC<Props> = ({ goToUser }) => {
-  const theme = useTheme();
-
   const { data, loading, error } = useInteractions();
 
   const interactions = data?.getInteractions.interactions;
@@ -57,21 +55,7 @@ const People: React.FC<Props> = ({ goToUser }) => {
         />
       ) : error ? (
         <ErrorContainer justifyContent="center" alignItems="center" fullWidth>
-          <Typography tag="h4" textAlign="center">
-            Something went wrong
-          </Typography>
-          <Spacer width={16} />
-          <Typography tag="h5" textAlign="center">
-            There was an issue fetching users
-          </Typography>
-          <Spacer width={16} />
-          <Typography
-            tag="p"
-            color={theme.colors.error.primary}
-            textAlign="center"
-          >
-            {error.message}
-          </Typography>
+          <Error error={error} message="We can't get those users right now." />
         </ErrorContainer>
       ) : null}
     </Container>
