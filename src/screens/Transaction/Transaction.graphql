@@ -6,11 +6,19 @@ mutation send($data: P2PTransactionInput!) {
     account {
       ...FullAccount
     }
+    interaction {
+      ...FullInteraction
+    }
   }
 }
 
 mutation request($data: P2PTransactionInput!) {
   requestEmoney(data: $data) {
-    ...FullTransaction
+    transaction {
+      ...FullTransaction
+    }
+    interaction {
+      ...FullInteraction
+    }
   }
 }

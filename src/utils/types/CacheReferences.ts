@@ -7,3 +7,7 @@ export type GetTransactionsReference = {
 export type GetNotificationsReference = {
   notifications: Reference[];
 };
+
+export type GetInteractionsReference = {
+  interactions: Reference[];
+};

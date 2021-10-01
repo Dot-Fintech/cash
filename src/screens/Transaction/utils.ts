@@ -7,10 +7,14 @@ import {
   useRequestMutation,
   useSendMutation,
 } from '../../generated/graphql';
+import { addToInteractionsCache } from '../../utils/cache/addToInteractionsCache';
 import { addToTransactionsCache } from '../../utils/cache/addToTransactionsCache';
 import { updateUserAccountCache } from '../../utils/cache/updateUserAccountCache';
 import { formatter } from '../../utils/money';
-import type { GetTransactionsReference } from '../../utils/types/CacheReferences';
+import type {
+  GetInteractionsReference,
+  GetTransactionsReference,
+} from '../../utils/types/CacheReferences';
 
 type HookArg = {
   amount: number;
@@ -42,6 +46,17 @@ export const useSendEmoney = (): HookResult => {
                 data?.sendEmoney.transaction,
               );
             },
+            getInteractions(
+              existingRef: GetInteractionsReference,
+              { readField },
+            ) {
+              return addToInteractionsCache({
+                cache,
+                existingRef,
+                readField,
+                data: data?.sendEmoney.interaction,
+              });
+            },
             user(existingRef: Reference) {
               return updateUserAccountCache(
                 cache,
@@ -72,14 +87,25 @@ export const useRequestEmoney = (): HookResult => {
               return addToTransactionsCache(
                 cache,
                 existingRef,
-                data?.requestEmoney,
+                data?.requestEmoney.transaction,
               );
+            },
+            getInteractions(
+              existingRef: GetInteractionsReference,
+              { readField },
+            ) {
+              return addToInteractionsCache({
+                cache,
+                existingRef,
+                readField,
+                data: data?.requestEmoney.interaction,
+              });
             },
           },
         });
       },
     });
-    return { data: data?.requestEmoney, errors };
+    return { data: data?.requestEmoney.transaction, errors };
   };
 
   return [request, { loading }];

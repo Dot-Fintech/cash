@@ -1,4 +1,5 @@
 fragment FullInteraction on Interaction {
+  _id
   time
   a {
     ...UserListItem
