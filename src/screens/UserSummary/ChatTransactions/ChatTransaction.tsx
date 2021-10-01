@@ -46,7 +46,7 @@ const ChatTransaction: React.FC<Props> = ({
   const { action, type } = source;
 
   const goToTransaction = () =>
-    navigation.navigate(SCREENS.TRANSACTION_SUMMARY, { token });
+    navigation.push(SCREENS.TRANSACTION_SUMMARY, { token });
 
   return (
     <Row

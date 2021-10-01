@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -28,7 +28,8 @@ type Props = {
 };
 
 const MainHeader: React.FC<Props> = ({ iconColor }) => {
-  const navigation = useNavigation<StackNavigationProp<MainTabsParamList>>();
+  const navigation =
+    useNavigation<BottomTabNavigationProp<MainTabsParamList>>();
 
   const { top } = useSafeAreaInsets();
 

@@ -51,7 +51,7 @@ const LandingPage: React.FC = () => {
   useEffect(() => {
     if (data) {
       setUser(data.user);
-      navigation.navigate(NAVIGATORS.MAIN_TABS);
+      navigation.push(NAVIGATORS.MAIN_TABS);
     } else {
       getMe();
       setRequested(true);

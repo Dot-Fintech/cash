@@ -24,7 +24,7 @@ const EmailVerified: React.FC = () => {
 
   useBlockBack(navigation);
 
-  const goToProfilePhoto = () => navigation.navigate(SCREENS.SET_PROFILE_PHOTO);
+  const goToProfilePhoto = () => navigation.push(SCREENS.SET_PROFILE_PHOTO);
 
   return (
     <OnboardingScreen primary={{ label: 'Next', action: goToProfilePhoto }}>
