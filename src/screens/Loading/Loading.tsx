@@ -21,7 +21,7 @@ const LoadingScreen: React.FC = () => {
       <TopBlock />
       <BottomBlock>
         <BottomContainer>
-          <LoadingChips />
+          <LoadingChips amount={4} />
           <Spacer height={16} />
           <LoadingList width={width - 2 * RAIL_SPACING} numRows={6} />
         </BottomContainer>

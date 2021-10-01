@@ -4,16 +4,21 @@ import Row from '../Row';
 import Spacer from '../Spacer';
 import LoadingBox from './LoadingBox';
 
-const LoadingChips: React.FC = () => {
+type Props = {
+  amount: number;
+};
+
+const LoadingChips: React.FC<Props> = ({ amount }) => {
+  const chips = new Array(amount).fill(null);
+
   return (
     <Row fullWidth>
-      <LoadingBox width={64} height={20} />
-      <Spacer width={16} />
-      <LoadingBox width={64} height={20} />
-      <Spacer width={16} />
-      <LoadingBox width={64} height={20} />
-      <Spacer width={16} />
-      <LoadingBox width={64} height={20} />
+      {chips.map((_, index) => (
+        <React.Fragment key={index}>
+          <LoadingBox width={64} height={20} />
+          {index !== amount - 1 && <Spacer width={16} />}
+        </React.Fragment>
+      ))}
     </Row>
   );
 };
