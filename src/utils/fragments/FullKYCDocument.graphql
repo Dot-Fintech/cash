@@ -1,0 +1,9 @@
+fragment FullKYCDocument on KYCDocument {
+  _id
+  notes
+  status
+  type
+  user {
+    ...UserListItem
+  }
+}

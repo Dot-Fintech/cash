@@ -1,11 +1,12 @@
-import { FullUserFragment, Kyc_Document_Status } from '../../generated/graphql';
+import {
+  Kyc_Document_Status,
+  Kyc_Document_Type,
+} from '../../generated/graphql';
 
-export const getTitle = (
-  type: keyof Omit<FullUserFragment['kyc'], '__typename'>,
-): string | undefined =>
-  type === 'identification'
+export const getTitle = (type: Kyc_Document_Type): string | undefined =>
+  type === Kyc_Document_Type.Identification
     ? 'ID'
-    : type === 'proofOfAddress'
+    : type === Kyc_Document_Type.ProofOfAddress
     ? 'Proof of Address'
     : undefined;
 

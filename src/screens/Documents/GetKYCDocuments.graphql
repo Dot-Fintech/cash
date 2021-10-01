@@ -1,0 +1,11 @@
+query getKYCDocuments($pageData: PaginationInput!) {
+  getKYCDocuments(pageData: $pageData) {
+    documents {
+      ...FullKYCDocument
+    }
+    pageData {
+      count
+      pageNumber
+    }
+  }
+}

@@ -3,14 +3,7 @@ fragment FullUser on User {
   email
   firstName
   kyc {
-    identification {
-      notes
-      status
-    }
-    proofOfAddress {
-      notes
-      status
-    }
+    ...FullKYCDocument
   }
   lastName
   profilePhotoUrl

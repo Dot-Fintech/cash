@@ -23,14 +23,14 @@ const UploadDocuments: React.FC = () => {
 
   const [uploadDocument, { loading }] = useUploadDocumentMutation();
 
-  const { documents } = route.params;
+  const { actionableDocuments } = route.params;
 
-  if (documents.length === 0) navigation.pop();
+  if (actionableDocuments.length === 0) navigation.pop();
 
-  const document = documents[0];
+  const document = actionableDocuments[0];
 
   const containerName =
-    document === Kyc_Document_Type.Identification
+    document.type === Kyc_Document_Type.Identification
       ? 'kycidentification'
       : 'kycproofofaddress';
 
@@ -39,7 +39,7 @@ const UploadDocuments: React.FC = () => {
       variables: {
         data: {
           photoId,
-          document,
+          documentId: document._id,
           containerName,
         },
       },
@@ -50,9 +50,9 @@ const UploadDocuments: React.FC = () => {
   };
 
   const next = () => {
-    if (documents.length > 1) {
+    if (actionableDocuments.length > 1) {
       navigation.push(SCREENS.UPLOAD_DOCUMENT, {
-        documents: documents.slice(1),
+        actionableDocuments: actionableDocuments.slice(1),
       });
     } else {
       navigation.navigate(SCREENS.PROFILE);
@@ -62,7 +62,7 @@ const UploadDocuments: React.FC = () => {
   return (
     <Screen>
       <UploadPhoto
-        {...getPageDetails(document)}
+        {...getPageDetails(document.type)}
         compressedSize={500}
         action={{
           containerName,

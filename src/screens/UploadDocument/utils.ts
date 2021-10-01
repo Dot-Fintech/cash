@@ -1,9 +1,9 @@
 import { Kyc_Document_Type } from '../../generated/graphql';
 
 export const getPageDetails = (
-  document: Kyc_Document_Type,
+  type: Kyc_Document_Type,
 ): { title: string; description: string } => {
-  switch (document) {
+  switch (type) {
     case Kyc_Document_Type.Identification:
       return {
         title: 'ID',

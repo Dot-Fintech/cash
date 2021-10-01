@@ -4,7 +4,10 @@ import { TouchableOpacity } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import { UserContext } from '../../context/user/state';
-import { FullUserFragment, Kyc_Document_Status } from '../../generated/graphql';
+import {
+  FullKycDocumentFragment,
+  Kyc_Document_Status,
+} from '../../generated/graphql';
 import { RAIL_SPACING } from '../../styles/spacing';
 import Column from '../Column';
 import Row from '../Row';
@@ -26,10 +29,10 @@ const NotesWrapper = styled(Column)`
 `;
 
 type Props = {
-  type: keyof Omit<FullUserFragment['kyc'], '__typename'>;
+  document: FullKycDocumentFragment;
 };
 
-const DocumentListItem: React.FC<Props> = ({ type }) => {
+const DocumentListItem: React.FC<Props> = ({ document }) => {
   const theme = useTheme();
 
   const { user } = useContext(UserContext);
@@ -38,7 +41,7 @@ const DocumentListItem: React.FC<Props> = ({ type }) => {
 
   if (!user) return null;
 
-  const { notes, status } = user.kyc[type];
+  const { notes, status, type } = document;
 
   const toggleShowNotes = () => setShowNotes(!showNotes);
 
@@ -104,7 +107,7 @@ const DocumentListItem: React.FC<Props> = ({ type }) => {
           </NotesWrapper>
           <Spacer height={16} />
           <Row justifyContent="center" fullWidth>
-            <AddDocumentButton text="Resubmit Document" onClick={addDocument} />
+            <AddDocumentButton text="Resubmit Document" onPress={addDocument} />
           </Row>
         </>
       )}
