@@ -62,7 +62,7 @@ export const useNotificationActions = (
         acceptConnectionRequest({
           variables: { data: { connectionId: connection?._id ?? '' } },
         });
-      } else if (reason === Notification_Reason.TransactionRequest) {
+      } else if (reason === Notification_Reason.P2PTransactionRequest) {
         acceptRequest({
           variables: { data: { transactionId: transaction?._id ?? '' } },
           update(cache, { data }) {
@@ -123,7 +123,7 @@ export const useNotificationActions = (
             });
           },
         });
-      } else if (reason === Notification_Reason.TransactionRequest) {
+      } else if (reason === Notification_Reason.P2PTransactionRequest) {
         declineRequest({
           variables: { data: { transactionId: transaction?._id ?? '' } },
         });
