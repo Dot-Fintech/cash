@@ -4,7 +4,7 @@ import {
   FullTransactionFragment,
   FullTransactionFragmentDoc,
 } from '../../generated/graphql';
-import { GetTransactionsReference } from '../../utils/types/CacheReferences';
+import { GetTransactionsReference } from '../types/CacheReferences';
 
 export const addToTransactionsCache = <T>(
   cache: ApolloCache<T>,
