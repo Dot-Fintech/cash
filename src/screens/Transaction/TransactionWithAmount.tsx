@@ -2,7 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { Dimensions, View } from 'react-native';
+import { Alert, Dimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { css, useTheme } from 'styled-components';
 
@@ -100,7 +100,7 @@ const TransactionWithAmount: React.FC = () => {
       if (data) {
         setResult(data);
       } else if (errors) {
-        alert(`Something went wrong. ${errors[0].message}`);
+        Alert.alert('Something went wrong.', errors[0].message);
       }
     }
   };
