@@ -10,7 +10,6 @@ const Divider = styled(View)<Props>`
   height: 2px;
   background-color: ${({ theme }) =>
     theme.colors.background.secondary.toString()};
-  margin: 0;
 `;
 
 export default Divider;
