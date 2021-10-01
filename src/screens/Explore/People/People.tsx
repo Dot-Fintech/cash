@@ -1,6 +1,6 @@
 import debounce from 'debounce';
 import React, { useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, FlatList, View } from 'react-native';
 import styled from 'styled-components';
 
 import BottomBlock from '../../../components/BottomBlock';
@@ -16,8 +16,14 @@ import { SCREENS } from '../../../navigation/utils/enums/screens';
 import { RAIL_SPACING } from '../../../styles/spacing';
 import SearchGroup from '../SearchGroup';
 
+const { width } = Dimensions.get('window');
+
 const BottomContainer = styled(Column)`
-  padding: 16px ${RAIL_SPACING}px 0;
+  padding: 0 ${RAIL_SPACING}px;
+`;
+
+const ListItemWrapper = styled(View)`
+  width: ${width - 2 * RAIL_SPACING}px;
 `;
 
 const People: React.FC = () => {
@@ -52,17 +58,18 @@ const People: React.FC = () => {
         <BottomBlock>
           <BottomContainer>
             {data && showResults ? (
-              data.searchUsers.users.map((user, index) => (
-                <Column key={user._id} fullWidth>
-                  {index > 0 && <Spacer height={16} />}
-                  <UserListItem user={user} showConnectionStatus />
-                </Column>
-              ))
-            ) : loading ? (
-              <LoadingList
-                width={Dimensions.get('window').width - 2 * RAIL_SPACING}
-                numRows={8}
+              <FlatList
+                data={data.searchUsers.users}
+                keyExtractor={(user) => user._id}
+                renderItem={({ item }) => (
+                  <ListItemWrapper>
+                    <Spacer height={16} />
+                    <UserListItem user={item} showConnectionStatus />
+                  </ListItemWrapper>
+                )}
               />
+            ) : loading ? (
+              <LoadingList width={width - 2 * RAIL_SPACING} numRows={8} />
             ) : error ? (
               <Column alignItems="center" fullWidth>
                 <Error
