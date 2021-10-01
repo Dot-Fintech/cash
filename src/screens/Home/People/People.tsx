@@ -1,21 +1,24 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
-import styled from 'styled-components';
+import { Dimensions, FlatList, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import styled, { useTheme } from 'styled-components';
 
 import Column from '../../../components/Column';
-import EmptyState from '../../../components/EmptyState';
 import Error from '../../../components/Error';
-import { LoadingList } from '../../../components/Loading';
+import { LoadingBox } from '../../../components/Loading';
+import ProfilePhoto from '../../../components/ProfilePhoto';
 import Spacer from '../../../components/Spacer';
-import UserListItem from '../../../components/UserListItem';
+import Typography from '../../../components/Typography';
 import { UserListItemFragment } from '../../../generated/graphql';
 import { RAIL_SPACING } from '../../../styles/spacing';
 import { useInteractions } from './useInteractions';
 
 const { width } = Dimensions.get('window');
 
-const Container = styled(Column)`
-  padding-top: 16px;
+const LIST_HEIGHT = 80;
+
+const ListContainer = styled(View)`
+  height: ${LIST_HEIGHT}px;
 `;
 
 const ErrorContainer = styled(Column)`
@@ -27,37 +30,50 @@ type Props = {
 };
 
 const People: React.FC<Props> = ({ goToUser }) => {
+  const theme = useTheme();
+
   const { data, loading, error } = useInteractions();
 
   const interactions = data?.getInteractions.interactions;
 
   return (
-    <Container fullWidth>
-      {data ? (
-        interactions && interactions.length > 0 ? (
-          interactions.map(({ otherUser }, index) => (
-            <Column key={otherUser._id} fullWidth>
-              {index > 0 && <Spacer height={16} />}
-              <UserListItem
-                user={otherUser}
-                onPress={() => goToUser(otherUser)}
-              />
-            </Column>
-          ))
-        ) : (
-          <EmptyState
-            title="Not too much going on over here"
-            description="Start moving money around to see a list of users you've interacted with here."
+    <>
+      {interactions ? (
+        <ListContainer>
+          <FlatList
+            data={interactions}
+            keyExtractor={(interaction) => interaction._id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <>
+                <Spacer width={16} />
+                <Column alignItems="center">
+                  <TouchableOpacity onPress={() => goToUser(item.otherUser)}>
+                    <ProfilePhoto
+                      size={
+                        LIST_HEIGHT - theme.typography['p'].lineHeight - 3 * 4
+                      }
+                      uri={item.otherUser.profilePhotoUrl}
+                    />
+                  </TouchableOpacity>
+                  <Spacer height={4} />
+                  <Typography tag="p">
+                    {item.otherUser.firstName} {item.otherUser.lastName[0]}.
+                  </Typography>
+                </Column>
+              </>
+            )}
           />
-        )
+        </ListContainer>
       ) : loading ? (
-        <LoadingList width={width - 2 * RAIL_SPACING} numRows={6} />
+        <LoadingBox width={width - 2 * RAIL_SPACING} height={LIST_HEIGHT} />
       ) : error ? (
         <ErrorContainer justifyContent="center" alignItems="center" fullWidth>
           <Error error={error} message="We can't get those users right now." />
         </ErrorContainer>
       ) : null}
-    </Container>
+    </>
   );
 };
 

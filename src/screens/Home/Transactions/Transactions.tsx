@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Dimensions } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Dimensions, FlatList, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
 import Chip, { CHIP_HEIGHT } from '../../../components/Chip';
@@ -13,6 +13,7 @@ import Spacer from '../../../components/Spacer';
 import TransactionListItem from '../../../components/TransactionListItem';
 import Typography from '../../../components/Typography';
 import { Transaction_Action } from '../../../generated/graphql';
+import { TAB_BAR_HEIGHT } from '../../../navigation/MainTabs/TabBar';
 import { RAIL_SPACING } from '../../../styles/spacing';
 import {
   FilterOption,
@@ -21,13 +22,21 @@ import {
 
 const { width } = Dimensions.get('window');
 
-const FilterOptionsContainer = styled(ScrollView)`
-  height: ${CHIP_HEIGHT + 16}px;
-  padding: 8px 0;
+const ChipListItemWrapper = styled(Row)`
+  height: ${CHIP_HEIGHT + 8}px;
 `;
 
 const TransactionContainer = styled(Column)`
   padding: 0 ${RAIL_SPACING}px;
+`;
+
+const TransactionListItemWrapper = styled(Column)`
+  width: ${width - 2 * RAIL_SPACING}px;
+`;
+
+type FinalBlockProps = { bottomInset: number };
+const FinalBlock = styled(View)<FinalBlockProps>`
+  height: ${({ bottomInset }) => bottomInset + TAB_BAR_HEIGHT + 16}px;
 `;
 
 const ErrorContainer = styled(Column)`
@@ -43,6 +52,8 @@ const filterOptions: FilterOption[] = [
 ];
 
 const Transactions: React.FC = () => {
+  const { bottom } = useSafeAreaInsets();
+
   const [filterOption, setFilterOption] = useState(filterOptions[0]);
 
   const { data, loading, error } = useTransactions(filterOption);
@@ -52,55 +63,72 @@ const Transactions: React.FC = () => {
   return (
     <Column fullWidth>
       {data ? (
-        <FilterOptionsContainer
+        <FlatList
+          data={filterOptions}
+          keyExtractor={(option) => option.id}
           horizontal
           showsHorizontalScrollIndicator={false}
-        >
-          <Spacer width={8} />
-          {filterOptions.map((option, index) => (
-            <Row key={option.id}>
-              {index > 0 && <Spacer width={16} />}
-              <Chip
-                isSelected={filterOption.id === option.id}
-                onPress={() => setFilterOption(option)}
-              >
-                {option.label}
-              </Chip>
-            </Row>
-          ))}
-          <Spacer width={8} />
-        </FilterOptionsContainer>
+          renderItem={({ item, index }) => (
+            <>
+              <Spacer width={16} />
+              <ChipListItemWrapper>
+                <Chip
+                  isSelected={filterOption.id === item.id}
+                  onPress={() => setFilterOption(item)}
+                >
+                  {item.label}
+                </Chip>
+              </ChipListItemWrapper>
+              {index === filterOptions.length - 1 && <Spacer width={16} />}
+            </>
+          )}
+        />
       ) : loading ? (
         <Row>
           <Spacer width={16} />
-          <LoadingChips />
+          <LoadingChips amount={filterOptions.length} />
         </Row>
       ) : null}
       <Spacer height={16} />
       <TransactionContainer>
-        {data ? (
-          transactions && transactions.length > 0 ? (
-            transactions.map((transaction, index) => (
-              <Column key={transaction._id} justifyContent="center" fullWidth>
-                {index > 0 && <Spacer height={16} />}
-                {(index === 0 ||
-                  new Date(transactions[index - 1].createdAt).toDateString() !==
-                    new Date(transaction.createdAt).toDateString()) && (
-                  <>
-                    <Typography tag="h6">
-                      {new Date(transaction.createdAt).toDateString()}
-                    </Typography>
-                    <Spacer height={16} />
-                  </>
-                )}
-                <TransactionListItem transaction={transaction} />
-              </Column>
-            ))
-          ) : (
-            <EmptyState
-              title="No transactions just yet"
-              description="Start moving money around to see a list of transactions here."
+        {transactions ? (
+          transactions.length > 0 ? (
+            <FlatList
+              data={transactions}
+              keyExtractor={(transaction) => transaction._id}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item, index }) => (
+                <>
+                  <TransactionListItemWrapper justifyContent="center">
+                    {index > 0 && <Spacer height={16} />}
+                    {(index === 0 ||
+                      new Date(
+                        transactions[index - 1].createdAt,
+                      ).toDateString() !==
+                        new Date(item.createdAt).toDateString()) && (
+                      <>
+                        <Typography tag="h6">
+                          {new Date(item.createdAt).toDateString()}
+                        </Typography>
+                        <Spacer height={16} />
+                      </>
+                    )}
+                    <TransactionListItem transaction={item} />
+                  </TransactionListItemWrapper>
+                  {index === transactions.length - 1 && (
+                    <FinalBlock bottomInset={bottom} />
+                  )}
+                </>
+              )}
             />
+          ) : (
+            <>
+              <Spacer height={16} />
+              <EmptyState
+                title="No transactions just yet"
+                description="Start moving money around to see a list of transactions here."
+              />
+            </>
           )
         ) : loading ? (
           <LoadingList width={width - 2 * RAIL_SPACING} numRows={8} />

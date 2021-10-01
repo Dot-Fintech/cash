@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Dimensions } from 'react-native';
-import styled from 'styled-components';
 
 import BigPayIcon from '../../icons/BigPayIcon';
 import Column from '../Column';
 import Spacer from '../Spacer';
-import { TOP_BLOCK_HEIGHT } from '../TopBlock';
 import Typography from '../Typography';
 
-const { width, height } = Dimensions.get('window');
-
-const Container = styled(Column)`
-  height: ${height - TOP_BLOCK_HEIGHT}px;
-`;
+const { width } = Dimensions.get('window');
 
 type Props = {
   title: string;
@@ -20,17 +14,8 @@ type Props = {
 };
 
 const EmptyState: React.FC<Props> = ({ title, description }) => {
-  const [isHidden, setIsHidden] = useState(true);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsHidden(false), 100);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, []);
-
-  return !isHidden ? (
-    <Container justifyContent="center" alignItems="center" fullWidth>
+  return (
+    <Column justifyContent="center" alignItems="center" fullWidth>
       <Typography tag="h4" textAlign="center">
         {title}
       </Typography>
@@ -40,8 +25,8 @@ const EmptyState: React.FC<Props> = ({ title, description }) => {
       <Typography tag="h6" textAlign="center">
         {description}
       </Typography>
-    </Container>
-  ) : null;
+    </Column>
+  );
 };
 
 export default EmptyState;
