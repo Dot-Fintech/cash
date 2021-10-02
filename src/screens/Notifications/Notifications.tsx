@@ -1,9 +1,11 @@
 import React from 'react';
-import { Dimensions, FlatList } from 'react-native';
+import { ActivityIndicator, Dimensions, FlatList, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
 import Column from '../../components/Column';
 import Error from '../../components/Error';
+import FinalBlock from '../../components/FinalBlock';
 import { LoadingList } from '../../components/Loading';
 import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
@@ -23,13 +25,20 @@ const Container = styled(Column)`
   height: ${height - TOP_SPACING}px;
 `;
 
+const ListItemContainer = styled(View)`
+  width: ${width - 2 * RAIL_SPACING}px;
+`;
+
 const FullHeightContainer = styled(Column)`
   height: ${({ theme }) =>
     height - TOP_SPACING - theme.typography[HEADER_TAG].lineHeight}px;
 `;
 
 const Notifications: React.FC = () => {
-  const { data, loading, error } = useNotifications();
+  const { bottom } = useSafeAreaInsets();
+
+  const { data, loading, error, networkStatus, onNext, onRefresh } =
+    useNotifications();
 
   const notifications = data?.getNotifications.notifications;
 
@@ -41,10 +50,24 @@ const Notifications: React.FC = () => {
             <FlatList
               data={data.getNotifications.notifications}
               keyExtractor={(notification) => notification._id}
+              refreshing={networkStatus === 4}
+              onRefresh={onRefresh}
+              onEndReached={onNext}
+              onEndReachedThreshold={0.7}
               renderItem={({ item, index }) => (
-                <>
+                <ListItemContainer>
                   {index > 0 && <Spacer height={16} />}
                   <NotificationListItem notification={item} />
+                </ListItemContainer>
+              )}
+              ListFooterComponent={() => (
+                <>
+                  {loading && (
+                    <Column alignItems="center" fullWidth>
+                      <ActivityIndicator />
+                    </Column>
+                  )}
+                  <FinalBlock bottomInset={bottom} />
                 </>
               )}
             />

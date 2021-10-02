@@ -1,4 +1,4 @@
-import { ApolloError } from '@apollo/client';
+import { ApolloError, NetworkStatus } from '@apollo/client';
 import { useEffect } from 'react';
 
 import type { NotificationsQuery } from '../../generated/graphql';
@@ -10,13 +10,16 @@ type ReturnType = {
   data?: NotificationsQuery;
   loading: boolean;
   error?: ApolloError;
+  networkStatus: NetworkStatus;
   onNext: () => void;
   onRefresh: () => void;
 };
 
 export const useNotifications = (): ReturnType => {
-  const [getNotifications, { data, loading, error, fetchMore, refetch }] =
-    useNotificationsLazyQuery();
+  const [
+    getNotifications,
+    { data, loading, error, networkStatus, fetchMore, refetch },
+  ] = useNotificationsLazyQuery();
 
   const variables = {
     pageData: {
@@ -51,6 +54,7 @@ export const useNotifications = (): ReturnType => {
     data,
     loading,
     error,
+    networkStatus,
     onNext,
     onRefresh,
   };

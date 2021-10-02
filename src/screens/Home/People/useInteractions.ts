@@ -1,4 +1,4 @@
-import { ApolloError } from '@apollo/client';
+import { ApolloError, NetworkStatus } from '@apollo/client';
 import { useEffect } from 'react';
 
 import type { InteractionsQuery } from '../../../generated/graphql';
@@ -10,13 +10,16 @@ type ReturnType = {
   data?: InteractionsQuery;
   loading: boolean;
   error?: ApolloError;
+  networkStatus: NetworkStatus;
   onNext: () => void;
   onRefresh: () => void;
 };
 
 export const useInteractions = (): ReturnType => {
-  const [getInteractions, { data, loading, error, fetchMore, refetch }] =
-    useInteractionsLazyQuery();
+  const [
+    getInteractions,
+    { data, loading, error, networkStatus, fetchMore, refetch },
+  ] = useInteractionsLazyQuery();
 
   const variables = {
     pageData: {
@@ -51,6 +54,7 @@ export const useInteractions = (): ReturnType => {
     data,
     loading,
     error,
+    networkStatus,
     onNext,
     onRefresh,
   };

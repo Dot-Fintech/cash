@@ -158,7 +158,6 @@ const UserSummary: React.FC = () => {
         </TopBlock>
         <BottomBlock>
           {user && <ConnectionBanner user={user} />}
-          <Spacer height={BANNER_SPACING} />
           <TransactionsWrapper>
             {user && <ChatTransactions user={user} />}
           </TransactionsWrapper>

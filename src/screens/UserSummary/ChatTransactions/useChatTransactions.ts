@@ -1,4 +1,4 @@
-import { ApolloError } from '@apollo/client';
+import { ApolloError, NetworkStatus } from '@apollo/client';
 import { useEffect } from 'react';
 
 import type { ChatTransactionsQuery } from '../../../generated/graphql';
@@ -10,13 +10,16 @@ type ReturnType = {
   data?: ChatTransactionsQuery;
   loading: boolean;
   error?: ApolloError;
+  networkStatus: NetworkStatus;
   onNext: () => void;
   onRefresh: () => void;
 };
 
 export const useChatTransactions = (userId: string): ReturnType => {
-  const [getTransactions, { data, loading, error, fetchMore, refetch }] =
-    useChatTransactionsLazyQuery();
+  const [
+    getTransactions,
+    { data, loading, error, networkStatus, fetchMore, refetch },
+  ] = useChatTransactionsLazyQuery();
 
   const variables = {
     data: { userId },
@@ -52,6 +55,7 @@ export const useChatTransactions = (userId: string): ReturnType => {
     data,
     loading,
     error,
+    networkStatus,
     onNext,
     onRefresh,
   };

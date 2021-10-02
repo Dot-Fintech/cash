@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { ActivityIndicator, FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
@@ -23,7 +23,8 @@ type Props = {
 const ChatTransactions: React.FC<Props> = ({ user }) => {
   const { bottom } = useSafeAreaInsets();
 
-  const { data, loading, error } = useChatTransactions(user._id);
+  const { data, loading, error, networkStatus, onNext, onRefresh } =
+    useChatTransactions(user._id);
 
   const transactions = data?.getP2PTransactions.transactions;
 
@@ -35,15 +36,29 @@ const ChatTransactions: React.FC<Props> = ({ user }) => {
           keyExtractor={(transaction) => transaction._id}
           inverted
           showsVerticalScrollIndicator={false}
+          refreshing={networkStatus === 4}
+          onRefresh={onRefresh}
+          onEndReached={onNext}
+          onEndReachedThreshold={0.7}
           renderItem={({ item, index }) =>
             item.p2p ? (
               <Column fullWidth>
                 <ChatTransaction {...item} source={item.p2p} />
                 {index > 0 && <Spacer height={16} />}
-                {index === 0 && <FinalBlock bottomInset={bottom} />}
               </Column>
             ) : null
           }
+          ListHeaderComponent={() => (
+            <>
+              {loading && (
+                <Column alignItems="center" fullWidth>
+                  <ActivityIndicator />
+                </Column>
+              )}
+              <FinalBlock bottomInset={bottom} />
+            </>
+          )}
+          ListFooterComponent={() => <Spacer height={16} />}
         />
       ) : loading ? (
         <LoadingMessages />

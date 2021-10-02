@@ -7,7 +7,7 @@ import type {
 } from '../../generated/graphql';
 import { useTransactionsLazyQuery } from '../../generated/graphql';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 15;
 
 export type FilterOption = {
   id: Transaction_Action | 'all';

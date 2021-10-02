@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, FlatList, View } from 'react-native';
+import { ActivityIndicator, Dimensions, FlatList, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import styled, { useTheme } from 'styled-components';
 
@@ -34,7 +34,8 @@ type Props = {
 const People: React.FC<Props> = ({ goToUser }) => {
   const theme = useTheme();
 
-  const { data, loading, error } = useInteractions();
+  const { data, loading, error, networkStatus, onNext, onRefresh } =
+    useInteractions();
 
   const interactions = data?.getInteractions.interactions;
 
@@ -47,6 +48,10 @@ const People: React.FC<Props> = ({ goToUser }) => {
             keyExtractor={(interaction) => interaction._id}
             horizontal
             showsHorizontalScrollIndicator={false}
+            refreshing={networkStatus === 4}
+            onRefresh={onRefresh}
+            onEndReached={onNext}
+            onEndReachedThreshold={0.7}
             renderItem={({ item }) => (
               <>
                 <Spacer width={16} />
@@ -68,6 +73,13 @@ const People: React.FC<Props> = ({ goToUser }) => {
                 </Column>
               </>
             )}
+            ListFooterComponent={() =>
+              loading ? (
+                <Column justifyContent="center">
+                  <ActivityIndicator />
+                </Column>
+              ) : null
+            }
           />
         </ListContainer>
       ) : loading ? (
