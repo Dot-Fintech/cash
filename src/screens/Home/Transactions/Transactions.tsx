@@ -95,7 +95,7 @@ const Transactions: React.FC = () => {
               renderItem={({ item, index }) => (
                 <>
                   <TransactionListItemWrapper justifyContent="center">
-                    {index > 0 && <Spacer height={16} />}
+                    {index > 0 && <Spacer height={12} />}
                     {(index === 0 ||
                       new Date(
                         transactions[index - 1].createdAt,
