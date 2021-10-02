@@ -69,9 +69,13 @@ const People: React.FC = () => {
                 )}
               />
             ) : loading ? (
-              <LoadingList width={width - 2 * RAIL_SPACING} numRows={8} />
+              <>
+                <Spacer height={16} />
+                <LoadingList width={width - 2 * RAIL_SPACING} numRows={8} />
+              </>
             ) : error ? (
               <Column alignItems="center" fullWidth>
+                <Spacer height={16} />
                 <Error
                   error={error}
                   message="We can't get those users right now."
