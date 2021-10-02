@@ -15,9 +15,6 @@ import axios from 'axios';
 import publicIp from 'public-ip';
 
 import TokenStore from '../../stores/TokenStore';
-import { mergeInteractions } from './cache/interactions';
-import { mergeNotifications } from './cache/notifications';
-import { mergeTransactions } from './cache/transactions';
 
 let clientIp: string | undefined;
 (async () => {
@@ -92,17 +89,17 @@ export const client = new ApolloClient({
     typePolicies: {
       Query: {
         fields: {
-          interactions: {
-            keyArgs: false,
-            merge: mergeInteractions,
+          getInteractions: {
+            merge: true,
           },
-          notifications: {
-            keyArgs: false,
-            merge: mergeNotifications,
+          getNotifications: {
+            merge: true,
           },
-          transactions: {
-            keyArgs: false,
-            merge: mergeTransactions,
+          getTransactions: {
+            merge: true,
+          },
+          getP2PTransactions: {
+            merge: true,
           },
         },
       },
