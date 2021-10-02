@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import debounce from 'debounce';
 import { FormikProps } from 'formik';
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, FlatList, View } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import Button from '../../../../components/Button';
@@ -162,12 +162,16 @@ const Search: React.FC<Props> = ({
         <Row fullWidth>
           <ResultsContainer>
             {data ? (
-              data.searchUsers.users.map((user, index) => (
-                <ListItem key={user._id}>
-                  {index > 0 && <Spacer height={4} />}
-                  <UserListItem user={user} onPress={handleUserClick} />
-                </ListItem>
-              ))
+              <FlatList
+                data={data.searchUsers.users}
+                keyExtractor={(user) => user._id}
+                renderItem={({ item, index }) => (
+                  <ListItem>
+                    {index > 0 && <Spacer height={4} />}
+                    <UserListItem user={item} onPress={handleUserClick} />
+                  </ListItem>
+                )}
+              />
             ) : loading ? (
               <>
                 <Spacer height={8} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, FlatList } from 'react-native';
 import styled from 'styled-components';
 
 import Column from '../../components/Column';
@@ -36,21 +36,27 @@ const Notifications: React.FC = () => {
   return (
     <Screen>
       <Container>
-        {data ? (
-          notifications && notifications.length > 0 ? (
-            data?.getNotifications.notifications.map((notification, index) => (
-              <Column key={notification._id} fullWidth>
-                {index > 0 && <Spacer height={16} />}
-                <NotificationListItem notification={notification} />
-              </Column>
-            ))
+        {notifications ? (
+          notifications.length > 0 ? (
+            <FlatList
+              data={data.getNotifications.notifications}
+              keyExtractor={(notification) => notification._id}
+              renderItem={({ item, index }) => (
+                <>
+                  {index > 0 && <Spacer height={16} />}
+                  <NotificationListItem notification={item} />
+                </>
+              )}
+            />
           ) : (
             <FullHeightContainer
               justifyContent="center"
               alignItems="center"
               fullWidth
             >
-              <Typography tag="h3">Nothing just yet</Typography>
+              <Typography tag="h3" textAlign="center">
+                Nothing just yet
+              </Typography>
               <Spacer height={16} />
               <NotificationIcon
                 height={200}
@@ -58,7 +64,7 @@ const Notifications: React.FC = () => {
               />
               <Spacer height={16} />
               <Typography tag="p" textAlign="center">
-                We'll let you know when something interesting happens
+                We'll let you know when something interesting happens.
               </Typography>
             </FullHeightContainer>
           )

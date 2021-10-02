@@ -1,8 +1,11 @@
 import React from 'react';
+import { FlatList } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
 import Column from '../../../components/Column';
 import Error from '../../../components/Error';
+import FinalBlock from '../../../components/FinalBlock';
 import Spacer from '../../../components/Spacer';
 import type { UserListItemFragment } from '../../../generated/graphql';
 import ChatTransaction from './ChatTransaction';
@@ -13,38 +16,35 @@ const Container = styled(Column)`
   height: 100%;
 `;
 
-const ScrollContainer = styled(Column)`
-  flex-direction: column-reverse;
-`;
-
 type Props = {
   user: UserListItemFragment;
 };
 
 const ChatTransactions: React.FC<Props> = ({ user }) => {
+  const { bottom } = useSafeAreaInsets();
+
   const { data, loading, error } = useChatTransactions(user._id);
 
   const transactions = data?.getP2PTransactions.transactions;
 
   return (
     <Container fullWidth>
-      {data ? (
-        transactions && transactions.length > 0 ? (
-          <ScrollContainer fullWidth>
-            {transactions.map(
-              (transaction, index) =>
-                transaction.p2p && (
-                  <Column key={transaction._id} fullWidth>
-                    {index > 0 && <Spacer height={16} />}
-                    <ChatTransaction
-                      {...transaction}
-                      source={transaction.p2p}
-                    />
-                  </Column>
-                ),
-            )}
-          </ScrollContainer>
-        ) : null
+      {transactions && transactions.length > 0 ? (
+        <FlatList
+          data={transactions}
+          keyExtractor={(transaction) => transaction._id}
+          inverted
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item, index }) =>
+            item.p2p ? (
+              <Column fullWidth>
+                <ChatTransaction {...item} source={item.p2p} />
+                {index > 0 && <Spacer height={16} />}
+                {index === 0 && <FinalBlock bottomInset={bottom} />}
+              </Column>
+            ) : null
+          }
+        />
       ) : loading ? (
         <LoadingMessages />
       ) : error ? (

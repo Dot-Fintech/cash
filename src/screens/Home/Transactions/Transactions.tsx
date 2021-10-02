@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, FlatList, View } from 'react-native';
+import { Dimensions, FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
@@ -7,13 +7,13 @@ import Chip, { CHIP_HEIGHT } from '../../../components/Chip';
 import Column from '../../../components/Column';
 import EmptyState from '../../../components/EmptyState';
 import Error from '../../../components/Error';
+import FinalBlock from '../../../components/FinalBlock';
 import { LoadingChips, LoadingList } from '../../../components/Loading';
 import Row from '../../../components/Row';
 import Spacer from '../../../components/Spacer';
 import TransactionListItem from '../../../components/TransactionListItem';
 import Typography from '../../../components/Typography';
 import { Transaction_Action } from '../../../generated/graphql';
-import { TAB_BAR_HEIGHT } from '../../../navigation/MainTabs/TabBar';
 import { RAIL_SPACING } from '../../../styles/spacing';
 import {
   FilterOption,
@@ -32,11 +32,6 @@ const TransactionContainer = styled(Column)`
 
 const TransactionListItemWrapper = styled(Column)`
   width: ${width - 2 * RAIL_SPACING}px;
-`;
-
-type FinalBlockProps = { bottomInset: number };
-const FinalBlock = styled(View)<FinalBlockProps>`
-  height: ${({ bottomInset }) => bottomInset + TAB_BAR_HEIGHT + 16}px;
 `;
 
 const ErrorContainer = styled(Column)`

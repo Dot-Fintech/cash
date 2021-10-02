@@ -2,7 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { Alert, Dimensions, View } from 'react-native';
+import { Alert, Dimensions, FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { css, useTheme } from 'styled-components';
 
@@ -152,17 +152,19 @@ const TransactionWithAmount: React.FC = () => {
           </Typography>
           <Spacer height={8} />
           {data ? (
-            <Column fullWidth>
-              {data.getInteractions.interactions.map((interaction, index) => (
-                <View key={interaction.otherUser._id}>
+            <FlatList
+              data={data.getInteractions.interactions}
+              keyExtractor={(interaction) => interaction._id}
+              renderItem={({ item, index }) => (
+                <>
                   {index > 0 && <Spacer height={8} />}
                   <UserListItem
-                    user={interaction.otherUser}
+                    user={item.otherUser}
                     onPress={handleUserClick}
                   />
-                </View>
-              ))}
-            </Column>
+                </>
+              )}
+            />
           ) : loading ? (
             <LoadingList width={width - 2 * RAIL_SPACING} numRows={5} />
           ) : error ? (
