@@ -16,6 +16,8 @@ import { useInteractions } from './useInteractions';
 const { width } = Dimensions.get('window');
 
 const LIST_HEIGHT = 80;
+const USER_NAME_TAG = 'p';
+const USER_PHOTO_NAME_SPACING = 4;
 
 const ListContainer = styled(View)`
   height: ${LIST_HEIGHT}px;
@@ -52,7 +54,9 @@ const People: React.FC<Props> = ({ goToUser }) => {
                   <TouchableOpacity onPress={() => goToUser(item.otherUser)}>
                     <ProfilePhoto
                       size={
-                        LIST_HEIGHT - theme.typography['p'].lineHeight - 3 * 4
+                        LIST_HEIGHT -
+                        theme.typography[USER_NAME_TAG].lineHeight -
+                        USER_PHOTO_NAME_SPACING
                       }
                       uri={item.otherUser.profilePhotoUrl}
                     />
