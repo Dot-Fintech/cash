@@ -36,20 +36,18 @@ const Home: React.FC = () => {
   return (
     <Screen>
       <MainHeader iconColor={theme.colors.text.primary} />
-      <Container>
-        <Column alignItems="center" fullWidth>
-          <Typography tag="h6">Welcome back, {user?.firstName}</Typography>
-          <Spacer height={16} />
-          <Typography tag="h2">
-            {formatter.format(user?.primaryAccount.balance ?? 0)}
-          </Typography>
-          {user?.primaryAccount.frozen && (
-            <>
-              <Spacer height={8} />
-              <Ionicons name="snow" size={36} />
-            </>
-          )}
-        </Column>
+      <Container flexShrink={0} alignItems="center" fullWidth>
+        <Typography tag="h6">Welcome back, {user?.firstName}</Typography>
+        <Spacer height={16} />
+        <Typography tag="h2">
+          {formatter.format(user?.primaryAccount.balance ?? 0)}
+        </Typography>
+        {user?.primaryAccount.frozen && (
+          <>
+            <Spacer height={8} />
+            <Ionicons name="snow" size={36} />
+          </>
+        )}
       </Container>
       <Spacer height={16} />
       <People goToUser={goToUser} />

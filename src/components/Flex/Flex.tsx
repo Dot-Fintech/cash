@@ -5,6 +5,7 @@ import type { AlignmentValue } from './types';
 
 export type Props = {
   flexDirection: 'column' | 'row';
+  flexShrink?: number;
   justifyContent?: AlignmentValue;
   alignItems?: AlignmentValue;
   fullWidth?: boolean;
@@ -13,8 +14,14 @@ export type Props = {
 /** DO NOT USE THIS COMPONENT. Use Row and Column instead */
 const Flex = styled(View)<Props>`
   display: flex;
-  flex-shrink: 1;
-  ${({ flexDirection, justifyContent, alignItems, fullWidth }) => css`
+  ${({
+    flexDirection,
+    flexShrink,
+    justifyContent,
+    alignItems,
+    fullWidth,
+  }) => css`
+    flex-shrink: ${flexShrink ?? 1};
     flex-direction: ${flexDirection};
     justify-content: ${justifyContent ?? 'flex-start'};
     align-items: ${alignItems ?? 'flex-start'};
