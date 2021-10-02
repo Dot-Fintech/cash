@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, FlatList } from 'react-native';
+import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
@@ -51,7 +51,8 @@ const Transactions: React.FC = () => {
 
   const [filterOption, setFilterOption] = useState(filterOptions[0]);
 
-  const { data, loading, error } = useTransactions(filterOption);
+  const { data, loading, error, networkStatus, onNext, onRefresh } =
+    useTransactions(filterOption);
 
   const transactions = data?.getTransactions.transactions;
 
@@ -92,27 +93,36 @@ const Transactions: React.FC = () => {
               data={transactions}
               keyExtractor={(transaction) => transaction._id}
               showsVerticalScrollIndicator={false}
+              refreshing={networkStatus === 4}
+              onRefresh={onRefresh}
+              onEndReached={onNext}
+              onEndReachedThreshold={0.7}
               renderItem={({ item, index }) => (
-                <>
-                  <TransactionListItemWrapper justifyContent="center">
-                    {index > 0 && <Spacer height={12} />}
-                    {(index === 0 ||
-                      new Date(
-                        transactions[index - 1].createdAt,
-                      ).toDateString() !==
-                        new Date(item.createdAt).toDateString()) && (
-                      <>
-                        <Typography tag="h6">
-                          {new Date(item.createdAt).toDateString()}
-                        </Typography>
-                        <Spacer height={16} />
-                      </>
-                    )}
-                    <TransactionListItem transaction={item} />
-                  </TransactionListItemWrapper>
-                  {index === transactions.length - 1 && (
-                    <FinalBlock bottomInset={bottom} />
+                <TransactionListItemWrapper justifyContent="center">
+                  {index > 0 && <Spacer height={12} />}
+                  {(index === 0 ||
+                    new Date(
+                      transactions[index - 1].createdAt,
+                    ).toDateString() !==
+                      new Date(item.createdAt).toDateString()) && (
+                    <>
+                      <Typography tag="h6">
+                        {new Date(item.createdAt).toDateString()}
+                      </Typography>
+                      <Spacer height={16} />
+                    </>
                   )}
+                  <TransactionListItem transaction={item} />
+                </TransactionListItemWrapper>
+              )}
+              ListFooterComponent={() => (
+                <>
+                  {loading && (
+                    <Column alignItems="center" fullWidth>
+                      <ActivityIndicator />
+                    </Column>
+                  )}
+                  <FinalBlock bottomInset={bottom} />
                 </>
               )}
             />

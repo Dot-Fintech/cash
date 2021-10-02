@@ -1,4 +1,4 @@
-import { ApolloError } from '@apollo/client';
+import { ApolloError, NetworkStatus } from '@apollo/client';
 import { useEffect } from 'react';
 
 import type {
@@ -7,7 +7,7 @@ import type {
 } from '../../generated/graphql';
 import { useTransactionsLazyQuery } from '../../generated/graphql';
 
-const PAGE_SIZE = 15;
+const PAGE_SIZE = 10;
 
 export type FilterOption = {
   id: Transaction_Action | 'all';
@@ -18,13 +18,16 @@ type ReturnType = {
   data?: TransactionsQuery;
   loading: boolean;
   error?: ApolloError;
+  networkStatus: NetworkStatus;
   onNext: () => void;
   onRefresh: () => void;
 };
 
 export const useTransactions = (filterOption: FilterOption): ReturnType => {
-  const [getTransactions, { data, loading, error, fetchMore, refetch }] =
-    useTransactionsLazyQuery();
+  const [
+    getTransactions,
+    { data, loading, error, networkStatus, fetchMore, refetch },
+  ] = useTransactionsLazyQuery();
 
   const variables = {
     data: {
@@ -62,6 +65,7 @@ export const useTransactions = (filterOption: FilterOption): ReturnType => {
     data,
     loading,
     error,
+    networkStatus,
     onNext,
     onRefresh,
   };
