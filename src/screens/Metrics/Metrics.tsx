@@ -32,7 +32,7 @@ const Metrics: React.FC = () => {
       <MainHeader iconColor={theme.colors.text.primary} />
       <Container>
         <ContentContainer>
-          <Typography tag="h4">Daily Balance</Typography>
+          <Typography tag="h4">Balance</Typography>
         </ContentContainer>
         <Spacer height={8} />
         <DailyBalancesChart

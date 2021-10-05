@@ -1,5 +1,5 @@
-import { scaleLinear, scaleQuantile, scaleTime } from 'd3-scale';
-import { curveBasis, line } from 'd3-shape';
+import { scaleLinear, scaleTime } from 'd3-scale';
+import { curveMonotoneX, line } from 'd3-shape';
 import { max, min } from 'date-fns';
 import React, { createRef, useEffect } from 'react';
 import {
@@ -23,7 +23,6 @@ import { formatter } from '../../utils/money';
 import Column from '../Column';
 import Error from '../Error';
 import { LoadingBox } from '../Loading';
-import { data as dailyBalances } from './temp';
 
 const STROKE_WIDTH = 4;
 const CURSOR_SIZE = 28;
@@ -55,7 +54,7 @@ const LabelWrapper = styled(Animated.View)`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: -${CURSOR_SIZE + 16}px;
+  top: -${CURSOR_SIZE + 20}px;
   left: 0;
   width: ${LABEL_WRAPPER_WIDTH}px;
   padding: 4px;
@@ -71,7 +70,6 @@ const Label = styled(TextInput)`
     font-family: ${theme.typography[LABEL_TAG].fontFamily};
     font-size: ${theme.typography[LABEL_TAG].fontSize}px;
     font-weight: ${theme.typography[LABEL_TAG].fontWeight};
-    line-height: ${theme.typography[LABEL_TAG].lineHeight}px;
     letter-spacing: ${theme.typography[LABEL_TAG].letterSpacing}px;
   `}
 `;
@@ -128,11 +126,12 @@ const DailyBalancesChart: React.FC<Props> = ({
   const cursorRef = createRef<View>();
   const labelRef = createRef<TextInput>();
 
-  // const dailyBalances = data?.getDailyBalances;
+  const dailyBalances = (data?.getDailyBalances ?? []).map((db) => ({
+    ...db,
+    date: new Date(db.date),
+  }));
 
-  // if (!dailyBalances) return <EmptyView {...dimensions} />;
-
-  const dates = dailyBalances.map(({ date }) => new Date(date));
+  const dates = dailyBalances.map(({ date }) => date);
   const balances = dailyBalances.map(({ balance }) => balance);
 
   const balanceDomain = [Math.min(...balances), Math.max(...balances)];
@@ -142,12 +141,11 @@ const DailyBalancesChart: React.FC<Props> = ({
   const scaleY = scaleLinear()
     .domain(balanceDomain)
     .range([height - STROKE_WIDTH, STROKE_WIDTH]);
-  const scaleLabel = scaleQuantile().domain(balanceDomain).range(balances);
 
   const curve = line<DailyBalance>()
     .x((d) => scaleX(d.date))
     .y((d) => scaleY(d.balance))
-    .curve(curveBasis)(dailyBalances);
+    .curve(curveMonotoneX)(dailyBalances);
 
   const properties = curve ? new svgPathProperties(curve) : undefined;
   const curveLength = properties?.getTotalLength() ?? 0;
@@ -159,7 +157,7 @@ const DailyBalancesChart: React.FC<Props> = ({
         top: y - CURSOR_SIZE / 2,
         left: x - CURSOR_SIZE / 2,
       });
-      const amount = scaleLabel(scaleY.invert(y));
+      const amount = scaleY.invert(y);
       labelRef.current?.setNativeProps({ text: formatter.format(amount) });
     }
   };
@@ -209,7 +207,7 @@ const DailyBalancesChart: React.FC<Props> = ({
         style={StyleSheet.absoluteFill}
         contentContainerStyle={{ width: curveLength * 2 }}
         onScroll={handleScroll}
-        scrollEventThrottle={16}
+        scrollEventThrottle={32}
         showsHorizontalScrollIndicator={false}
         bounces={false}
         horizontal
