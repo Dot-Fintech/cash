@@ -35,7 +35,7 @@ const PhotoPicker: React.FC<Props> = ({ aspect, setUri }) => {
         const cameraRollStatus =
           await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (cameraRollStatus.status !== 'granted') {
-          Alert.alert('Sorry', 'We need these permissions to make this work!');
+          Alert.alert('Sorry', 'We needed those permissions to be enabled.!');
         }
       }
     })();
