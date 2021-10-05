@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import React, { useContext, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   NativeSyntheticEvent,
   NativeTouchEvent,
 } from 'react-native';
@@ -117,7 +118,7 @@ const TransactionWithUser: React.FC = () => {
       if (data) {
         setResult(data);
       } else if (errors) {
-        alert(`Something went wrong. ${errors[0].message}`);
+        Alert.alert('Something went wrong.', errors[0].message);
       }
     }
   };

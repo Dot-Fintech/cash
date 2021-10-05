@@ -112,10 +112,7 @@ const TransactionWithAmount: React.FC = () => {
     setSelectedUser(user);
   };
 
-  const handleComplete = () => {
-    setResult(undefined);
-    navigation.navigate(SCREENS.MONEY);
-  };
+  const handleComplete = () => navigation.navigate(SCREENS.MONEY);
 
   return !result ? (
     <Screen>

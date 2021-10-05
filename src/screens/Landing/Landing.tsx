@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext, useEffect, useState } from 'react';
 import { Dimensions, useWindowDimensions } from 'react-native';
@@ -39,6 +39,8 @@ const PrimaryButton = styled(Button)`
 const LandingPage: React.FC = () => {
   const { colors } = useTheme();
 
+  const route = useRoute<RouteProp<RootStackParamList, SCREENS.LANDING>>();
+
   const navigation =
     useNavigation<StackNavigationProp<RootStackParamList, SCREENS.LANDING>>();
 
@@ -53,7 +55,9 @@ const LandingPage: React.FC = () => {
   useEffect(() => {
     if (data) {
       setUser(data.user);
-      navigation.push(NAVIGATORS.MAIN_TABS);
+      if (route.name === SCREENS.LANDING) {
+        navigation.push(NAVIGATORS.MAIN_TABS);
+      }
     } else {
       getMe();
       setRequested(true);

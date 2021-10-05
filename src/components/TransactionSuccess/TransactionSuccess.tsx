@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dimensions } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
@@ -10,7 +10,6 @@ import BankIcon from '../../icons/BankIcon';
 import PhonePayIcon from '../../icons/PhonePayIcon';
 import PhoneSendIcon from '../../icons/PhoneSendIcon';
 import { RAIL_SPACING } from '../../styles/spacing';
-import Button from '../Button';
 import Column from '../Column';
 import Spacer from '../Spacer';
 import Typography from '../Typography';
@@ -42,6 +41,10 @@ const TransactionSuccess: React.FC<Props> = ({
 }) => {
   const theme = useTheme();
 
+  useEffect(() => {
+    setTimeout(onComplete, 3000);
+  }, []);
+
   return (
     <Container justifyContent="center" alignItems="center">
       <Typography tag="h1" color={theme.colors.success.primary}>
@@ -59,8 +62,6 @@ const TransactionSuccess: React.FC<Props> = ({
       ) : (
         <BankIcon {...ICON_PROPS} />
       )}
-      <Spacer height={32} />
-      <Button onPress={onComplete}>Continue</Button>
     </Container>
   );
 };
