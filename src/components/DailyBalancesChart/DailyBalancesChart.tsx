@@ -114,10 +114,6 @@ const DailyBalancesChart: React.FC<Props> = ({
   const [selectedTimeFrame] = selectedTimeFrameState;
 
   useEffect(() => {
-    moveCursor(0);
-  }, []);
-
-  useEffect(() => {
     getDailyBalances({
       variables: { data: { timeFrame: selectedTimeFrame } },
     });
@@ -161,6 +157,10 @@ const DailyBalancesChart: React.FC<Props> = ({
       labelRef.current?.setNativeProps({ text: formatter.format(amount) });
     }
   };
+
+  useEffect(() => {
+    moveCursor(0);
+  }, [selectedTimeFrame]);
 
   const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const value = e.nativeEvent.contentOffset.x;
