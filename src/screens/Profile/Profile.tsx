@@ -82,8 +82,8 @@ const Profile: React.FC = () => {
         <TopContainer topInset={top} alignItems="center" fullWidth>
           <MainHeader iconColor={Colors.white} />
           <Spacer height={8} />
-          <ProfilePhoto size={100} uri={user?.profilePhotoUrl} />
-          <Spacer height={16} />
+          <ProfilePhoto size={100} uri={user?.profilePhotoUrl} style="light" />
+          <Spacer height={8} />
           <Pill onPress={goToProfilePhoto} variant="translucent">
             Change Profile Picture
           </Pill>
