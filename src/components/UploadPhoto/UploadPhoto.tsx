@@ -56,8 +56,8 @@ const ProfilePhotoPage: React.FC<Props> = ({
   const handleSave = async () => {
     if (uri) {
       const blob = await (await fetch(uri)).blob();
-      const file = new File([blob], `${user?._id}.png`, {
-        type: 'image/png',
+      const file = new File([blob], `${user?._id}.jpg`, {
+        type: 'image/jpeg',
         lastModified: Date.now(),
       });
       const photoId = await upload(file, action.containerName);
