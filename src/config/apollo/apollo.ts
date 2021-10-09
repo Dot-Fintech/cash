@@ -22,7 +22,7 @@ let clientIp: string | undefined;
 })();
 
 const getNewAccessToken = async () => {
-  const { getRefreshToken, setTokens, setAccessToken } = TokenStore;
+  const { getRefreshToken, setTokens } = TokenStore;
   const refreshToken = await getRefreshToken();
   try {
     if (!refreshToken) return;
@@ -30,7 +30,6 @@ const getNewAccessToken = async () => {
       `${process.env.SERVER_URL}/auth/generate-token`,
       { params: { refreshToken } },
     );
-    setAccessToken(accessTokenResponse.data);
     return accessTokenResponse.data;
   } catch (error) {
     setTokens();
@@ -42,6 +41,8 @@ const getNewAccessToken = async () => {
 const retryOperation = (operation: Operation, forward: NextLink) =>
   fromPromise(getNewAccessToken()).flatMap((accessToken) => {
     if (accessToken) {
+      const { setAccessToken } = TokenStore;
+      setAccessToken(accessToken);
       operation.setContext({
         headers: {
           ...operation.getContext().headers,
@@ -55,13 +56,17 @@ const retryOperation = (operation: Operation, forward: NextLink) =>
 
 const errorLink = onError(
   ({ graphQLErrors, networkError, operation, forward }) => {
-    if (networkError && (networkError as ServerError).statusCode === 401) {
-      return retryOperation(operation, forward);
-    } else if (graphQLErrors) {
-      for (const err of graphQLErrors) {
-        switch (err.extensions?.code) {
-          case 'UNAUTHENTICATED':
-            return retryOperation(operation, forward);
+    if (networkError) {
+      // The following may help when debugging.
+      // https://github.com/apollographql/apollo-feature-requests/issues/153#issuecomment-513148734
+      if ((networkError as ServerError).statusCode === 401) {
+        return retryOperation(operation, forward);
+      } else if (graphQLErrors) {
+        for (const err of graphQLErrors) {
+          switch (err.extensions?.code) {
+            case 'UNAUTHENTICATED':
+              return retryOperation(operation, forward);
+          }
         }
       }
     }
