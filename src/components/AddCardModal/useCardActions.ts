@@ -1,12 +1,12 @@
 import { ApolloError, Reference } from '@apollo/client';
+import { GraphQLError } from 'graphql';
+
 import {
   Card_Provider,
   CreateCardMutation,
   FullCardFragmentDoc,
   useCreateCardMutation,
-} from 'generated/graphql';
-import { GraphQLError } from 'graphql';
-import { encrypt, getPublicKey } from 'utils/rsa';
+} from '../../generated/graphql';
 
 type CreateCardArg = {
   cardholderName: string;
@@ -34,14 +34,13 @@ export const useCardActions = (): ReturnType => {
     serviceCode,
     provider,
   }: CreateCardArg) => {
-    const publicKey = await getPublicKey();
     return await createCardMutation({
       variables: {
         data: {
-          cardholderName: encrypt(cardholderName, publicKey),
-          primaryAccountNumber: encrypt(primaryAccountNumber, publicKey),
-          expiryDate: encrypt(expiryDate, publicKey),
-          serviceCode: encrypt(serviceCode, publicKey),
+          cardholderName,
+          primaryAccountNumber,
+          expiryDate,
+          serviceCode,
           provider,
         },
       },
