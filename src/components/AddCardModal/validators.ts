@@ -1,62 +1,62 @@
 import { isBefore } from 'date-fns';
-import { Card_Provider } from 'generated/graphql';
-import { detectCardProvider } from 'utils/card';
+import * as yup from 'yup';
 
-export const validateCardholderName = (value: unknown): string | undefined => {
-  const stringValue = String(value);
-  if (stringValue.length < 3) {
-    return 'Name too short';
-  }
-};
+import { Card_Provider } from '../../generated/graphql';
+import { detectCardProvider } from './utils';
 
-export const validatePrimaryAccountNumber = (
-  value: unknown,
-): string | undefined => {
-  const stringValue = String(value);
-  if (!parseInt(stringValue)) {
-    return 'Value must be a number';
-  }
-  if (stringValue.length < 14) {
-    return 'Number needs to be at least 14 digits long';
-  }
-  const cardProvider = detectCardProvider(stringValue);
-  if (
-    cardProvider !== Card_Provider.Visa &&
-    cardProvider !== Card_Provider.Mastercard
-  ) {
-    return 'Card number must refer to a valid VISA or Mastercard card';
-  }
-};
-
-export const validateExpiryDate = (value: unknown): string | undefined => {
-  const stringValue = String(value);
-  if (!parseInt(stringValue)) {
-    return 'Expiry date should be in the form MMYY';
-  }
-  if (stringValue.length < 4) {
-    return 'Expiry date should be 4 digits';
-  }
-  const today = new Date();
-  const expiryMonth = parseInt(stringValue.slice(0, 2));
-  if (expiryMonth < 0 || expiryMonth > 12) {
-    return 'Invalid month';
-  }
-  const expiryYear = parseInt(stringValue.slice(2, 4)) + 2000;
-  if (expiryYear > today.getFullYear() + 10) {
-    return 'Invalid year';
-  }
-  const expiryDate = new Date(expiryYear, expiryMonth - 1);
-  if (isBefore(expiryDate, today)) {
-    return 'This card has expired';
-  }
-};
-
-export const validateServiceCode = (value: unknown): string | undefined => {
-  const stringValue = String(value);
-  if (!parseInt(stringValue)) {
-    return 'CVV should be a number';
-  }
-  if (stringValue.length < 3) {
-    return 'CVV is a 3 or 4 digit code on the back of the card';
-  }
-};
+export const addCardValidationSchema = yup.object().shape({
+  cardholderName: yup
+    .string()
+    .matches(
+      /^[a-zA-Z]+ [a-zA-Z]+$/,
+      'Name cannot contain any special characters',
+    )
+    .min(3, ({ min }) => `Name must be at most ${min} characters`)
+    .max(40, ({ max }) => `Name must be at most ${max} characters`)
+    .required('Name is required'),
+  primaryAccountNumber: yup
+    .string()
+    .matches(/^[0-9]*$/, 'Card number must be a number')
+    .min(14, ({ min }) => `Card number must be at least ${min} characters`)
+    .max(19, ({ max }) => `Card number must be at most ${max} characters`)
+    .test(
+      'test-provider',
+      'Card must be either VISA or Mastercard',
+      (value) => {
+        const cardProvider = value ? detectCardProvider(value) : undefined;
+        return value
+          ? cardProvider === Card_Provider.Visa ||
+              cardProvider === Card_Provider.Mastercard
+          : true;
+      },
+    )
+    .required('Card number is required'),
+  expiryDate: yup
+    .string()
+    .matches(/^[0-9]*$/, 'Expiration date must be in the form MMYY')
+    .length(4, ({ length }) => `Expiration date should be ${length} digits`)
+    .test('test-expiry', 'Invalid expiry date', (value) => {
+      if (!value) return true;
+      const today = new Date();
+      const expiryMonth = parseInt(value.slice(0, 2));
+      if (expiryMonth < 0 || expiryMonth > 12) {
+        return false;
+      }
+      const expiryYear = parseInt(value.slice(2, 4)) + 2000;
+      if (expiryYear > today.getFullYear() + 10) {
+        return false;
+      }
+      const expiryDate = new Date(expiryYear, expiryMonth - 1);
+      if (isBefore(expiryDate, today)) {
+        return false;
+      }
+      return true;
+    })
+    .required('Expiration date is required'),
+  serviceCode: yup
+    .string()
+    .matches(/^[0-9]*$/, 'CVV must be a number')
+    .min(3, ({ min }) => `CVV must be at least ${min} digits`)
+    .max(4, ({ max }) => `CVV must be at most ${max} digits`)
+    .required('CVV is required'),
+});

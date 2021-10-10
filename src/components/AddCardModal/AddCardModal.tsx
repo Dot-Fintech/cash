@@ -1,42 +1,38 @@
-import { ErrorMessage, Field, Form } from 'formik';
+import { Formik } from 'formik';
 import React from 'react';
-import { Button, Modal } from 'react-native';
+import { Modal, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
 import styled from 'styled-components';
 
 import { RAIL_SPACING } from '../../styles/spacing';
 import { detectCardProvider } from '../../utils/card';
+import Button from '../Button';
 import Column from '../Column';
 import Error from '../Error';
+import FormValidationError from '../FormValidationError';
 import Row from '../Row';
 import Spacer from '../Spacer';
 import TextField from '../TextField';
 import Typography from '../Typography';
 import { useCardActions } from './useCardActions';
-import {
-  validateCardholderName,
-  validateExpiryDate,
-  validatePrimaryAccountNumber,
-  validateServiceCode,
-} from './validators';
+import { addCardValidationSchema } from './validators';
 
 const Container = styled(Column)`
   padding: 16px ${RAIL_SPACING}px;
   height: 100vh;
 `;
 
-const FullWidthForm = styled.form`
-  width: 100%;
-`;
-
-const FullWidthButton = styled(Button)`
-  width: 100%;
-`;
-
-type FormState = {
+type FormValues = {
   cardholderName: string;
   primaryAccountNumber: string;
   expiryDate: string;
   serviceCode: string;
+};
+
+const initialFormValues: FormValues = {
+  cardholderName: '',
+  primaryAccountNumber: '',
+  expiryDate: '',
+  serviceCode: '',
 };
 
 type Props = {
@@ -47,7 +43,7 @@ type Props = {
 const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
   const [createCard, { loading, error }] = useCardActions();
 
-  const handleSubmit = async (data: FormState) => {
+  const submit = async (data: FormValues) => {
     const provider = detectCardProvider(data.primaryAccountNumber);
     if (provider) {
       const { errors } = await createCard({ ...data, provider });
@@ -65,95 +61,116 @@ const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
       <Container>
         <Typography tag="h2">Card Info</Typography>
         <Typography tag="p">
-          Your info is secure and end to end encrypted
+          Your info is secure and end to end encrypted.
         </Typography>
         <Spacer height={8} />
-        <Form onSubmit={handleSubmit}>
-          {({ formProps }) => (
-            <FullWidthForm {...formProps}>
-              <Field
-                name="cardholderName"
-                defaultValue=""
-                validate={validateCardholderName}
-              >
-                {({ fieldProps, error }) => (
-                  <>
-                    <TextField
-                      {...fieldProps}
-                      type="text"
-                      placeholder="Cardholder name"
-                      maxLength={40}
-                      autoComplete="off"
-                    />
-                    {error && <ErrorMessage>{error}</ErrorMessage>}
-                  </>
-                )}
-              </Field>
-              <Field
-                name="primaryAccountNumber"
-                defaultValue=""
-                validate={validatePrimaryAccountNumber}
-              >
-                {({ fieldProps, error }) => (
-                  <>
-                    <TextField
-                      {...fieldProps}
-                      type="number"
-                      placeholder="Card number"
-                      maxLength={16}
-                      autoComplete="off"
-                    />
-                    {error && <ErrorMessage>{error}</ErrorMessage>}
-                  </>
-                )}
-              </Field>
-              <Row fullWidth>
-                <Field
-                  name="expiryDate"
-                  defaultValue=""
-                  validate={validateExpiryDate}
-                >
-                  {({ fieldProps, error }) => (
+        <Formik
+          validationSchema={addCardValidationSchema}
+          initialValues={initialFormValues}
+          onSubmit={submit}
+        >
+          {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+            <>
+              <TextField
+                placeholder="Name on card"
+                onChangeText={handleChange('cardholderName')}
+                onBlur={handleBlur('cardholderName')}
+                value={values.cardholderName}
+                autoCorrect={false}
+                autoCompleteType="name"
+              />
+              {errors.cardholderName && (
+                <>
+                  <Spacer height={4} />
+                  <FormValidationError>
+                    {errors.cardholderName}
+                  </FormValidationError>
+                </>
+              )}
+              <Spacer height={16} />
+              <TextField
+                placeholder="Card number"
+                onChangeText={handleChange('primaryAccountNumber')}
+                onBlur={handleBlur('primaryAccountNumber')}
+                value={values.primaryAccountNumber}
+                textContentType="creditCardNumber"
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoCompleteType="cc-number"
+              />
+              {errors.primaryAccountNumber && (
+                <>
+                  <Spacer height={4} />
+                  <FormValidationError>
+                    {errors.primaryAccountNumber}
+                  </FormValidationError>
+                </>
+              )}
+              <Spacer height={16} />
+              <Row alignItems="center" fullWidth>
+                <Column>
+                  <TextField
+                    placeholder="Name on card"
+                    onChangeText={handleChange('cardholderName')}
+                    onBlur={handleBlur('cardholderName')}
+                    value={values.cardholderName}
+                    autoCorrect={false}
+                    autoCompleteType="name"
+                  />
+                  {errors.cardholderName && (
                     <>
-                      <TextField
-                        {...fieldProps}
-                        type="number"
-                        placeholder="MMYY"
-                        maxLength={4}
-                        autoComplete="off"
-                      />
-                      {error && <ErrorMessage>{error}</ErrorMessage>}
+                      <Spacer height={4} />
+                      <FormValidationError>
+                        {errors.cardholderName}
+                      </FormValidationError>
                     </>
                   )}
-                </Field>
-                <Spacer width={8} />
-                <Field
-                  name="serviceCode"
-                  defaultValue=""
-                  validate={validateServiceCode}
-                >
-                  {({ fieldProps, error }) => (
+                </Column>
+                <Spacer width={16} />
+                <Column>
+                  <TextField
+                    placeholder="Card number"
+                    onChangeText={handleChange('primaryAccountNumber')}
+                    onBlur={handleBlur('primaryAccountNumber')}
+                    value={values.primaryAccountNumber}
+                    textContentType="creditCardNumber"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    autoCompleteType="cc-number"
+                  />
+                  {errors.primaryAccountNumber && (
                     <>
-                      <TextField
-                        {...fieldProps}
-                        type="number"
-                        placeholder="CVV"
-                        maxLength={4}
-                        autoComplete="off"
-                      />
-                      {error && <ErrorMessage>{error}</ErrorMessage>}
+                      <Spacer height={4} />
+                      <FormValidationError>
+                        {errors.primaryAccountNumber}
+                      </FormValidationError>
                     </>
                   )}
-                </Field>
+                </Column>
               </Row>
-              <FormFooter>
-                <FullWidthButton type="submit" disabled={loading}>
-                  Add Card
-                </FullWidthButton>
-              </FormFooter>
-            </FullWidthForm>
+              <Spacer height={16} />
+              <Button
+                onPress={
+                  handleSubmit as unknown as (
+                    e: NativeSyntheticEvent<NativeTouchEvent>,
+                  ) => void
+                }
+                disabled={loading}
+              >
+                Add Card
+              </Button>
+            </>
           )}
-        </Form>
+        </Formik>
+        {error && (
+          <>
+            <Spacer height={16} />
+            <Error
+              error={error}
+              message="We can't add that card to your account right now."
+            />
+          </>
+        )}
       </Container>
     </Modal>
   );
