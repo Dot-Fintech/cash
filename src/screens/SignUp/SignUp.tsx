@@ -223,7 +223,6 @@ const SignUpPage: React.FC = () => {
                     ) => void
                   }
                   disabled={disableSubmit}
-                  color={theme.colors.main.secondary}
                 >
                   Sign Up
                 </FullWidthButton>

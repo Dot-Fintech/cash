@@ -144,7 +144,6 @@ const LoginPage: React.FC = () => {
                     ) => void
                   }
                   disabled={loading}
-                  color={theme.colors.main.secondary}
                 >
                   Login
                 </FullWidthButton>
