@@ -37,7 +37,7 @@ const PrimaryButton = styled(Button)`
 `;
 
 const LandingPage: React.FC = () => {
-  const { colors } = useTheme();
+  const theme = useTheme();
 
   const route = useRoute<RouteProp<RootStackParamList, SCREENS.LANDING>>();
 
@@ -102,7 +102,7 @@ const LandingPage: React.FC = () => {
           </Column>
         </Row>
         <Spacer height={24} />
-        <PrimaryButton onPress={goToLogin} color={colors.main.secondary}>
+        <PrimaryButton onPress={goToLogin} color={theme.colors.main.secondary}>
           Let's Go
         </PrimaryButton>
       </Container>
