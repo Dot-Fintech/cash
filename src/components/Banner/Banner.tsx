@@ -1,12 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
 import { Color } from '../../theme';
 import { Colors } from '../../theme/utils';
-import Button from '../Button';
 import Row from '../Row';
 import Spacer from '../Spacer';
 import Typography from '../Typography';
@@ -48,13 +48,13 @@ const Banner: React.FC<Props> = ({ children, isOpen, close, color, alert }) => {
           {children}
         </Typography>
       </Row>
-      <Button variant="lean" onPress={close}>
+      <TouchableOpacity onPress={close}>
         <Ionicons
           color={Colors.white.toString()}
           name="close-circle"
           size={16}
         />
-      </Button>
+      </TouchableOpacity>
     </Container>
   ) : null;
 };

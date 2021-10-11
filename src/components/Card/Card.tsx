@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import styled from 'styled-components';
 
 import { Card_Provider, FullCardFragment } from '../../generated/graphql';
 import MastercardIcon from '../../icons/MastercardIcon';
 import VisaIcon from '../../icons/VisaIcon';
 import { Color, Colors } from '../../theme';
-import Button from '../Button';
 import Row from '../Row';
 import Typography from '../Typography';
 
@@ -15,7 +15,7 @@ const CARD_PADDING = 8;
 export const CARD_HEIGHT = 120;
 export const CARD_WIDTH = CARD_AR * CARD_HEIGHT;
 
-const Container = styled(Button)`
+const Container = styled(TouchableOpacity)`
   position: relative;
   min-width: ${CARD_WIDTH}px;
   min-height: ${CARD_HEIGHT}px;
@@ -45,7 +45,7 @@ const Card: React.FC<Props> = ({ card }) => {
   };
 
   return (
-    <Container variant="lean" onPress={handleClick}>
+    <Container onPress={handleClick}>
       <InfoRow justifyContent="space-between" alignItems="center">
         {card.provider === Card_Provider.Visa ? (
           <VisaIcon height={20} />
