@@ -5,10 +5,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
 import Column from '../../../components/Column';
+import MainHeader from '../../../components/MainHeader';
 import SlideSelect, {
   OPTION_HEIGHT,
   SlideSelectOption,
 } from '../../../components/SlideSelect';
+import Spacer from '../../../components/Spacer';
 import TextField from '../../../components/TextField';
 import { SCREENS } from '../../../navigation/utils/enums/screens';
 import { ExploreTabsParamList } from '../../../navigation/utils/paramLists/ExploreTabs';
@@ -20,7 +22,7 @@ type AbsoluteContainerProps = {
 };
 const AbsoluteContainer = styled(Column)<AbsoluteContainerProps>`
   position: absolute;
-  top: ${({ topInset }) => topInset + 16}px;
+  top: ${({ topInset }) => topInset}px;
   z-index: 2;
 `;
 
@@ -58,6 +60,8 @@ const SearchGroup: React.FC<Props> = ({ screen, onChangeText }) => {
 
   return (
     <AbsoluteContainer topInset={top} alignItems="center" fullWidth>
+      <MainHeader iconColor={Colors.white} />
+      <Spacer height={16} />
       <SearchContainer fullWidth>
         <SlideSelect
           options={options}

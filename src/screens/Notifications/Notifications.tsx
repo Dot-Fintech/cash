@@ -7,6 +7,7 @@ import Column from '../../components/Column';
 import Error from '../../components/Error';
 import FinalBlock from '../../components/FinalBlock';
 import { LoadingList } from '../../components/Loading';
+import MainHeader from '../../components/MainHeader';
 import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
@@ -44,6 +45,8 @@ const Notifications: React.FC = () => {
 
   return (
     <Screen>
+      <MainHeader />
+      <Spacer height={16} />
       <Container>
         {notifications ? (
           notifications.length > 0 ? (

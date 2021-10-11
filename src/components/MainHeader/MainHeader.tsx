@@ -18,7 +18,7 @@ export const MAIN_HEADER_HEIGHT = ICON_SIZE + 2 * VERTICAL_PADDING;
 type ContainerProps = { insetTop: number };
 const Container = styled(Row)<ContainerProps>`
   min-height: ${MAIN_HEADER_HEIGHT}px;
-  padding: ${VERTICAL_PADDING}px 8px;
+  padding: ${VERTICAL_PADDING}px 16px;
   background-color: ${Colors.transparent.toString()};
 `;
 

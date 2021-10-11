@@ -1,12 +1,14 @@
 import React from 'react';
-import { Text } from 'react-native';
 
+import MainHeader from '../../components/MainHeader';
 import Screen from '../../components/Screen';
+import Spacer from '../../components/Spacer';
 
 const Scan: React.FC = () => {
   return (
     <Screen>
-      <Text>Scan</Text>
+      <MainHeader />
+      <Spacer height={16} />
     </Screen>
   );
 };
