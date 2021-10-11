@@ -12,6 +12,7 @@ const MIN_HEIGHT = 40;
 type ContainerProps = {
   width?: number;
   height?: number;
+  fullWidth?: boolean;
 };
 const Container = styled(LinearGradient)<ContainerProps>`
   display: flex;
@@ -19,7 +20,8 @@ const Container = styled(LinearGradient)<ContainerProps>`
   justify-content: center;
   align-items: center;
 
-  ${({ width }) => (width ? `width: ${width}px;` : '')}
+  ${({ width, fullWidth }) =>
+    fullWidth ? 'width: 100%;' : width ? `width: ${width}px;` : ''}
   ${({ height }) => (height ? `height: ${height}px;` : '')}
 
   min-width: 64px;
@@ -29,10 +31,8 @@ const Container = styled(LinearGradient)<ContainerProps>`
   padding: 8px;
 `;
 
-type TextProps = {
-  disabled?: boolean;
-};
-const ButtonText = styled(Text)<TextProps>`
+type ButtonTextProps = { disabled?: boolean };
+const ButtonText = styled(Text)<ButtonTextProps>`
   font-family: SourceSansPro_400Regular;
   color: ${({ disabled }) =>
     disabled
@@ -48,25 +48,34 @@ const ButtonText = styled(Text)<TextProps>`
 `;
 
 type Props = TouchableOpacityProps &
-  ContainerProps &
-  TextProps & {
+  ContainerProps & {
     children: string;
     color?: Color;
   };
 
-const Button: React.FC<Props> = ({ children, color, ...props }) => {
+const Button: React.FC<Props> = ({
+  children,
+  color,
+  width,
+  height,
+  fullWidth,
+  ...props
+}) => {
   const { first, second } = useButtonLinearGradient();
 
   return (
-    <TouchableOpacity {...props}>
+    <TouchableOpacity style={fullWidth ? { width: '100%' } : {}} {...props}>
       <Container
         colors={
           color ? [color.toString()] : [first.toString(), second.toString()]
         }
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
+        {...{ width, height, fullWidth }}
       >
-        <ButtonText disabled={props.disabled}>{children}</ButtonText>
+        <ButtonText disabled={props.disabled ?? undefined}>
+          {children}
+        </ButtonText>
       </Container>
     </TouchableOpacity>
   );

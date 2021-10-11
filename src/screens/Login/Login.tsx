@@ -31,10 +31,6 @@ const Container = styled(Column)`
   padding: 32px 24px 0 24px;
 `;
 
-const FullWidthButton = styled(Button)`
-  width: 100%;
-`;
-
 type FormValues = {
   email: string;
   password: string;
@@ -138,16 +134,17 @@ const LoginPage: React.FC = () => {
                   </>
                 )}
                 <Spacer height={16} />
-                <FullWidthButton
+                <Button
                   onPress={
                     handleSubmit as unknown as (
                       e: NativeSyntheticEvent<NativeTouchEvent>,
                     ) => void
                   }
                   disabled={loading}
+                  fullWidth
                 >
                   Login
-                </FullWidthButton>
+                </Button>
               </>
             )}
           </Formik>
