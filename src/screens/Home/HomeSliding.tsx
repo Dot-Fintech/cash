@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import { Animated, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SlidingUpPanel from 'rn-sliding-up-panel';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Column from '../../components/Column';
 import MainHeader, { MAIN_HEADER_HEIGHT } from '../../components/MainHeader';
@@ -51,8 +51,6 @@ const Home: React.FC = () => {
   const navigation =
     useNavigation<StackNavigationProp<HomeStackParamList, SCREENS.HOME>>();
 
-  const theme = useTheme();
-
   const { top, bottom } = useSafeAreaInsets();
   const { height } = useWindowDimensions();
 
@@ -65,7 +63,7 @@ const Home: React.FC = () => {
 
   return (
     <Screen>
-      <MainHeader iconColor={theme.colors.text.primary} />
+      <MainHeader />
       <Container>
         <Column alignItems="center" fullWidth>
           <Typography tag="h6">Welcome back, {user?.firstName}</Typography>

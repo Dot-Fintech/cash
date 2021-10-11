@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Column from '../../components/Column';
 import MainHeader from '../../components/MainHeader';
@@ -56,7 +56,6 @@ const Money: React.FC = () => {
   const navigation =
     useNavigation<StackNavigationProp<MoneyStackParamList, SCREENS.MONEY>>();
 
-  const theme = useTheme();
   const { top, bottom } = useSafeAreaInsets();
 
   const { user } = useContext(UserContext);
@@ -78,7 +77,7 @@ const Money: React.FC = () => {
       <>
         <Container alignItems="center">
           <Spacer height={top} />
-          <MainHeader iconColor={theme.colors.text.primary} />
+          <MainHeader />
           <Spacer height={16} />
           <SlideSelectContainer>
             <SlideSelect

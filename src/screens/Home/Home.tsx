@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext } from 'react';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Column from '../../components/Column';
 import MainHeader from '../../components/MainHeader';
@@ -26,8 +26,6 @@ const Home: React.FC = () => {
   const navigation =
     useNavigation<StackNavigationProp<HomeStackParamList, SCREENS.HOME>>();
 
-  const theme = useTheme();
-
   const { user } = useContext(UserContext);
 
   const goToUser = (user: UserListItemFragment) =>
@@ -35,7 +33,7 @@ const Home: React.FC = () => {
 
   return (
     <Screen>
-      <MainHeader iconColor={theme.colors.text.primary} />
+      <MainHeader />
       <Container flexShrink={0} alignItems="center" fullWidth>
         <Typography tag="h6">Welcome back, {user?.firstName}</Typography>
         <Spacer height={16} />

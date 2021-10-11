@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Column from '../../components/Column';
 import DailyBalancesChart from '../../components/DailyBalancesChart';
@@ -23,13 +23,11 @@ const ContentContainer = styled(Column)`
 `;
 
 const Metrics: React.FC = () => {
-  const theme = useTheme();
-
   const selectedTimeFrameState = useState(Time_Frame.OneWeek);
 
   return (
     <Screen>
-      <MainHeader iconColor={theme.colors.text.primary} />
+      <MainHeader />
       <Container>
         <ContentContainer>
           <Typography tag="h4">Balance</Typography>

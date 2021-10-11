@@ -1,10 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { MainTabsParamList } from '../../navigation/utils/paramLists/MainTabs';
@@ -23,18 +23,25 @@ const Container = styled(Row)<ContainerProps>`
 `;
 
 type Props = {
-  iconColor: Color;
+  iconColor?: Color;
 };
 
 const MainHeader: React.FC<Props> = ({ iconColor }) => {
+  const theme = useTheme();
+
   const navigation =
     useNavigation<BottomTabNavigationProp<MainTabsParamList>>();
+
+  const route =
+    useRoute<RouteProp<MainTabsParamList, keyof MainTabsParamList>>();
 
   const { top } = useSafeAreaInsets();
 
   const goToBanking = () => navigation.navigate(SCREENS.BANKING);
   const goToScan = () => navigation.navigate(SCREENS.SCAN);
   const goToNotifications = () => navigation.navigate(SCREENS.NOTIFICATIONS);
+
+  const baseIconColor = iconColor ? iconColor : theme.colors.text.primary;
 
   return (
     <Container
@@ -44,15 +51,32 @@ const MainHeader: React.FC<Props> = ({ iconColor }) => {
       fullWidth
     >
       <TouchableOpacity onPress={goToBanking}>
-        <Ionicons name="card" color={iconColor.toString()} size={ICON_SIZE} />
+        <Ionicons
+          name="card"
+          color={(route.name === SCREENS.BANKING
+            ? theme.colors.main.secondary
+            : baseIconColor
+          ).toString()}
+          size={ICON_SIZE}
+        />
       </TouchableOpacity>
       <TouchableOpacity onPress={goToScan}>
-        <Ionicons name="camera" color={iconColor.toString()} size={ICON_SIZE} />
+        <Ionicons
+          name="camera"
+          color={(route.name === SCREENS.SCAN
+            ? theme.colors.main.secondary
+            : baseIconColor
+          ).toString()}
+          size={ICON_SIZE}
+        />
       </TouchableOpacity>
       <TouchableOpacity onPress={goToNotifications}>
         <Ionicons
           name="notifications"
-          color={iconColor.toString()}
+          color={(route.name === SCREENS.NOTIFICATIONS
+            ? theme.colors.main.secondary
+            : baseIconColor
+          ).toString()}
           size={ICON_SIZE}
         />
       </TouchableOpacity>
