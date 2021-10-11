@@ -39,7 +39,7 @@ const WelcomeModal: React.FC = () => {
   return (
     <Modal
       visible={showModal}
-      onRequestClose={handleCloseModal}
+      onDismiss={handleCloseModal}
       animationType="slide"
     >
       <ModalContainer justifyContent="center" alignItems="center">

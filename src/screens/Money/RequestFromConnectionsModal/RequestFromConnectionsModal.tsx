@@ -51,7 +51,11 @@ const RequestFromConnectionsModal: React.FC = () => {
   };
 
   return (
-    <Modal visible={showModal} onRequestClose={handleCloseModal}>
+    <Modal
+      visible={showModal}
+      onDismiss={handleCloseModal}
+      animationType="slide"
+    >
       <ModalContainer justifyContent="center" alignItems="center">
         <Typography tag="h1" textAlign="center">
           Requesting money
