@@ -3,6 +3,7 @@ import React from 'react';
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import styled from 'styled-components';
 
+import { Colors } from '../../theme';
 import { Color } from '../../theme/colors/types';
 import { useButtonLinearGradient } from './utils';
 
@@ -33,13 +34,13 @@ type TextProps = {
 };
 const ButtonText = styled(Text)<TextProps>`
   font-family: SourceSansPro_400Regular;
-  color: ${({ disabled, theme }) =>
+  color: ${({ disabled }) =>
     disabled
       ? new Color({
-          ...theme.colors.text.primary,
+          ...Colors.white,
           opacity: 0.5,
         }).toString()
-      : theme.colors.text.primary.toString()};
+      : Colors.white.toString()};
   font-size: 18px;
   line-height: 18px;
   margin: 0;
