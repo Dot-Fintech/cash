@@ -1,12 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext } from 'react';
-import { ActivityIndicator, Alert, Dimensions } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components';
 
 import BottomBlock from '../../components/BottomBlock';
-import Button from '../../components/Button';
 import Column from '../../components/Column';
 import Divider from '../../components/Divider';
 import MainHeader from '../../components/MainHeader';
@@ -96,29 +100,29 @@ const Profile: React.FC = () => {
             Theme
           </Typography>
           <Spacer height={8} />
-          <Button disabled={loading} onPress={setLightTheme}>
+          <TouchableOpacity disabled={loading} onPress={setLightTheme}>
             <Typography tag="h5" textAlign="left">
               Light
             </Typography>
-          </Button>
+          </TouchableOpacity>
           <Spacer height={8} />
           <Divider width={width - 2 * RAIL_SPACING} />
           <Spacer height={8} />
-          <Button disabled={loading} onPress={setDarkTheme}>
+          <TouchableOpacity disabled={loading} onPress={setDarkTheme}>
             <Typography tag="h5" textAlign="left">
               Dark
             </Typography>
-          </Button>
+          </TouchableOpacity>
           <Spacer height={16} />
           <Typography tag="p" color={theme.colors.text.secondary}>
             Documents
           </Typography>
           <Spacer height={8} />
-          <Button disabled={loading} onPress={goToDocuments}>
+          <TouchableOpacity disabled={loading} onPress={goToDocuments}>
             <Typography tag="h5" textAlign="left">
               My Documents
             </Typography>
-          </Button>
+          </TouchableOpacity>
           <Spacer height={16} />
           <Typography tag="p" color={theme.colors.text.secondary}>
             Account
@@ -130,11 +134,11 @@ const Profile: React.FC = () => {
                 color={theme.colors.main.secondary.toString()}
               />
             ) : (
-              <Button onPress={handleLogout}>
+              <TouchableOpacity onPress={handleLogout}>
                 <Typography tag="h5" textAlign="left">
                   Logout
                 </Typography>
-              </Button>
+              </TouchableOpacity>
             )}
           </Row>
         </BottomContainer>

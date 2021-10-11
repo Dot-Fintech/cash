@@ -1,17 +1,18 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { Color } from '../../theme/colors/types';
-import { Colors } from '../../theme/utils/Colors';
+import { useButtonLinearGradient } from './utils';
+
+const MIN_HEIGHT = 40;
 
 type ContainerProps = {
-  color?: Color;
-  variant?: 'default' | 'lean';
   width?: number;
   height?: number;
 };
-const Container = styled(TouchableOpacity)<ContainerProps>`
+const Container = styled(LinearGradient)<ContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,20 +20,12 @@ const Container = styled(TouchableOpacity)<ContainerProps>`
 
   ${({ width }) => (width ? `width: ${width}px;` : '')}
   ${({ height }) => (height ? `height: ${height}px;` : '')}
-  ${({ variant }) => css`
-    min-width: ${variant === 'lean' ? 40 : 64}px;
-    min-height: ${variant === 'lean' ? 24 : 40}px;
-  `}
 
-  border-radius: 4px;
+  min-width: 64px;
+  min-height: ${MIN_HEIGHT}px;
+  border-radius: ${({ height }) => (height ? height / 2 : MIN_HEIGHT / 2)}px;
   border: none;
-  padding: ${({ variant }) => (variant === 'lean' ? 0 : '12px')};
-
-  background-color: ${({ color, variant, theme }) =>
-    color?.toString() ??
-    (variant === 'lean'
-      ? Colors.transparent.toString()
-      : theme.colors.main.secondary.toString())};
+  padding: 8px;
 `;
 
 type TextProps = {
@@ -43,30 +36,38 @@ const ButtonText = styled(Text)<TextProps>`
   color: ${({ disabled, theme }) =>
     disabled
       ? new Color({
-          ...theme.colors.background.primary,
+          ...theme.colors.text.primary,
           opacity: 0.5,
         }).toString()
-      : theme.colors.background.primary.toString()};
+      : theme.colors.text.primary.toString()};
   font-size: 18px;
   line-height: 18px;
   margin: 0;
+  padding: 0;
 `;
 
-type Props = TouchableOpacityProps & ContainerProps & TextProps;
+type Props = TouchableOpacityProps &
+  ContainerProps &
+  TextProps & {
+    children: string;
+    color?: Color;
+  };
 
 const Button: React.FC<Props> = ({ children, color, ...props }) => {
+  const { first, second } = useButtonLinearGradient();
+
   return (
-    <Container
-      {...props}
-      color={color}
-      variant={typeof children === 'string' ? 'default' : 'lean'}
-    >
-      {typeof children === 'string' ? (
+    <TouchableOpacity {...props}>
+      <Container
+        colors={
+          color ? [color.toString()] : [first.toString(), second.toString()]
+        }
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      >
         <ButtonText disabled={props.disabled}>{children}</ButtonText>
-      ) : (
-        children
-      )}
-    </Container>
+      </Container>
+    </TouchableOpacity>
   );
 };
 

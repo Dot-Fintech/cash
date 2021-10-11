@@ -1,22 +1,26 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 
-import Button from '../Button';
 import Typography from '../Typography';
 
-const NumberButton = styled(Button)`
+const NumberButton = styled(TouchableOpacity)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 33%;
   padding: 0;
 `;
 
 type Props = {
   value: number;
-  onClick: (value: number) => void;
+  onPress: (value: number) => void;
 };
 
-const Number: React.FC<Props> = ({ value, onClick }) => {
+const Number: React.FC<Props> = ({ value, onPress }) => {
   const handleClick = () => {
-    onClick(value);
+    onPress(value);
   };
 
   return (

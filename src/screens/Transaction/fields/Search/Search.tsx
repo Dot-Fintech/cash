@@ -2,10 +2,14 @@ import { Ionicons } from '@expo/vector-icons';
 import debounce from 'debounce';
 import { FormikProps } from 'formik';
 import React from 'react';
-import { ActivityIndicator, FlatList, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
-import Button from '../../../../components/Button';
 import Column from '../../../../components/Column';
 import Row from '../../../../components/Row';
 import Spacer from '../../../../components/Spacer';
@@ -136,9 +140,9 @@ const Search: React.FC<Props> = ({
             <Typography tag="h5" color={color}>
               {user.firstName} {user.lastName}
             </Typography>
-            <Button onPress={handleClearUser}>
+            <TouchableOpacity onPress={handleClearUser}>
               <Ionicons name="close" size={24} color={color?.toString()} />
-            </Button>
+            </TouchableOpacity>
           </SelectedUserRow>
         ) : (
           <TextFieldWrapper>

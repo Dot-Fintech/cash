@@ -2,14 +2,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { css } from 'styled-components';
 
 import BottomBlock, {
   BOTTOM_BLOCK_BORDER_RADIUS,
 } from '../../components/BottomBlock';
-import Button from '../../components/Button';
 import Column from '../../components/Column';
 import Pill from '../../components/Pill';
 import ProfilePhoto from '../../components/ProfilePhoto';
@@ -120,13 +119,13 @@ const UserSummary: React.FC = () => {
           >
             <Row justifyContent="space-between" fullWidth>
               <TopRowItemWrapper>
-                <Button onPress={goBack}>
+                <TouchableOpacity onPress={goBack}>
                   <Ionicons
                     size={32}
                     name="arrow-back"
                     color={Colors.white.toString()}
                   />
-                </Button>
+                </TouchableOpacity>
               </TopRowItemWrapper>
               <TopRowItemWrapper alignItems="center">
                 <ProfilePhoto

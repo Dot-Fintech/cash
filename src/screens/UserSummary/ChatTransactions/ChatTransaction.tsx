@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
-import Button from '../../../components/Button';
 import Column from '../../../components/Column';
 import Row from '../../../components/Row';
 import Spacer from '../../../components/Spacer';
@@ -55,7 +55,7 @@ const ChatTransaction: React.FC<Props> = ({
       }
       fullWidth
     >
-      <Button onPress={goToTransaction}>
+      <TouchableOpacity onPress={goToTransaction}>
         <Container>
           <Row justifyContent="space-between" alignItems="center">
             <Typography tag="h5">{formatter.format(amount)}</Typography>
@@ -67,7 +67,7 @@ const ChatTransaction: React.FC<Props> = ({
           <Spacer height={8} />
           <Typography tag="p">{new Date(createdAt).toDateString()}</Typography>
         </Container>
-      </Button>
+      </TouchableOpacity>
     </Row>
   );
 };

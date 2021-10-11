@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   NativeSyntheticEvent,
   NativeTouchEvent,
+  TouchableOpacity,
 } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
@@ -240,14 +241,14 @@ const SignUpPage: React.FC = () => {
             </>
           )}
           <Spacer height={16} />
-          <Button onPress={goBack}>
+          <TouchableOpacity onPress={goBack}>
             <Typography tag="p" color={theme.colors.main.secondary}>
               Already have an account?
             </Typography>
             <Typography tag="p" color={theme.colors.main.secondary}>
               Tap here to log in
             </Typography>
-          </Button>
+          </TouchableOpacity>
         </Container>
       </OnboardingScreen>
     </>

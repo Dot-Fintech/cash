@@ -8,11 +8,11 @@ import {
   Alert,
   NativeSyntheticEvent,
   NativeTouchEvent,
+  TouchableOpacity,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components';
 
-import Button from '../../components/Button';
 import Column from '../../components/Column';
 import { LoadingBox } from '../../components/Loading';
 import Numberpad from '../../components/Numberpad';
@@ -131,9 +131,9 @@ const TransactionWithUser: React.FC = () => {
     <Screen>
       <Container alignItems="center">
         <Column fullWidth>
-          <Button onPress={goBack}>
+          <TouchableOpacity onPress={goBack}>
             <Ionicons name="arrow-back" size={32} />
-          </Button>
+          </TouchableOpacity>
         </Column>
         <Spacer height={8} />
         <Formik initialValues={initialFormValues} onSubmit={handleSubmit}>

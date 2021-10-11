@@ -1,6 +1,11 @@
 import React from 'react';
-import { ActivityIndicator, Dimensions, FlatList, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {
+  ActivityIndicator,
+  Dimensions,
+  FlatList,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import Column from '../../../components/Column';

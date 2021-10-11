@@ -40,26 +40,26 @@ const Numberpad: React.FC<Props> = ({ amount, setAmount }) => {
   return (
     <>
       <Row justifyContent="space-between" fullWidth>
-        <Number value={1} onClick={handlePushValue} />
-        <Number value={2} onClick={handlePushValue} />
-        <Number value={3} onClick={handlePushValue} />
+        <Number value={1} onPress={handlePushValue} />
+        <Number value={2} onPress={handlePushValue} />
+        <Number value={3} onPress={handlePushValue} />
       </Row>
       <Spacer height={16} />
       <Row justifyContent="space-between" fullWidth>
-        <Number value={4} onClick={handlePushValue} />
-        <Number value={5} onClick={handlePushValue} />
-        <Number value={6} onClick={handlePushValue} />
+        <Number value={4} onPress={handlePushValue} />
+        <Number value={5} onPress={handlePushValue} />
+        <Number value={6} onPress={handlePushValue} />
       </Row>
       <Spacer height={16} />
       <Row justifyContent="space-between" fullWidth>
-        <Number value={7} onClick={handlePushValue} />
-        <Number value={8} onClick={handlePushValue} />
-        <Number value={9} onClick={handlePushValue} />
+        <Number value={7} onPress={handlePushValue} />
+        <Number value={8} onPress={handlePushValue} />
+        <Number value={9} onPress={handlePushValue} />
       </Row>
       <Spacer height={16} />
       <Row justifyContent="center" fullWidth>
         <EmptyBox />
-        <Number value={0} onClick={handlePushValue} />
+        <Number value={0} onPress={handlePushValue} />
         <BackspaceContainer onPress={handlePopValue}>
           <Ionicons
             name="arrow-back-sharp"

@@ -1,7 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { TextInputProps } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { TextInput, TextInputProps } from 'react-native';
 import styled, { css, useTheme } from 'styled-components';
 
 import { Color, Colors } from '../../theme';

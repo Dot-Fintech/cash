@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components';
 
@@ -57,11 +57,11 @@ const OnboardingScreen: React.FC<Props> = ({
           )}
           {primary && secondary && <Spacer height={12} />}
           {secondary && (
-            <Button onPress={secondary.action}>
+            <TouchableOpacity onPress={secondary.action}>
               <Typography tag="h6" color={theme.colors.main.secondary}>
                 {secondary.label}
               </Typography>
-            </Button>
+            </TouchableOpacity>
           )}
         </ButtonContainer>
       )}

@@ -2,10 +2,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
-import { Dimensions, FlatList } from 'react-native';
+import { Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
-import Button from '../../components/Button';
 import Column from '../../components/Column';
 import DocumentListItem, {
   AddDocumentButton,
@@ -57,13 +56,13 @@ const Documents: React.FC = () => {
     <Screen>
       <Container>
         <Row alignItems="center" fullWidth>
-          <Button onPress={goBack}>
+          <TouchableOpacity onPress={goBack}>
             <Ionicons
               icon="arrow-back"
               size={32}
               color={theme.colors.text.primary.toString()}
             />
-          </Button>
+          </TouchableOpacity>
           <Spacer width={16} />
           <Typography tag="h2">Documents</Typography>
         </Row>

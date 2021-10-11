@@ -1,6 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components';
 
 import { Card_Provider, FullCardFragment } from '../../generated/graphql';

@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { useTheme } from 'styled-components';
 
-import Button from '../Button';
 import Row from '../Row';
 import Spacer from '../Spacer';
 import Typography from '../Typography';
@@ -16,7 +16,7 @@ const AddDocumentButton: React.FC<Props> = ({ text, onPress }) => {
   const theme = useTheme();
 
   return (
-    <Button onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <Row alignItems="center">
         <Ionicons
           name="add-circle"
@@ -26,7 +26,7 @@ const AddDocumentButton: React.FC<Props> = ({ text, onPress }) => {
         <Spacer width={8} />
         <Typography tag="h6">{text}</Typography>
       </Row>
-    </Button>
+    </TouchableOpacity>
   );
 };
 

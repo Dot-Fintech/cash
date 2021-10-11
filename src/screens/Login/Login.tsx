@@ -7,6 +7,7 @@ import {
   NativeSyntheticEvent,
   NativeTouchEvent,
 } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
 import Banner from '../../components/Banner';
@@ -162,16 +163,16 @@ const LoginPage: React.FC = () => {
           )}
           <Spacer height={16} />
           <Row justifyContent="space-between" alignItems="center" fullWidth>
-            <Button>
+            <TouchableOpacity>
               <Typography tag="p" color={theme.colors.main.secondary}>
                 Forgot password?
               </Typography>
-            </Button>
-            <Button onPress={goToSignUp}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={goToSignUp}>
               <Typography tag="p" color={theme.colors.main.secondary}>
                 Sign up for an account
               </Typography>
-            </Button>
+            </TouchableOpacity>
           </Row>
         </Container>
       </OnboardingScreen>

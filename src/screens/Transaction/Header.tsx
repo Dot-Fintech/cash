@@ -7,10 +7,10 @@ import {
   ActivityIndicator,
   NativeSyntheticEvent,
   NativeTouchEvent,
+  TouchableOpacity,
 } from 'react-native';
 import styled from 'styled-components';
 
-import Button from '../../components/Button';
 import Pill from '../../components/Pill';
 import Row from '../../components/Row';
 import Typography from '../../components/Typography';
@@ -42,13 +42,13 @@ const Header: React.FC<Props> = ({ amount, type, loading, handleSubmit }) => {
   return (
     <Row justifyContent="space-between" fullWidth>
       <ActionWrapper alignItems="center">
-        <Button onPress={goBack}>
+        <TouchableOpacity onPress={goBack}>
           <Ionicons
             name="arrow-back"
             size={36}
             color={Colors.white.toString()}
           />
-        </Button>
+        </TouchableOpacity>
       </ActionWrapper>
       <ActionWrapper justifyContent="center" alignItems="center">
         <Typography tag="h4" color={Colors.white}>

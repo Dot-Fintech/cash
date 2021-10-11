@@ -2,10 +2,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
 import styled, { useTheme } from 'styled-components';
 
-import Button from '../../components/Button';
 import Column from '../../components/Column';
 import Error from '../../components/Error';
 import { LoadingList } from '../../components/Loading';
@@ -51,13 +50,13 @@ const TransactionSummary: React.FC = () => {
     <Screen>
       <Container>
         <Row alignItems="center" fullWidth>
-          <Button onPress={goBack}>
+          <TouchableOpacity onPress={goBack}>
             <Ionicons
               name="arrow-back"
               size={32}
               color={theme.colors.text.primary.toString()}
             />
-          </Button>
+          </TouchableOpacity>
           <Spacer width={16} />
           <Typography tag="h2">Transaction</Typography>
         </Row>
