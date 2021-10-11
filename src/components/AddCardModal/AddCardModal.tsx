@@ -1,6 +1,11 @@
 import { Formik } from 'formik';
 import React from 'react';
-import { Modal, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
+import {
+  Alert,
+  Modal,
+  NativeSyntheticEvent,
+  NativeTouchEvent,
+} from 'react-native';
 import styled from 'styled-components';
 
 import { RAIL_SPACING } from '../../styles/spacing';
@@ -48,8 +53,9 @@ const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
     if (provider) {
       const { errors } = await createCard({ ...data, provider });
       if (errors) {
-        alert(
-          'Something went wrong. We encountered an issue while adding your card.',
+        Alert.alert(
+          'Something went wrong.',
+          'We encountered an issue while adding your card.',
         );
       }
     }
