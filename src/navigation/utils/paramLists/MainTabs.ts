@@ -7,7 +7,7 @@ export type MainTabsParamList = {
   [NAVIGATORS.MONEY_STACK]: undefined;
   [SCREENS.METRICS]: undefined;
   [NAVIGATORS.PROFILE_STACK]: undefined;
-  [SCREENS.BANKING]: undefined;
+  [NAVIGATORS.BANKING_STACK]: undefined;
   [SCREENS.SCAN]: undefined;
   [SCREENS.NOTIFICATIONS]: undefined;
 };

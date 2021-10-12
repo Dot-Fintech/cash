@@ -20,7 +20,7 @@ import { SCREENS } from '../../navigation/utils/enums/screens';
 import { MoneyStackParamList } from '../../navigation/utils/paramLists/MoneyStack';
 import { formatter } from '../../utils/money';
 import RequestFromConnectionsModal from './RequestFromConnectionsModal';
-import { validateTransaction } from './utils';
+import { validateP2PTransaction } from './utils';
 
 const Container = styled(Column)`
   position: relative;
@@ -66,7 +66,7 @@ const Money: React.FC = () => {
   const type = selectedOption.id as P2P_Transaction_Type;
 
   const handleContinue = () => {
-    if (validateTransaction({ amount, type, user })) {
+    if (validateP2PTransaction({ amount, type, user })) {
       setAmount(0);
       navigation.push(SCREENS.TRANSACTION_WITH_AMOUNT, { amount, type });
     }

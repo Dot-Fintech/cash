@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
-import Banking from '../../screens/Banking';
 import Metrics from '../../screens/Metrics';
 import Notifications from '../../screens/Notifications';
 import Scan from '../../screens/Scan';
+import BankingStack from '../BankingStack';
 import ExploreTabs from '../ExploreTabs';
 import HomeStack from '../HomeStack';
 import MoneyStack from '../MoneyStack';
@@ -45,8 +45,8 @@ const MainTabs: React.FC = () => {
         options={{ title: 'Profile' }}
       />
       <Tabs.Screen
-        component={Banking}
-        name={SCREENS.BANKING}
+        component={BankingStack}
+        name={NAVIGATORS.BANKING_STACK}
         options={{ title: '' }}
       />
       <Tabs.Screen

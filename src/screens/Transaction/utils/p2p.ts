@@ -6,15 +6,15 @@ import {
   P2P_Transaction_Type,
   useRequestMutation,
   useSendMutation,
-} from '../../generated/graphql';
-import { addToInteractionsCache } from '../../utils/cache/addToInteractionsCache';
-import { addToTransactionsCache } from '../../utils/cache/addToTransactionsCache';
-import { updateUserAccountCache } from '../../utils/cache/updateUserAccountCache';
-import { formatter } from '../../utils/money';
+} from '../../../generated/graphql';
+import { addToInteractionsCache } from '../../../utils/cache/addToInteractionsCache';
+import { addToTransactionsCache } from '../../../utils/cache/addToTransactionsCache';
+import { updateUserAccountCache } from '../../../utils/cache/updateUserAccountCache';
+import { formatter } from '../../../utils/money';
 import type {
   GetInteractionsReference,
   GetTransactionsReference,
-} from '../../utils/types/CacheReferences';
+} from '../../../utils/types/CacheReferences';
 
 type HookArg = {
   amount: number;

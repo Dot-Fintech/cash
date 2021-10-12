@@ -1,4 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -19,8 +21,13 @@ import Row from '../../components/Row';
 import Screen from '../../components/Screen';
 import Spacer from '../../components/Spacer';
 import Typography from '../../components/Typography';
-import { useCardsLazyQuery } from '../../generated/graphql';
+import {
+  Bank_Transaction_Type,
+  useCardsLazyQuery,
+} from '../../generated/graphql';
 import { TAB_BAR_HEIGHT } from '../../navigation/MainTabs/TabBar';
+import { SCREENS } from '../../navigation/utils/enums/screens';
+import { BankingStackParamList } from '../../navigation/utils/paramLists/BankingStack';
 import { useStyledLinearGradient } from '../../styles/linearGradient';
 import { getShadowColor } from '../../styles/shadow';
 import { RAIL_SPACING } from '../../styles/spacing';
@@ -62,11 +69,14 @@ const ActionItem = styled(TouchableOpacity)`
   border-radius: 8px;
 
   background-color: ${({ theme }) =>
-    theme.colors.background.primary.toString()};
+    theme.colors.background.secondary.toString()};
   box-shadow: 2px 2px 4px ${({ theme }) => getShadowColor(theme.name)};
 `;
 
 const Banking: React.FC = () => {
+  const navigation =
+    useNavigation<StackNavigationProp<BankingStackParamList>>();
+
   const theme = useTheme();
 
   const { bottom } = useSafeAreaInsets();
@@ -90,6 +100,21 @@ const Banking: React.FC = () => {
 
   const cards = data?.getCards;
   const card = cards?.[selectedCardIndex];
+
+  const goToWithdraw = () =>
+    card
+      ? navigation.push(SCREENS.TRANSACTION_WITH_CARD, {
+          card,
+          type: Bank_Transaction_Type.Withdraw,
+        })
+      : null;
+  const goToDeposit = () =>
+    card
+      ? navigation.push(SCREENS.TRANSACTION_WITH_CARD, {
+          card,
+          type: Bank_Transaction_Type.Deposit,
+        })
+      : null;
 
   return (
     <Screen>
@@ -164,7 +189,7 @@ const Banking: React.FC = () => {
           </Row>
           <Spacer height={16} />
           <Row fullWidth>
-            <ActionItem>
+            <ActionItem onPress={goToDeposit}>
               <Typography tag="h6">Add funds</Typography>
               <Spacer height={4} />
               <Ionicons
@@ -174,7 +199,7 @@ const Banking: React.FC = () => {
               />
             </ActionItem>
             <Spacer width={ACTION_ITEM_GAP} />
-            <ActionItem>
+            <ActionItem onPress={goToWithdraw}>
               <Typography tag="h6">Transfer funds</Typography>
               <Spacer height={4} />
               <Ionicons

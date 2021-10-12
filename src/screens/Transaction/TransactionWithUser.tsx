@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Formik } from 'formik';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -14,7 +14,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components';
 
 import Column from '../../components/Column';
-import { LoadingBox } from '../../components/Loading';
 import Numberpad from '../../components/Numberpad';
 import Pill from '../../components/Pill';
 import Row from '../../components/Row';
@@ -24,25 +23,21 @@ import TransactionSuccess from '../../components/TransactionSuccess';
 import Typography from '../../components/Typography';
 import { UserContext } from '../../context/user/state';
 import type { FullTransactionFragment } from '../../generated/graphql';
-import {
-  P2P_Transaction_Type,
-  useGetUserFromUsernameLazyQuery,
-} from '../../generated/graphql';
+import { P2P_Transaction_Type } from '../../generated/graphql';
 import { TAB_BAR_HEIGHT } from '../../navigation/MainTabs/TabBar';
 import { SCREENS } from '../../navigation/utils/enums/screens';
 import { HomeStackParamList } from '../../navigation/utils/paramLists/HomeStack';
 import { RAIL_SPACING } from '../../styles/spacing';
 import { formatter } from '../../utils/money';
-import { validateTransaction } from '../Money/utils';
+import { validateP2PTransaction } from '../Money/utils';
 import FilledUser from './fields/FilledUser';
-import { NAME_TAG, USERNAME_TAG } from './fields/FilledUser/FilledUser';
 import NoteField from './fields/Note';
 import { FormValues } from './types';
 import {
   buildSuccessDescription,
   useRequestEmoney,
   useSendEmoney,
-} from './utils';
+} from './utils/p2p';
 
 const Container = styled(Column)`
   position: relative;
@@ -83,16 +78,7 @@ const TransactionWithUser: React.FC = () => {
 
   const { user } = useContext(UserContext);
 
-  const [getUserFromUsername, { data, loading, error }] =
-    useGetUserFromUsernameLazyQuery();
-
-  const { username, type } = route.params;
-
-  useEffect(() => {
-    getUserFromUsername({
-      variables: { data: { username } },
-    });
-  }, [username]);
+  const { type } = route.params;
 
   const [send, sendResult] = useSendEmoney();
   const [request, requestResult] = useRequestEmoney();
@@ -100,12 +86,12 @@ const TransactionWithUser: React.FC = () => {
   const [amount, setAmount] = useState(0);
   const [result, setResult] = useState<FullTransactionFragment>();
 
-  const selectedUser = data?.getUserFromUsername;
+  const selectedUser = route.params.user;
 
   const goBack = () => navigation.pop();
 
   const handleSubmit = async ({ note }: FormValues) => {
-    if (validateTransaction({ amount, type, user }) && selectedUser) {
+    if (validateP2PTransaction({ amount, type, user }) && selectedUser) {
       const args = {
         amount,
         note,
@@ -139,19 +125,7 @@ const TransactionWithUser: React.FC = () => {
         <Formik initialValues={initialFormValues} onSubmit={handleSubmit}>
           {(props) => (
             <>
-              {data ? (
-                <FilledUser user={data.getUserFromUsername} />
-              ) : loading ? (
-                <LoadingBox
-                  width={200}
-                  height={
-                    theme.typography[NAME_TAG].lineHeight +
-                    theme.typography[USERNAME_TAG].lineHeight
-                  }
-                />
-              ) : error ? (
-                <Typography tag="h5">We couldn't get that user</Typography>
-              ) : null}
+              <FilledUser user={selectedUser} />
               <Spacer height={16} />
               <NoteField hideField={false} {...props} />
               <Spacer height={24} />

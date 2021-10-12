@@ -1,4 +1,7 @@
-import { P2P_Transaction_Type } from '../../../generated/graphql';
+import {
+  P2P_Transaction_Type,
+  UserListItemFragment,
+} from '../../../generated/graphql';
 import { SCREENS } from '../enums/screens';
 
 export type HomeStackParamList = {
@@ -6,7 +9,7 @@ export type HomeStackParamList = {
   [SCREENS.TRANSACTION_SUMMARY]: { token: string };
   [SCREENS.USER_SUMMARY]: { username: string };
   [SCREENS.TRANSACTION_WITH_USER]: {
-    username: string;
+    user: UserListItemFragment;
     type: P2P_Transaction_Type;
   };
 };

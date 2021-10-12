@@ -6,7 +6,12 @@ import { TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components';
 
+import { NAVIGATORS } from '../../navigation/utils/enums/navigators';
 import { SCREENS } from '../../navigation/utils/enums/screens';
+import {
+  BANKING_SCREENS,
+  BankingStackParamList,
+} from '../../navigation/utils/paramLists/BankingStack';
 import { MainTabsParamList } from '../../navigation/utils/paramLists/MainTabs';
 import { Color, Colors } from '../../theme';
 import Row from '../Row';
@@ -33,11 +38,16 @@ const MainHeader: React.FC<Props> = ({ iconColor }) => {
     useNavigation<BottomTabNavigationProp<MainTabsParamList>>();
 
   const route =
-    useRoute<RouteProp<MainTabsParamList, keyof MainTabsParamList>>();
+    useRoute<
+      RouteProp<
+        MainTabsParamList & BankingStackParamList,
+        keyof MainTabsParamList | keyof BankingStackParamList
+      >
+    >();
 
   const { top } = useSafeAreaInsets();
 
-  const goToBanking = () => navigation.navigate(SCREENS.BANKING);
+  const goToBanking = () => navigation.navigate(NAVIGATORS.BANKING_STACK);
   const goToScan = () => navigation.navigate(SCREENS.SCAN);
   const goToNotifications = () => navigation.navigate(SCREENS.NOTIFICATIONS);
 
@@ -53,7 +63,7 @@ const MainHeader: React.FC<Props> = ({ iconColor }) => {
       <TouchableOpacity onPress={goToBanking}>
         <Ionicons
           name="card"
-          color={(route.name === SCREENS.BANKING
+          color={(BANKING_SCREENS.includes(route.name)
             ? theme.colors.main.secondary
             : baseIconColor
           ).toString()}

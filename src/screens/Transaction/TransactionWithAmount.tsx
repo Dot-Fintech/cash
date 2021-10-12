@@ -33,7 +33,7 @@ import {
   buildSuccessDescription,
   useRequestEmoney,
   useSendEmoney,
-} from './utils';
+} from './utils/p2p';
 
 const { width } = Dimensions.get('window');
 

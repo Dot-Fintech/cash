@@ -1,0 +1,21 @@
+mutation withdraw($data: BankTransactionInput!) {
+  withdrawEmoney(data: $data) {
+    transaction {
+      ...FullTransaction
+    }
+    account {
+      ...FullAccount
+    }
+  }
+}
+
+mutation deposit($data: BankTransactionInput!) {
+  depositEmoney(data: $data) {
+    transaction {
+      ...FullTransaction
+    }
+    account {
+      ...FullAccount
+    }
+  }
+}
