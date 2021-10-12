@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import React from 'react';
 import {
@@ -5,8 +6,10 @@ import {
   Modal,
   NativeSyntheticEvent,
   NativeTouchEvent,
+  TouchableOpacity,
 } from 'react-native';
-import styled from 'styled-components';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import styled, { useTheme } from 'styled-components';
 
 import { RAIL_SPACING } from '../../styles/spacing';
 import { detectCardProvider } from '../../utils/card';
@@ -23,7 +26,9 @@ import { addCardValidationSchema } from './validators';
 
 const Container = styled(Column)`
   padding: 16px ${RAIL_SPACING}px;
-  height: 100vh;
+  height: 100%;
+  background-color: ${({ theme }) =>
+    theme.colors.background.primary.toString()};
 `;
 
 type FormValues = {
@@ -31,6 +36,7 @@ type FormValues = {
   primaryAccountNumber: string;
   expiryDate: string;
   serviceCode: string;
+  nickname: string;
 };
 
 const initialFormValues: FormValues = {
@@ -38,6 +44,7 @@ const initialFormValues: FormValues = {
   primaryAccountNumber: '',
   expiryDate: '',
   serviceCode: '',
+  nickname: '',
 };
 
 type Props = {
@@ -46,6 +53,10 @@ type Props = {
 };
 
 const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
+  const theme = useTheme();
+
+  const { top } = useSafeAreaInsets();
+
   const [createCard, { loading, error }] = useCardActions();
 
   const submit = async (data: FormValues) => {
@@ -63,13 +74,24 @@ const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
   };
 
   return (
-    <Modal visible={isOpen} onDismiss={close}>
+    <Modal visible={isOpen} onDismiss={close} animationType="slide">
       <Container>
-        <Typography tag="h2">Card Info</Typography>
+        <Spacer height={top} />
+        <Row justifyContent="space-between" alignItems="center" fullWidth>
+          <Typography tag="h2">Card Info</Typography>
+          <TouchableOpacity onPress={close}>
+            <Ionicons
+              name="close"
+              size={32}
+              color={theme.colors.text.primary.toString()}
+            />
+          </TouchableOpacity>
+        </Row>
+        <Spacer height={8} />
         <Typography tag="p">
           Your info is secure and end to end encrypted.
         </Typography>
-        <Spacer height={8} />
+        <Spacer height={16} />
         <Formik
           validationSchema={addCardValidationSchema}
           initialValues={initialFormValues}
@@ -82,7 +104,7 @@ const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
                 onChangeText={handleChange('cardholderName')}
                 onBlur={handleBlur('cardholderName')}
                 value={values.cardholderName}
-                autoCorrect={false}
+                textContentType="name"
                 autoCompleteType="name"
               />
               {errors.cardholderName && (
@@ -100,8 +122,7 @@ const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
                 onBlur={handleBlur('primaryAccountNumber')}
                 value={values.primaryAccountNumber}
                 textContentType="creditCardNumber"
-                autoCapitalize="none"
-                autoCorrect={false}
+                keyboardType="numeric"
                 autoCompleteType="cc-number"
               />
               {errors.primaryAccountNumber && (
@@ -116,18 +137,18 @@ const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
               <Row alignItems="center" fullWidth>
                 <Column>
                   <TextField
-                    placeholder="Name on card"
-                    onChangeText={handleChange('cardholderName')}
-                    onBlur={handleBlur('cardholderName')}
-                    value={values.cardholderName}
-                    autoCorrect={false}
-                    autoCompleteType="name"
+                    placeholder="MMYY"
+                    onChangeText={handleChange('expiryDate')}
+                    onBlur={handleBlur('expiryDate')}
+                    value={values.expiryDate}
+                    keyboardType="numeric"
+                    autoCompleteType="cc-exp"
                   />
-                  {errors.cardholderName && (
+                  {errors.expiryDate && (
                     <>
                       <Spacer height={4} />
                       <FormValidationError>
-                        {errors.cardholderName}
+                        {errors.expiryDate}
                       </FormValidationError>
                     </>
                   )}
@@ -135,20 +156,18 @@ const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
                 <Spacer width={16} />
                 <Column>
                   <TextField
-                    placeholder="Card number"
-                    onChangeText={handleChange('primaryAccountNumber')}
-                    onBlur={handleBlur('primaryAccountNumber')}
-                    value={values.primaryAccountNumber}
-                    textContentType="creditCardNumber"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    autoCompleteType="cc-number"
+                    placeholder="CVV"
+                    onChangeText={handleChange('serviceCode')}
+                    onBlur={handleBlur('serviceCode')}
+                    value={values.serviceCode}
+                    keyboardType="numeric"
+                    autoCompleteType="cc-csc"
                   />
-                  {errors.primaryAccountNumber && (
+                  {errors.serviceCode && (
                     <>
                       <Spacer height={4} />
                       <FormValidationError>
-                        {errors.primaryAccountNumber}
+                        {errors.serviceCode}
                       </FormValidationError>
                     </>
                   )}
@@ -162,6 +181,7 @@ const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
                   ) => void
                 }
                 disabled={loading}
+                fullWidth
               >
                 Add Card
               </Button>

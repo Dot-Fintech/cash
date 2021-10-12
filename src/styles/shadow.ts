@@ -1,4 +1,4 @@
-import { Color, Colors, ThemeName } from '../../../theme';
+import { Color, Colors, ThemeName } from '../theme';
 
 export const getShadowColor = (theme: ThemeName): string => {
   switch (theme) {

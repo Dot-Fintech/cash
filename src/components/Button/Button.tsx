@@ -3,9 +3,9 @@ import React from 'react';
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import styled from 'styled-components';
 
+import { useStyledLinearGradient } from '../../styles/linearGradient';
 import { Colors } from '../../theme';
 import { Color } from '../../theme/colors/types';
-import { useButtonLinearGradient } from './utils';
 
 const MIN_HEIGHT = 40;
 
@@ -61,7 +61,7 @@ const Button: React.FC<Props> = ({
   fullWidth,
   ...props
 }) => {
-  const { first, second } = useButtonLinearGradient();
+  const { first, second } = useStyledLinearGradient();
 
   return (
     <TouchableOpacity style={fullWidth ? { width: '100%' } : {}} {...props}>

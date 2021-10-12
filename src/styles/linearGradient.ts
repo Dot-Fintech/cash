@@ -1,13 +1,13 @@
 import { useTheme } from 'styled-components';
 
-import { Color } from '../../theme';
+import { Color } from '../theme';
 
 type Result = {
   first: Color;
   second: Color;
 };
 
-export const useButtonLinearGradient = (): Result => {
+export const useStyledLinearGradient = (): Result => {
   const theme = useTheme();
 
   switch (theme.name) {

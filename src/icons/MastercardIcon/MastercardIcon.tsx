@@ -6,7 +6,7 @@ import { getIconDimensions } from '../utils';
 import { xml } from './xml';
 
 const MastercardIcon: React.FC<DesiredIconDimensions> = (props) => {
-  const dimensions = getIconDimensions({ AR: 512 / 362.82, ...props });
+  const dimensions = getIconDimensions({ AR: 391.34 / 241.88, ...props });
   return <SvgXml xml={xml} {...dimensions} />;
 };
 

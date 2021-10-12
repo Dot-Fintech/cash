@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import Column from '../../../components/Column';
 import Spacer from '../../../components/Spacer';
 import Typography from '../../../components/Typography';
+import { getShadowColor } from '../../../styles/shadow';
 import { RAIL_SPACING } from '../../../styles/spacing';
 import { Card } from '../utils';
-import { getShadowColor } from './utils';
 
 const { width } = Dimensions.get('window');
 
