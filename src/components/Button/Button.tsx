@@ -67,7 +67,9 @@ const Button: React.FC<Props> = ({
     <TouchableOpacity style={fullWidth ? { width: '100%' } : {}} {...props}>
       <Container
         colors={
-          color ? [color.toString()] : [first.toString(), second.toString()]
+          color
+            ? [color.toString(), color.toString()]
+            : [first.toString(), second.toString()]
         }
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}

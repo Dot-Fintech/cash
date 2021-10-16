@@ -29,6 +29,12 @@ const Container = styled(Column)`
   padding: 32px 24px 0 24px;
 `;
 
+const LogInPromptContainer = styled(TouchableOpacity)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 type FormValues = {
   firstName: string;
   lastName: string;
@@ -238,14 +244,14 @@ const SignUpPage: React.FC = () => {
             </>
           )}
           <Spacer height={16} />
-          <TouchableOpacity onPress={goBack}>
+          <LogInPromptContainer onPress={goBack}>
             <Typography tag="p" color={theme.colors.main.secondary}>
               Already have an account?
             </Typography>
             <Typography tag="p" color={theme.colors.main.secondary}>
               Tap here to log in
             </Typography>
-          </TouchableOpacity>
+          </LogInPromptContainer>
         </Container>
       </OnboardingScreen>
     </>

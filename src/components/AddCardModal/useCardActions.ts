@@ -9,7 +9,6 @@ import {
 } from '../../generated/graphql';
 
 type CreateCardArg = {
-  cardholderName: string;
   primaryAccountNumber: string;
   expiryDate: string;
   serviceCode: string;
@@ -28,7 +27,6 @@ export const useCardActions = (): ReturnType => {
   const [createCardMutation, { loading, error }] = useCreateCardMutation();
 
   const createCard = async ({
-    cardholderName,
     primaryAccountNumber,
     expiryDate,
     serviceCode,
@@ -37,7 +35,6 @@ export const useCardActions = (): ReturnType => {
     return await createCardMutation({
       variables: {
         data: {
-          cardholderName,
           primaryAccountNumber,
           expiryDate,
           serviceCode,

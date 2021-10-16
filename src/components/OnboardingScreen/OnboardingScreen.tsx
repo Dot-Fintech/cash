@@ -12,10 +12,9 @@ import Header from './Header';
 
 const { width } = Dimensions.get('window');
 
-type ButtonContainerProps = {
-  bottomInset: number;
-};
+type ButtonContainerProps = { bottomInset: number };
 const ButtonContainer = styled(Column)<ButtonContainerProps>`
+  position: absolute;
   bottom: ${({ bottomInset }) => bottomInset + 100}px;
 `;
 

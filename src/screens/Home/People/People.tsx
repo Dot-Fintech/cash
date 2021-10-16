@@ -46,7 +46,7 @@ const People: React.FC<Props> = ({ goToUser }) => {
 
   return (
     <>
-      {interactions ? (
+      {interactions && interactions.length > 0 ? (
         <ListContainer>
           <FlatList
             data={interactions}

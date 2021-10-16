@@ -30,7 +30,7 @@ export const useSignUpValidationSchema = (): Result => {
       .string()
       .matches(/^[a-zA-Z]*$/, 'Last name cannot contain any special characters')
       .max(20, ({ max }) => `Last name can be at most ${max} characters`)
-      .required('Email Address is required'),
+      .required('Last name is required'),
     username: yup
       .string()
       .matches(
@@ -45,18 +45,18 @@ export const useSignUpValidationSchema = (): Result => {
         }
         return true;
       })
-      .required('Email Address is required'),
+      .required('Username is required'),
     email: yup
       .string()
       .email('Please enter valid email')
-      .required('Email Address is required')
       .max(50, ({ max }) => `Email Address can be at most ${max} characters`)
       .test('is-taken', 'Email Address is already taken', (email) => {
         if (email && email.length > 4) {
           debounce(() => isEmailTaken({ variables: { email } }), 1500)();
         }
         return true;
-      }),
+      })
+      .required('Email Address is required'),
     password: yup
       .string()
       .min(8, ({ min }) => `Password must be at least ${min} characters`)

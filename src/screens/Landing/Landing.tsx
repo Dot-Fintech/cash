@@ -2,7 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext, useEffect, useState } from 'react';
 import { Dimensions, useWindowDimensions } from 'react-native';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import Button from '../../components/Button';
 import Column from '../../components/Column';
@@ -37,8 +37,6 @@ const PrimaryButton = styled(Button)`
 `;
 
 const LandingPage: React.FC = () => {
-  const theme = useTheme();
-
   const route = useRoute<RouteProp<RootStackParamList, SCREENS.LANDING>>();
 
   const navigation =
@@ -102,9 +100,7 @@ const LandingPage: React.FC = () => {
           </Column>
         </Row>
         <Spacer height={24} />
-        <PrimaryButton onPress={goToLogin} color={theme.colors.main.secondary}>
-          Let's Go
-        </PrimaryButton>
+        <PrimaryButton onPress={goToLogin}>Let's Go</PrimaryButton>
       </Container>
     </Screen>
   ) : (

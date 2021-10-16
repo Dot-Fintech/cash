@@ -43,10 +43,11 @@ const Banner: React.FC<Props> = ({ children, isOpen, close, color, alert }) => {
             <Spacer width={8} />
           </>
         )}
-        <Typography tag="p" color={Colors.white}>
+        <Typography tag="p" color={Colors.white} textAlign="center">
           {children}
         </Typography>
       </Row>
+      <Spacer width={16} />
       <TouchableOpacity onPress={close}>
         <Ionicons
           color={Colors.white.toString()}

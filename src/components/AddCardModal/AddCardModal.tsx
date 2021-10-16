@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Alert,
   Modal,
@@ -11,7 +11,9 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled, { useTheme } from 'styled-components';
 
+import { UserContext } from '../../context/user/state';
 import { RAIL_SPACING } from '../../styles/spacing';
+import { Color } from '../../theme';
 import { detectCardProvider } from '../../utils/card';
 import Button from '../Button';
 import Column from '../Column';
@@ -32,7 +34,6 @@ const Container = styled(Column)`
 `;
 
 type FormValues = {
-  cardholderName: string;
   primaryAccountNumber: string;
   expiryDate: string;
   serviceCode: string;
@@ -40,7 +41,6 @@ type FormValues = {
 };
 
 const initialFormValues: FormValues = {
-  cardholderName: '',
   primaryAccountNumber: '',
   expiryDate: '',
   serviceCode: '',
@@ -54,6 +54,8 @@ type Props = {
 
 const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
   const theme = useTheme();
+
+  const { user } = useContext(UserContext);
 
   const { top } = useSafeAreaInsets();
 
@@ -100,21 +102,15 @@ const AddCardModal: React.FC<Props> = ({ isOpen, close }) => {
           {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
             <>
               <TextField
+                value={`${user?.firstName} ${user?.lastName}`}
                 placeholder="Name on card"
-                onChangeText={handleChange('cardholderName')}
-                onBlur={handleBlur('cardholderName')}
-                value={values.cardholderName}
-                textContentType="name"
-                autoCompleteType="name"
+                editable={false}
+                underlineColorAndroid="transparent"
+                selectTextOnFocus={false}
+                borderColor={
+                  new Color({ ...theme.colors.text.primary, opacity: 0.5 })
+                }
               />
-              {errors.cardholderName && (
-                <>
-                  <Spacer height={4} />
-                  <FormValidationError>
-                    {errors.cardholderName}
-                  </FormValidationError>
-                </>
-              )}
               <Spacer height={16} />
               <TextField
                 placeholder="Card number"

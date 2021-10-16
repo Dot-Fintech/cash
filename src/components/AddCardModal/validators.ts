@@ -5,15 +5,6 @@ import { Card_Provider } from '../../generated/graphql';
 import { detectCardProvider } from './utils';
 
 export const addCardValidationSchema = yup.object().shape({
-  cardholderName: yup
-    .string()
-    .matches(
-      /^[a-zA-Z]+ [a-zA-Z]+$/,
-      'Name cannot contain any special characters',
-    )
-    .min(3, ({ min }) => `Name must be at most ${min} characters`)
-    .max(40, ({ max }) => `Name must be at most ${max} characters`)
-    .required('Name is required'),
   primaryAccountNumber: yup
     .string()
     .matches(/^[0-9]*$/, 'Card number must be a number')
